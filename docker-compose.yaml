@@ -1,0 +1,8 @@
+services:
+  postgres:
+    image: postgres:15.5-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: devPostgres
+    ports:
+      - 5432:5432
