@@ -10,28 +10,30 @@ import {
   SupportButton,
 } from '@backstage/core-components';
 import { FeedbackCards } from '../OpenFeedbackCard/OpenFeedbackCard';
+import { FeedbackForm } from '../OpenFeedbackForm/OpenFeedbackForm';
 
 export const OpenFeedbackPage = () => (
   <Page themeId="tool">
-    <Header title="Welcome to open-feedback!" subtitle="Optional subtitle">
+    <Header title="Welcome to OpenFeedback!" subtitle="Collected Feedback for your Backstage App!">
       <HeaderLabel label="Owner" value="Team X" />
       <HeaderLabel label="Lifecycle" value="Alpha" />
     </Header>
     <Content>
-      <ContentHeader title="Plugin title">
+      <ContentHeader title="">
         <SupportButton>A description of your plugin goes here.</SupportButton>
       </ContentHeader>
-      <Grid container spacing={3} direction="column">
-        <Grid item>
-          <InfoCard title="Information card">
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <InfoCard title="Collected Feedback">
             <Typography variant="body1">
-              All content should be wrapped in a card like this.
+              The feedback collected from your users will be displayed below.
             </Typography>
           </InfoCard>
+          <Grid item>
+            <FeedbackForm />
+          </Grid>
         </Grid>
-        <Grid item>
         <FeedbackCards />
-        </Grid>
       </Grid>
     </Content>
   </Page>

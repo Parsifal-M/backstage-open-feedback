@@ -3,7 +3,7 @@ import { createApiRef } from '@backstage/core-plugin-api';
 //! TODO: Put this in a common package
 export type AppFeedback = {
     userRef: string;
-    rating: string;
+    rating: number;
     comment: string;
 }
 

@@ -2,7 +2,6 @@ import {
   createApiFactory,
   createPlugin,
   createRoutableExtension,
-  discoveryApiRef,
   fetchApiRef,
 } from '@backstage/core-plugin-api';
 import { rootRouteRef } from './routes';
