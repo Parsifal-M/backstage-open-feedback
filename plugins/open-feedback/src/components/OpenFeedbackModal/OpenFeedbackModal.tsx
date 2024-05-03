@@ -57,7 +57,7 @@ export const OpenFeedbackModal = () => {
             <Rating
               name="rating"
               value={rating}
-              onChange={(event, newValue) => {
+              onChange={(_, newValue) => {
                 if (newValue !== null) {
                   setRating(newValue);
                 }
