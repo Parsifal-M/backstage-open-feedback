@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Grid } from '@material-ui/core';
+import { Typography, Grid, Box } from '@material-ui/core';
 import {
   InfoCard,
   Header,
@@ -29,9 +29,6 @@ export const OpenFeedbackPage = () => (
               The feedback collected from your users will be displayed below.
             </Typography>
           </InfoCard>
-          <Grid item>
-            <FeedbackForm />
-          </Grid>
         </Grid>
         <FeedbackCards />
       </Grid>

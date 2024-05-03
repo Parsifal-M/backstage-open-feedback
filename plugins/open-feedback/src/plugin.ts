@@ -32,3 +32,12 @@ export const OpenFeedbackPage = openFeedbackPlugin.provide(
     mountPoint: rootRouteRef,
   }),
 );
+
+export const OpenFeedbackModal = openFeedbackPlugin.provide(
+  createRoutableExtension({
+    name: 'OpenFeedbackPage',
+    component: () =>
+      import('./components/OpenFeedbackModal').then(m => m.OpenFeedbackModal),
+    mountPoint: rootRouteRef,
+  }),
+);

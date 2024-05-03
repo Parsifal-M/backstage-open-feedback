@@ -71,6 +71,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         <SidebarItem icon={LibraryBooks} to="docs" text="Docs" />
         <SidebarItem icon={CreateComponentIcon} to="create" text="Create..." />
         <SidebarItem icon={ThumbUpAltIcon} to='open-feedback' text='OpenFeedback' />
+        <SidebarItem icon={ThumbUpAltIcon} to='open-feedback-dialog' text='OpenFeedbackModal' />
         {/* End global nav */}
         <SidebarDivider />
         <SidebarScrollWrapper>
