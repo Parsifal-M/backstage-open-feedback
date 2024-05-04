@@ -1,9 +1,19 @@
-import { useApi, identityApiRef } from "@backstage/core-plugin-api";
-import { Box, TextField, Button, FormControlLabel, Checkbox, Dialog, DialogTitle, DialogContent, DialogActions } from "@material-ui/core";
+import { useApi, identityApiRef } from '@backstage/core-plugin-api';
+import {
+  Box,
+  TextField,
+  Button,
+  FormControlLabel,
+  Checkbox,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from '@material-ui/core';
 import Rating from '@mui/material/Rating';
-import React, { useEffect, useState } from "react";
-import { openFeedbackBackendRef } from "../../api/types";
-import useAsyncFn from "react-use/esm/useAsyncFn";
+import React, { useEffect, useState } from 'react';
+import { openFeedbackBackendRef } from '../../api/types';
+import useAsyncFn from 'react-use/esm/useAsyncFn';
 import { useNavigate } from 'react-router-dom';
 import { AppFeedback } from '@internal/backstage-plugin-open-feedback-common';
 
@@ -70,7 +80,7 @@ export const OpenFeedbackModal = () => {
               name="comment"
               label="Comment"
               value={comment}
-              onChange={(event) => setComment(event.target.value)}
+              onChange={event => setComment(event.target.value)}
               fullWidth
             />
           </Box>
@@ -79,7 +89,7 @@ export const OpenFeedbackModal = () => {
               control={
                 <Checkbox
                   checked={anonymous}
-                  onChange={(event) => setAnonymous(event.target.checked)}
+                  onChange={event => setAnonymous(event.target.checked)}
                   name="anonymous"
                   color="primary"
                 />

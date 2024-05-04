@@ -21,14 +21,7 @@ export const openFeedbackPlugin = createBackendPlugin({
         auth: coreServices.auth,
         httpAuth: coreServices.httpAuth,
       },
-      async init({
-        database,
-        discovery,
-        logger,
-        httpRouter,
-        auth,
-        httpAuth,
-      }) {
+      async init({ database, discovery, logger, httpRouter, auth, httpAuth }) {
         httpRouter.use(
           await createRouter({
             database,

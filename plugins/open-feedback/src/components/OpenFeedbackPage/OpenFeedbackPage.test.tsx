@@ -22,8 +22,6 @@ describe('ExampleComponent', () => {
 
   it('should render', async () => {
     await renderInTestApp(<OpenFeedbackPage />);
-    expect(
-      screen.getByText('Welcome to open-feedback!'),
-    ).toBeInTheDocument();
+    expect(screen.getByText('Welcome to open-feedback!')).toBeInTheDocument();
   });
 });
