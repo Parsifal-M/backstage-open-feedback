@@ -1,11 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { InfoCard } from "@backstage/core-components";
-import { useApi, alertApiRef } from "@backstage/core-plugin-api";
-import { openFeedbackBackendRef } from "../../api/types";
-import { Grid, Box, Typography, IconButton, Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@material-ui/core";
+import React, { useEffect, useState } from 'react';
+import { InfoCard } from '@backstage/core-components';
+import { useApi, alertApiRef } from '@backstage/core-plugin-api';
+import { openFeedbackBackendRef } from '../../api/types';
+import {
+  Grid,
+  Box,
+  Typography,
+  IconButton,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from '@material-ui/core';
 import Rating from '@mui/material/Rating';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Skeleton from "@mui/material/Skeleton";
+import Skeleton from '@mui/material/Skeleton';
 import { AppFeedback } from '@internal/backstage-plugin-open-feedback-common';
 
 export const FeedbackCards = () => {
@@ -23,7 +33,10 @@ export const FeedbackCards = () => {
         const feedbackData = await feedbackApi.getFeedback();
         setFeedback(feedbackData);
       } catch (error) {
-        alertApi.post({ message: `Failed to fetch feedback: ${error}`, severity: 'error' });
+        alertApi.post({
+          message: `Failed to fetch feedback: ${error}`,
+          severity: 'error',
+        });
       }
       setLoading(false);
     };
@@ -60,7 +73,10 @@ export const FeedbackCards = () => {
         setFeedback(feedback.filter(item => item.id !== deleteId));
       }
     } catch (error) {
-      alertApi.post({ message: `Failed to delete feedback: ${error}`, severity: 'error' });
+      alertApi.post({
+        message: `Failed to delete feedback: ${error}`,
+        severity: 'error',
+      });
     }
 
     setDeleteDialogOpen(false);
@@ -73,7 +89,7 @@ export const FeedbackCards = () => {
 
   return (
     <>
-      {feedback?.map((item) => (
+      {feedback?.map(item => (
         <Grid item xs={6} key={item.id}>
           <Box>
             <InfoCard
@@ -94,9 +110,14 @@ export const FeedbackCards = () => {
           </Box>
         </Grid>
       ))}
-      <Dialog open={deleteDialogOpen} onClose={() => setDeleteDialogOpen(false)}>
+      <Dialog
+        open={deleteDialogOpen}
+        onClose={() => setDeleteDialogOpen(false)}
+      >
         <DialogTitle>Confirm Deletion</DialogTitle>
-        <DialogContent>Are you sure you want to delete this feedback?</DialogContent>
+        <DialogContent>
+          Are you sure you want to delete this feedback?
+        </DialogContent>
         <DialogActions>
           <Button onClick={() => setDeleteDialogOpen(false)} color="primary">
             Cancel

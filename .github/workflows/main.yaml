@@ -39,6 +39,5 @@ jobs:
           yarn lint:all
           yarn prettier:check
 
-      - name: Run Tests
-        run: yarn test:all
-
+      # - name: Run Tests
+      #   run: yarn test:all

@@ -1,1 +1,1 @@
-export {OpenFeedbackModal} from './OpenFeedbackModal';
+export { OpenFeedbackModal } from './OpenFeedbackModal';

@@ -9,8 +9,8 @@ export const openFeedbackReadPermission = createPermission({
 });
 
 export const openFeedbackCreatePermission = createPermission({
-    name: 'open.feedback.create',
-    attributes: { action: 'create' },
+  name: 'open.feedback.create',
+  attributes: { action: 'create' },
 });
 
 /**
@@ -18,6 +18,6 @@ export const openFeedbackCreatePermission = createPermission({
  */
 
 export const openFeedbackPermissions = [
-    openFeedbackReadPermission,
-    openFeedbackCreatePermission,
+  openFeedbackReadPermission,
+  openFeedbackCreatePermission,
 ];

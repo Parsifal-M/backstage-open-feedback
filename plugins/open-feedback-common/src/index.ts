@@ -14,6 +14,6 @@ export type AppFeedback = {
   userRef: string;
   rating: number;
   comment: string;
-}
+};
 
 export type SubmitFeedback = Omit<AppFeedback, 'id'>;

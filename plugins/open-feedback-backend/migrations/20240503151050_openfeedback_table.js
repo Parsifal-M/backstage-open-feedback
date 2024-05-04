@@ -3,14 +3,13 @@
  * @returns { Promise<void> }
  */
 exports.up = function up(knex) {
-    return knex.schema.createTable('open_feedback', (table) => {
-        table.increments('id').primary();
-        table.string('userRef').notNullable();
-        table.string('rating').notNullable();
-        table.string('comment')
-        table.timestamp('created_at').defaultTo(knex.fn.now());
-    });
-  
+  return knex.schema.createTable('open_feedback', table => {
+    table.increments('id').primary();
+    table.string('userRef').notNullable();
+    table.string('rating').notNullable();
+    table.string('comment');
+    table.timestamp('created_at').defaultTo(knex.fn.now());
+  });
 };
 
 /**
@@ -18,5 +17,5 @@ exports.up = function up(knex) {
  * @returns { Promise<void> }
  */
 exports.down = function down(knex) {
-    return knex.schema.dropTable('openfeedback');
+  return knex.schema.dropTable('openfeedback');
 };

@@ -1,1 +1,5 @@
-export { openFeedbackPlugin, OpenFeedbackPage, OpenFeedbackModal } from './plugin';
+export {
+  openFeedbackPlugin,
+  OpenFeedbackPage,
+  OpenFeedbackModal,
+} from './plugin';
