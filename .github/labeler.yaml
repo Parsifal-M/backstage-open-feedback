@@ -1,0 +1,15 @@
+backend:
+  - plugins/open-feedback-backend/**/*
+
+frontend:
+  - plugins/open-feedback-frontend/**/*
+
+common:
+  - plugins/open-feedback-common/**/*
+
+cicd:
+  - .github/workflows/**/*
+
+documentation:
+  - docs/**/*
+  - README.md
