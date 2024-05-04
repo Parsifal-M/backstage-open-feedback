@@ -4,7 +4,7 @@ backend:
 
 frontend:
   - changed-files:
-      - any-glob-to-any-file: ['plugins/open-feedback-frontend/**/*']
+      - any-glob-to-any-file: ['plugins/open-feedback/**/*']
 
 common:
   - changed-files:
