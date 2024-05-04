@@ -16,7 +16,7 @@ describe('createRouter', () => {
         // eslint-disable-next-line func-names
         getExternalBaseUrl: function (_pluginId: string): Promise<string> {
           throw new Error('Function not implemented.');
-        }
+        },
       },
     });
     app = express().use(router);
