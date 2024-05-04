@@ -10,6 +10,14 @@ describe('createRouter', () => {
   beforeAll(async () => {
     const router = await createRouter({
       logger: getVoidLogger(),
+      database: { getClient: jest.fn() },
+      discovery: {
+        getBaseUrl: jest.fn(),
+        // eslint-disable-next-line func-names
+        getExternalBaseUrl: function (_pluginId: string): Promise<string> {
+          throw new Error('Function not implemented.');
+        }
+      },
     });
     app = express().use(router);
   });

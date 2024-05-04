@@ -16,7 +16,6 @@ import { openFeedbackBackendRef } from '../../api/types';
 import useAsyncFn from 'react-use/esm/useAsyncFn';
 import { useNavigate } from 'react-router-dom';
 import {
-  AppFeedback,
   SubmitFeedback,
 } from '@internal/backstage-plugin-open-feedback-common';
 
