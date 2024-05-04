@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: '18.x'
 
+      - name: Set Yarn Version
+        run: yarn policies set-version 4.2.1
+
       - name: Clean Yarn Cache
         run: yarn cache clean
 
