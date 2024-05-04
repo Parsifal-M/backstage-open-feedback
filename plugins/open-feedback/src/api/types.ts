@@ -1,12 +1,5 @@
 import { createApiRef } from '@backstage/core-plugin-api';
-
-//! TODO: Put this in a common package
-export type AppFeedback = {
-    id: number;
-    userRef: string;
-    rating: number;
-    comment: string;
-}
+import { AppFeedback } from '@internal/backstage-plugin-open-feedback-common';
 
 export interface OpenFeedbackBackendApi {
     getFeedback(): Promise<AppFeedback[]>;

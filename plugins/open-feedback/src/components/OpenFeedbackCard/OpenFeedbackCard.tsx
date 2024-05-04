@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { InfoCard } from "@backstage/core-components";
 import { useApi, alertApiRef } from "@backstage/core-plugin-api";
-import { AppFeedback, openFeedbackBackendRef } from "../../api/types";
+import { openFeedbackBackendRef } from "../../api/types";
 import { Grid, Box, Typography, IconButton, Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@material-ui/core";
 import Rating from '@mui/material/Rating';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Skeleton from "@mui/material/Skeleton";
+import { AppFeedback } from '@internal/backstage-plugin-open-feedback-common';
 
 export const FeedbackCards = () => {
   const [feedback, setFeedback] = useState<AppFeedback[] | null>(null);

@@ -1,6 +1,6 @@
 import { resolvePackagePath } from '@backstage/backend-common';
 import { Knex } from 'knex';
-import { AppFeedback } from './types';
+import { AppFeedback, SubmitFeedback } from '@internal/backstage-plugin-open-feedback-common';
 
 const migrationsDir = resolvePackagePath(
   '@internal/backstage-plugin-open-feedback-backend',
@@ -28,7 +28,7 @@ export class DatabaseHandler {
     this.database = options.database;
   }
 
-  async addFeedback(feedback: AppFeedback): Promise<void> {
+  async addFeedback(feedback: SubmitFeedback): Promise<void> {
     await this.database('open_feedback').insert(feedback);
   }
 
