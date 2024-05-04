@@ -15,7 +15,7 @@ import React, { useEffect, useState } from 'react';
 import { openFeedbackBackendRef } from '../../api/types';
 import useAsyncFn from 'react-use/esm/useAsyncFn';
 import { useNavigate } from 'react-router-dom';
-import { AppFeedback } from '@internal/backstage-plugin-open-feedback-common';
+import { AppFeedback, SubmitFeedback } from '@internal/backstage-plugin-open-feedback-common';
 
 export const OpenFeedbackModal = () => {
   const [rating, setRating] = useState<number | null>(2);
@@ -44,7 +44,7 @@ export const OpenFeedbackModal = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    const feedback: AppFeedback = {
+    const feedback: SubmitFeedback = {
       rating: rating ?? 0,
       comment: comment,
       userRef: anonymous ? 'Anonymous' : userName.value ?? 'unknown',
