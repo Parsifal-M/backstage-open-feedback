@@ -1,1 +1,9 @@
 playwright.config.ts
+**/node_modules/**
+**/dist/**
+**/dist-types/**
+**/coverage/**
+**/build/**
+**/.git/**
+**/templates/**
+**/sample-templates/**

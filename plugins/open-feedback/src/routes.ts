@@ -5,5 +5,5 @@ export const rootRouteRef = createRouteRef({
 });
 
 export const openDialogRouteRef = createRouteRef({
-  id: 'open-feedback-dialog',
+  id: '/open-feedback-modal',
 });
