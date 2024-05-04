@@ -2,7 +2,6 @@ import { resolvePackagePath } from '@backstage/backend-common';
 import { Knex } from 'knex';
 import { AppFeedback } from './types';
 
-
 const migrationsDir = resolvePackagePath(
   '@internal/backstage-plugin-open-feedback-backend',
   'migrations',
@@ -11,7 +10,6 @@ const migrationsDir = resolvePackagePath(
 type Options = {
   database: Knex;
 };
-
 
 export class DatabaseHandler {
   static async create(options: Options): Promise<DatabaseHandler> {
@@ -35,7 +33,16 @@ export class DatabaseHandler {
   }
 
   async getFeedback(): Promise<AppFeedback[]> {
-    return this.database('open_feedback').select('userRef', 'rating', 'comment', 'created_at');
+    return this.database('open_feedback').select(
+      'id',
+      'userRef',
+      'rating',
+      'comment',
+      'created_at',
+    );
   }
 
+  async removeFeedback(id: number): Promise<void> {
+    return this.database('open_feedback').where('id', id).delete();
+  }
 }
