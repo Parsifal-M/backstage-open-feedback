@@ -20,14 +20,17 @@ jobs:
         with:
           node-version: '18.x'
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Set Yarn Version
-        run: yarn policies set-version 4.2.1
+        run: yarn set version 4.2.1
 
       - name: Clean Yarn Cache
         run: yarn cache clean
 
       - name: Cache Node.js modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.cache/yarn
           key: yarn-${{ runner.OS }}-18-${{ hashFiles('**/yarn.lock') }}
