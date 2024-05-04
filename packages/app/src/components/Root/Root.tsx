@@ -65,7 +65,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
       </SidebarGroup>
       <SidebarItem
         icon={ThumbUpAltIcon}
-        to="open-feedback-dialog"
+        to="/open-feedback-modal"
         text="OpenFeedbackModal"
       />
       <SidebarDivider />

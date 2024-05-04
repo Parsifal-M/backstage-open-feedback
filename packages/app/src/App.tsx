@@ -117,7 +117,7 @@ const routes = (
     <Route path="/settings" element={<UserSettingsPage />} />
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
     <Route path="/open-feedback" element={<OpenFeedbackPage />} />
-    <Route path="/open-feedback-dialog" element={<OpenFeedbackModal />} />
+    <Route path="//open-feedback-modal" element={<OpenFeedbackModal />} />
   </FlatRoutes>
 );
 
