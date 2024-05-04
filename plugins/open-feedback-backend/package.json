@@ -39,7 +39,7 @@
     "@backstage/backend-defaults": "^0.2.17",
     "@backstage/backend-plugin-api": "^0.6.17",
     "@backstage/config": "^1.2.0",
-    "@internal/backstage-plugin-open-feedback-common": "0.1.0",
+    "@parsifal-m/backstage-plugin-open-feedback-common": "0.1.0",
     "@types/express": "*",
     "express": "^4.17.1",
     "express-promise-router": "^4.1.0",

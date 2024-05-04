@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react';
 import { openFeedbackBackendRef } from '../../api/types';
 import useAsyncFn from 'react-use/esm/useAsyncFn';
 import { InfoCard } from '@backstage/core-components';
-import { SubmitFeedback } from '@internal/backstage-plugin-open-feedback-common';
+import { SubmitFeedback } from '@parsifal-m/backstage-plugin-open-feedback-common';
 
 export const FeedbackForm = () => {
   const [rating, setRating] = useState<number | null>(2);

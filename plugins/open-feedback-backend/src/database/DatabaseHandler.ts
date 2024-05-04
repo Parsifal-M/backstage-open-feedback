@@ -3,10 +3,10 @@ import { Knex } from 'knex';
 import {
   AppFeedback,
   SubmitFeedback,
-} from '@internal/backstage-plugin-open-feedback-common';
+} from '@parsifal-m/backstage-plugin-open-feedback-common';
 
 const migrationsDir = resolvePackagePath(
-  '@internal/backstage-plugin-open-feedback-backend',
+  '@parsifal-m/backstage-plugin-open-feedback-backend',
   'migrations',
 );
 

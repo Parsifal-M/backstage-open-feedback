@@ -15,7 +15,7 @@ import React, { useEffect, useState } from 'react';
 import { openFeedbackBackendRef } from '../../api/types';
 import useAsyncFn from 'react-use/esm/useAsyncFn';
 import { useNavigate } from 'react-router-dom';
-import { SubmitFeedback } from '@internal/backstage-plugin-open-feedback-common';
+import { SubmitFeedback } from '@parsifal-m/backstage-plugin-open-feedback-common';
 
 export const OpenFeedbackModal = () => {
   const [rating, setRating] = useState<number | null>(2);
