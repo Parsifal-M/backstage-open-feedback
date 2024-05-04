@@ -1,5 +1,8 @@
 import { createApiRef } from '@backstage/core-plugin-api';
-import { AppFeedback, SubmitFeedback } from '@internal/backstage-plugin-open-feedback-common';
+import {
+  AppFeedback,
+  SubmitFeedback,
+} from '@internal/backstage-plugin-open-feedback-common';
 
 export interface OpenFeedbackBackendApi {
   getFeedback(): Promise<AppFeedback[]>;
