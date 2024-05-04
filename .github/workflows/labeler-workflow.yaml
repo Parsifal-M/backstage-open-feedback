@@ -2,13 +2,12 @@ name: Labeler
 
 on:
   pull_request:
-    types: [closed]
+    types: [opened]
     branches: [main]
 
 jobs:
   label:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
     steps:
       - uses: actions/labeler@v5
         with:
