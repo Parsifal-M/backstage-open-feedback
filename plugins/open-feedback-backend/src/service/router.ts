@@ -3,8 +3,9 @@ import { AuthService, HttpAuthService, LoggerService } from '@backstage/backend-
 import express, { Request, Response } from 'express';
 import Router from 'express-promise-router';
 import {body} from 'express-validator';
-import { AppFeedback } from '../database/types';
 import { DatabaseHandler } from '../database/DatabaseHandler';
+import { SubmitFeedback } from '@internal/backstage-plugin-open-feedback-common';
+
 
 
 export interface RouterOptions {
@@ -39,7 +40,7 @@ export async function createRouter(
   router.post('/feedback/submit', feedbackValidator, async (req: Request, res: Response) => {
     const { rating, comment, userRef } = req.body;
   
-    const feedback: AppFeedback = { userRef, rating, comment };
+    const feedback: SubmitFeedback = { userRef, rating, comment };
   
     try {
       await dbHandler.addFeedback(feedback);

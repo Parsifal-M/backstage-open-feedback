@@ -1,4 +1,5 @@
-import { AppFeedback, OpenFeedbackBackendApi } from './types';
+import { AppFeedback, SubmitFeedback } from '@internal/backstage-plugin-open-feedback-common';
+import { OpenFeedbackBackendApi } from './types';
 import { FetchApi } from '@backstage/core-plugin-api';
 
 export class OpenFeedbackBackendClient implements OpenFeedbackBackendApi {
@@ -32,7 +33,7 @@ export class OpenFeedbackBackendClient implements OpenFeedbackBackendApi {
     return await this.handleResponse(response);
   }
 
-  async submitFeedback(feedback: AppFeedback): Promise<void> {
+  async submitFeedback(feedback: SubmitFeedback): Promise<void> {
     const url = `plugin://open-feedback/feedback/submit`
     const response = await this.fetchApi.fetch(url, {
       method: 'POST',

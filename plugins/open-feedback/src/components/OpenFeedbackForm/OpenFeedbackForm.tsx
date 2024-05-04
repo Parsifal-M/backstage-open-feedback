@@ -2,9 +2,10 @@ import { useApi, identityApiRef } from "@backstage/core-plugin-api";
 import { Box, TextField, Button, FormControlLabel, Checkbox } from "@material-ui/core";
 import Rating from '@mui/material/Rating';
 import React, { useEffect, useState } from "react";
-import { AppFeedback, openFeedbackBackendRef } from "../../api/types";
+import { openFeedbackBackendRef } from "../../api/types";
 import useAsyncFn from "react-use/esm/useAsyncFn";
 import { InfoCard } from "@backstage/core-components";
+import { AppFeedback } from '@internal/backstage-plugin-open-feedback-common';
 
 export const FeedbackForm = () => {
     const [rating, setRating] = useState<number | null>(2);
