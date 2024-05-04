@@ -1,11 +1,10 @@
 {
-  "name": "@internal/backstage-plugin-open-feedback-common",
+  "name": "@parsifal-m/backstage-plugin-open-feedback-common",
   "description": "Common functionalities for the open-feedback plugin",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "license": "Apache-2.0",
-  "private": true,
   "publishConfig": {
     "access": "public",
     "main": "dist/index.cjs.js",
@@ -15,6 +14,18 @@
   "backstage": {
     "role": "common-library"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Parsifal-M/backstage-open-feedback.git"
+  },
+  "keywords": [
+    "backstage",
+    "common-library",
+    "backstage-plugin",
+    "plugin",
+    "feedback",
+    "open-source"
+  ],
   "sideEffects": false,
   "scripts": {
     "build": "backstage-cli package build",

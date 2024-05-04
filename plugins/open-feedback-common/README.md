@@ -1,5 +1,5 @@
-# @internal/backstage-plugin-open-feedback-common
+# OpenFeedback Common
 
-Welcome to the common package for the open-feedback plugin!
+This is a common package for the OpenFeedback Frontend and Backend.
 
-_This plugin was created through the Backstage CLI_
+It contains some permissions and some shared types.

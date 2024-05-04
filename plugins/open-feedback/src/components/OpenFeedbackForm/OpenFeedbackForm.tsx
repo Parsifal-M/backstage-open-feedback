@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react';
 import { openFeedbackBackendRef } from '../../api/types';
 import useAsyncFn from 'react-use/esm/useAsyncFn';
 import { InfoCard } from '@backstage/core-components';
-import { AppFeedback } from '@internal/backstage-plugin-open-feedback-common';
+import { SubmitFeedback } from '@parsifal-m/backstage-plugin-open-feedback-common';
 
 export const FeedbackForm = () => {
   const [rating, setRating] = useState<number | null>(2);
@@ -33,7 +33,7 @@ export const FeedbackForm = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    const feedback: AppFeedback = {
+    const feedback: SubmitFeedback = {
       rating: rating ?? 0,
       comment: comment,
       userRef: anonymous ? 'Anonymous' : userName.value ?? 'unknown',
@@ -54,7 +54,7 @@ export const FeedbackForm = () => {
           <Rating
             name="rating"
             value={rating}
-            onChange={(event, newValue) => {
+            onChange={(_, newValue) => {
               if (newValue !== null) {
                 setRating(newValue);
               }

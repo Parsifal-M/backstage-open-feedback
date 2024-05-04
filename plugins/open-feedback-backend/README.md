@@ -1,14 +1,18 @@
-# open-feedback
+# OpenFeedback Backend
 
-Welcome to the open-feedback backend plugin!
+This plugin serves as the backend for OpenFeedback.
 
-_This plugin was created through the Backstage CLI_
+## Adding the OpenFeedback Backend to your Backstage Application
 
-## Getting started
+To add the OpenFeedback backend to your Backstage application, you need to add the following code to your `packages/backend/src/plugins/index.ts` file:
 
-Your plugin has been added to the example app in this repository, meaning you'll be able to access it by running `yarn
-start` in the root directory, and then navigating to [/openFeedbackPlugin/health](http://localhost:7007/api/openFeedbackPlugin/health).
+```typescript
+import { createBackend } from '@backstage/backend-defaults';
 
-You can also serve the plugin in isolation by running `yarn start` in the plugin directory.
-This method of serving the plugin provides quicker iteration speed and a faster startup and hot reloads.
-It is only meant for local development, and the setup for it can be found inside the [/dev](/dev) directory.
+const backend = createBackend();
+
+// Other plugins
+backend.add(import('@parsifal-m/backstage-plugin-open-feedback-backend'));
+
+backend.start();
+```

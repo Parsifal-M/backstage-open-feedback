@@ -16,7 +16,7 @@ import {
 import Rating from '@mui/material/Rating';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Skeleton from '@mui/material/Skeleton';
-import { AppFeedback } from '@internal/backstage-plugin-open-feedback-common';
+import { AppFeedback } from '@parsifal-m/backstage-plugin-open-feedback-common';
 
 export const FeedbackCards = () => {
   const [feedback, setFeedback] = useState<AppFeedback[] | null>(null);

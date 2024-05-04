@@ -1,10 +1,9 @@
 {
-  "name": "@internal/backstage-plugin-open-feedback-backend",
-  "version": "0.1.0",
+  "name": "@parsifal-m/backstage-plugin-open-feedback-backend",
+  "version": "0.2.0",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "license": "Apache-2.0",
-  "private": true,
   "publishConfig": {
     "access": "public",
     "main": "dist/index.cjs.js",
@@ -13,6 +12,18 @@
   "backstage": {
     "role": "backend-plugin"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Parsifal-M/backstage-open-feedback.git"
+  },
+  "keywords": [
+    "backstage",
+    "backend",
+    "backstage-plugin",
+    "plugin",
+    "feedback",
+    "open-source"
+  ],
   "scripts": {
     "start": "backstage-cli package start",
     "build": "backstage-cli package build",
@@ -27,7 +38,7 @@
     "@backstage/backend-defaults": "^0.2.17",
     "@backstage/backend-plugin-api": "^0.6.17",
     "@backstage/config": "^1.2.0",
-    "@internal/backstage-plugin-open-feedback-common": "0.1.0",
+    "@parsifal-m/backstage-plugin-open-feedback-common": "^0.1.0",
     "@types/express": "*",
     "express": "^4.17.1",
     "express-promise-router": "^4.1.0",

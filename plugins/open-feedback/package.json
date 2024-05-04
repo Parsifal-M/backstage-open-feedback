@@ -1,10 +1,9 @@
 {
-  "name": "@internal/backstage-plugin-open-feedback",
-  "version": "0.1.0",
+  "name": "@parsifal-m/backstage-plugin-open-feedback",
+  "version": "0.2.0",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "license": "Apache-2.0",
-  "private": true,
   "publishConfig": {
     "access": "public",
     "main": "dist/index.esm.js",
@@ -13,6 +12,18 @@
   "backstage": {
     "role": "frontend-plugin"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Parsifal-M/backstage-open-feedback.git"
+  },
+  "keywords": [
+    "backstage",
+    "frontend",
+    "backstage-plugin",
+    "plugin",
+    "feedback",
+    "open-source"
+  ],
   "sideEffects": false,
   "scripts": {
     "start": "backstage-cli package start",
@@ -27,12 +38,12 @@
     "@backstage/core-components": "^0.14.4",
     "@backstage/core-plugin-api": "^1.9.2",
     "@backstage/theme": "^0.5.3",
-    "@internal/backstage-plugin-open-feedback-common": "0.1.0",
     "@material-ui/core": "^4.9.13",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "4.0.0-alpha.61",
     "@mui/icons-material": "^5.15.16",
     "@mui/material": "^5.15.16",
+    "@parsifal-m/backstage-plugin-open-feedback-common": "^0.1.0",
     "react-use": "^17.2.4"
   },
   "peerDependencies": {
