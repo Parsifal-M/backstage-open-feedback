@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Grid, Box } from '@material-ui/core';
+import { Typography, Grid } from '@material-ui/core';
 import {
   InfoCard,
   Header,
@@ -10,7 +10,6 @@ import {
   SupportButton,
 } from '@backstage/core-components';
 import { FeedbackCards } from '../OpenFeedbackCard/OpenFeedbackCard';
-import { FeedbackForm } from '../OpenFeedbackForm/OpenFeedbackForm';
 
 export const OpenFeedbackPage = () => (
   <Page themeId="tool">

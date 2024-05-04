@@ -43,4 +43,13 @@ export class OpenFeedbackBackendClient implements OpenFeedbackBackendApi {
     });
     await this.handleResponse(response);
   }
+
+  async removeFeedback(id: number): Promise<void> {
+    const url = `plugin://open-feedback/feedback/${id}`
+    const response = await this.fetchApi.fetch(url, {
+      method: 'DELETE',
+    });
+    await this.handleResponse(response);
+  }
+
 }

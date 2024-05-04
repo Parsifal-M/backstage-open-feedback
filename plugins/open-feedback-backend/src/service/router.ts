@@ -61,6 +61,17 @@ export async function createRouter(
     }
   });
 
+  router.delete('/feedback/:id', async (req: Request, res: Response) => {
+    const { id } = req.params;
+  
+    try {
+      await dbHandler.removeFeedback(Number(id));
+      res.status(200).json({ status: 'ok', message: 'Feedback removed' });
+    } catch (error) {
+      logger.error(`Failed to remove feedback: ${error}`);
+      res.status(500).json({ status: 'error', message: 'Failed to remove feedback' });
+    }
+  });
 
   router.use(errorHandler());
   return router;
