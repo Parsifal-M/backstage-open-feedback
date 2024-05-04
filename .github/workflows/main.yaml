@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: '18.x'
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Set Yarn Version
         run: yarn set version 4.2.1
 
