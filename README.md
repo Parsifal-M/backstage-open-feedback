@@ -1,6 +1,10 @@
 # OpenFeedback Plugin for Backstage
 
+Hello! :wave:
+
 OpenFeedback is a plugin for [Backstage](https://backstage.io/) designed to simplify the process of collecting and managing feedback within your Backstage application, for your Backstage application. It's composed of several components, including a backend, frontend, and common utilities.
+
+Like what you see? Feel free to star this repository and share it with your friends! :star:
 
 ## Key Features
 
@@ -86,3 +90,9 @@ import { OpenFeedbackModal } from '@parsifal-m/backstage-plugin-open-feedback';
 ## Using the OpenFeedbackForm Component
 
 I would recommend using the `OpenFeedbackForm` on the [Backstage HomePage](https://backstage.io/docs/getting-started/homepage/#homepage) to collect feedback from users. This component can be added to any page, but it is more specifically designed for the Backstage HomePage.
+
+# Contributing
+
+Contributions are welcome! Feel free to pick up any open issues, or suggest new features by opening an issue!
+
+If you have any questions you can also contact me on mastodon at [@parcifal](https://hachyderm.io/@parcifal).
