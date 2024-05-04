@@ -27,6 +27,7 @@ import {
 } from '@backstage/core-components';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import { OpenFeedbackModal } from '@internal/backstage-plugin-open-feedback';
 
 const useSidebarLogoStyles = makeStyles({
   root: {
@@ -63,6 +64,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
       <SidebarGroup label="Search" icon={<SearchIcon />} to="/search">
         <SidebarSearchModal />
       </SidebarGroup>
+      <SidebarItem icon={ThumbUpAltIcon} to='open-feedback-dialog' text='OpenFeedbackModal' />
       <SidebarDivider />
       <SidebarGroup label="Menu" icon={<MenuIcon />}>
         {/* Global nav, not org-specific */}
@@ -71,7 +73,6 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         <SidebarItem icon={LibraryBooks} to="docs" text="Docs" />
         <SidebarItem icon={CreateComponentIcon} to="create" text="Create..." />
         <SidebarItem icon={ThumbUpAltIcon} to='open-feedback' text='OpenFeedback' />
-        <SidebarItem icon={ThumbUpAltIcon} to='open-feedback-dialog' text='OpenFeedbackModal' />
         {/* End global nav */}
         <SidebarDivider />
         <SidebarScrollWrapper>
