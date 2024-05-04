@@ -1,15 +1,19 @@
 backend:
-  - plugins/open-feedback-backend/**/*
+  changed-files:
+    any-glob-to-any-file: ['plugins/open-feedback-backend/**/*']
 
 frontend:
-  - plugins/open-feedback-frontend/**/*
+  changed-files:
+    any-glob-to-any-file: ['plugins/open-feedback-frontend/**/*']
 
 common:
-  - plugins/open-feedback-common/**/*
+  changed-files:
+    any-glob-to-any-file: ['plugins/open-feedback-common/**/*']
 
 cicd:
-  - .github/workflows/**/*
+  changed-files:
+    any-glob-to-any-file: ['.github/workflows/**/*']
 
 documentation:
-  - docs/**/*
-  - README.md
+  changed-files:
+    any-glob-to-any-file: ['docs/**/*', 'README.md']
