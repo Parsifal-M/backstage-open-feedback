@@ -29,8 +29,16 @@ Like what you see? Feel free to star this repository and share it with your frie
 
 Run the following yarn commands to add all the required packages to your Backstage application:
 
+In your `packages/app` directory:
+
 ```bash
-yarn add @parsifal-m/backstage-plugin-open-feedback-backend @parsifal-m/backstage-plugin-open-feedback-common @parsifal-m/backstage-plugin-open-feedback
+yarn add @parsifal-m/backstage-plugin-open-feedback
+```
+
+In your `packages/backend` directory:
+
+```bash
+yarn add @parsifal-m/backstage-plugin-open-feedback-backend
 ```
 
 ## Adding the OpenFeedback Backend to your Backstage Application
@@ -79,7 +87,7 @@ import { OpenFeedbackModal } from '@parsifal-m/backstage-plugin-open-feedback';
 <Sidebar>
   {/* Other SidebarItems */}
   <SidebarItem
-    icon={ThumbUpAltIcon}
+    icon={ThumbUpAltIcon} // You do not have to use this icon, it can be any!
     to="/open-feedback-modal"
     text="OpenFeedbackModal"
   />
