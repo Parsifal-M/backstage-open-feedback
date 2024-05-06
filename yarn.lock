@@ -8250,7 +8250,7 @@ __metadata:
     "@backstage/backend-defaults": "npm:^0.2.17"
     "@backstage/backend-plugin-api": "npm:^0.6.17"
     "@backstage/config": "npm:^1.2.0"
-    "@parsifal-m/backstage-plugin-open-feedback-common": "npm:0.1.0"
+    "@parsifal-m/backstage-plugin-open-feedback-common": "npm:0.2.0"
     "@types/express": "npm:*"
     express: "npm:^4.17.1"
     express-promise-router: "npm:^4.1.0"
@@ -8289,15 +8289,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@parsifal-m/backstage-plugin-open-feedback-common@npm:0.1.0":
-  version: 0.1.0
-  resolution: "@parsifal-m/backstage-plugin-open-feedback-common@npm:0.1.0"
-  dependencies:
-    "@backstage/plugin-permission-common": "npm:^0.7.13"
-  checksum: 10c0/1cf7c5f6e9dc029ce825326b0255cfdfe1c2ebf42dbd33825e16c5d52b765a7b9f3fae5efa556e9761305195b2a996788c90dd181e7636fff59c58de7ecf51d8
-  languageName: node
-  linkType: hard
-
 "@parsifal-m/backstage-plugin-open-feedback-common@npm:0.2.0, @parsifal-m/backstage-plugin-open-feedback-common@workspace:plugins/open-feedback-common":
   version: 0.0.0-use.local
   resolution: "@parsifal-m/backstage-plugin-open-feedback-common@workspace:plugins/open-feedback-common"
@@ -8319,7 +8310,7 @@ __metadata:
     "@material-ui/lab": "npm:4.0.0-alpha.61"
     "@mui/icons-material": "npm:^5.15.16"
     "@mui/material": "npm:^5.15.16"
-    "@parsifal-m/backstage-plugin-open-feedback-common": "npm:0.1.0"
+    "@parsifal-m/backstage-plugin-open-feedback-common": "npm:0.2.0"
     react-use: "npm:^17.2.4"
   peerDependencies:
     react: ^16.13.1 || ^17.0.0 || ^18.0.0

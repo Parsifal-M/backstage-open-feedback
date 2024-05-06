@@ -24,8 +24,8 @@ jobs:
         run: corepack enable
 
       - name: Set Yarn Version
-        run: yarn set version 4.2.1
-
+        run: yarn set version berry
+        
       - name: Clean Yarn Cache
         run: yarn cache clean
 
