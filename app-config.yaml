@@ -1,5 +1,5 @@
 app:
-  title: Brewed-Backstage
+  title: Backstage
   baseUrl: http://localhost:3000
 
 organization:

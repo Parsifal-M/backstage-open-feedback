@@ -41,7 +41,7 @@
     "@backstage/theme": "^0.5.3",
     "@material-ui/core": "^4.12.2",
     "@material-ui/icons": "^4.9.1",
-    "@parsifal-m/backstage-plugin-open-feedback": "^0.1.0",
+    "@parsifal-m/backstage-plugin-open-feedback": "^0.2.0",
     "history": "^5.0.0",
     "react": "^18.0.2",
     "react-dom": "^18.0.2",
