@@ -7,3 +7,4 @@ playwright.config.ts
 **/.git/**
 **/templates/**
 **/sample-templates/**
+**/.yarn/**
