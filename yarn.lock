@@ -8242,28 +8242,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@parsifal-m/backstage-plugin-open-feedback-backend@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@parsifal-m/backstage-plugin-open-feedback-backend@npm:0.1.0"
-  dependencies:
-    "@backstage/backend-common": "npm:^0.21.7"
-    "@backstage/backend-defaults": "npm:^0.2.17"
-    "@backstage/backend-plugin-api": "npm:^0.6.17"
-    "@backstage/config": "npm:^1.2.0"
-    "@parsifal-m/backstage-plugin-open-feedback-common": "npm:0.2.0"
-    "@types/express": "npm:*"
-    express: "npm:^4.17.1"
-    express-promise-router: "npm:^4.1.0"
-    express-validator: "npm:^7.0.1"
-    knex: "npm:^3.1.0"
-    node-fetch: "npm:^2.6.7"
-    winston: "npm:^3.2.1"
-    yn: "npm:^4.0.0"
-  checksum: 10c0/ed7cb29f65c76e699a7f60968707bc136f207528e7e27079900c2c3749a6ea41ab3c1803fa332d765c8904385ffe2084b3be4faaf9049a3b5cf92bd508b38d97
-  languageName: node
-  linkType: hard
-
-"@parsifal-m/backstage-plugin-open-feedback-backend@workspace:plugins/open-feedback-backend":
+"@parsifal-m/backstage-plugin-open-feedback-backend@npm:^0.2.0, @parsifal-m/backstage-plugin-open-feedback-backend@workspace:plugins/open-feedback-backend":
   version: 0.0.0-use.local
   resolution: "@parsifal-m/backstage-plugin-open-feedback-backend@workspace:plugins/open-feedback-backend"
   dependencies:
@@ -8298,28 +8277,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@parsifal-m/backstage-plugin-open-feedback@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@parsifal-m/backstage-plugin-open-feedback@npm:0.1.0"
-  dependencies:
-    "@backstage/core-components": "npm:^0.14.4"
-    "@backstage/core-plugin-api": "npm:^1.9.2"
-    "@backstage/theme": "npm:^0.5.3"
-    "@material-ui/core": "npm:^4.9.13"
-    "@material-ui/icons": "npm:^4.9.1"
-    "@material-ui/lab": "npm:4.0.0-alpha.61"
-    "@mui/icons-material": "npm:^5.15.16"
-    "@mui/material": "npm:^5.15.16"
-    "@parsifal-m/backstage-plugin-open-feedback-common": "npm:0.2.0"
-    react-use: "npm:^17.2.4"
-  peerDependencies:
-    react: ^16.13.1 || ^17.0.0 || ^18.0.0
-    react-router-dom: ^6.23.0
-  checksum: 10c0/475fb2415bb68e2932134aa86e6b0fd23d55dc4e00b118133eae411ebe0ed3f1312bbf29115e226d2d519647ef9469453cb38f18355b51d3a0b4a3a3ce04262c
-  languageName: node
-  linkType: hard
-
-"@parsifal-m/backstage-plugin-open-feedback@workspace:plugins/open-feedback":
+"@parsifal-m/backstage-plugin-open-feedback@npm:^0.2.0, @parsifal-m/backstage-plugin-open-feedback@workspace:plugins/open-feedback":
   version: 0.0.0-use.local
   resolution: "@parsifal-m/backstage-plugin-open-feedback@workspace:plugins/open-feedback"
   dependencies:
@@ -13243,7 +13201,7 @@ __metadata:
     "@backstage/theme": "npm:^0.5.3"
     "@material-ui/core": "npm:^4.12.2"
     "@material-ui/icons": "npm:^4.9.1"
-    "@parsifal-m/backstage-plugin-open-feedback": "npm:^0.1.0"
+    "@parsifal-m/backstage-plugin-open-feedback": "npm:^0.2.0"
     "@playwright/test": "npm:^1.32.3"
     "@testing-library/dom": "npm:^9.0.0"
     "@testing-library/jest-dom": "npm:^6.0.0"
@@ -13927,7 +13885,7 @@ __metadata:
     "@backstage/plugin-search-backend-module-techdocs": "npm:^0.1.22"
     "@backstage/plugin-search-backend-node": "npm:^1.2.21"
     "@backstage/plugin-techdocs-backend": "npm:^1.10.4"
-    "@parsifal-m/backstage-plugin-open-feedback-backend": "npm:^0.1.0"
+    "@parsifal-m/backstage-plugin-open-feedback-backend": "npm:^0.2.0"
     "@types/dockerode": "npm:^3.3.0"
     "@types/express": "npm:^4.17.6"
     "@types/express-serve-static-core": "npm:^4.17.5"

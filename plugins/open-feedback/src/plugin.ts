@@ -1,5 +1,6 @@
 import {
   createApiFactory,
+  createComponentExtension,
   createPlugin,
   createRoutableExtension,
   fetchApiRef,
@@ -34,10 +35,11 @@ export const OpenFeedbackPage = openFeedbackPlugin.provide(
 );
 
 export const OpenFeedbackModal = openFeedbackPlugin.provide(
-  createRoutableExtension({
-    name: 'OpenFeedbackPage',
-    component: () =>
-      import('./components/OpenFeedbackModal').then(m => m.OpenFeedbackModal),
-    mountPoint: rootRouteRef,
+  createComponentExtension({
+    name: 'OpenFeedbackModal',
+    component: {
+      lazy: () =>
+        import('./components/OpenFeedbackModal').then(m => m.OpenFeedbackModal),
+    },
   }),
 );

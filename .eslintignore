@@ -8,3 +8,4 @@ playwright.config.ts
 **/templates/**
 **/sample-templates/**
 **/.yarn/**
+.yarnrc.yml

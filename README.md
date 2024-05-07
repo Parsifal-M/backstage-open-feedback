@@ -17,6 +17,20 @@ Like what you see? Feel free to star this repository and share it with your frie
 
 - **Integrated Solution**: OpenFeedback is built to integrate seamlessly with Backstage, allowing you to manage feedback directly within your Backstage application.
 
+## Screenshots
+
+### OpenFeedbackModal
+
+This is the modal that pops up when the user clicks on the feedback button in the sidebar. It allows users to send feedback directly from the Backstage application as their logged in user or anonymously.
+
+![OpenFeedbackModal](./docs/img/feedback-modal.png)
+
+### OpenFeedbackPage
+
+This is the page where all the feedback is displayed. It uses card components to display each piece of feedback. Administrators can view all feedback collected from users on this page, making it a central hub for feedback management.
+
+![OpenFeedbackPage](./docs/img/feedback-page-mocked-data.png)
+
 ## Components
 
 - `backend`: This component, located in the `plugins/open-feedback-backend` directory, handles data processing and storage, ensuring that feedback data is securely stored and readily accessible.
