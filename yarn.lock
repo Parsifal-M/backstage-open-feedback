@@ -8277,7 +8277,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@parsifal-m/backstage-plugin-open-feedback@npm:^0.2.0, @parsifal-m/backstage-plugin-open-feedback@workspace:plugins/open-feedback":
+"@parsifal-m/backstage-plugin-open-feedback@npm:^0.3.0, @parsifal-m/backstage-plugin-open-feedback@workspace:plugins/open-feedback":
   version: 0.0.0-use.local
   resolution: "@parsifal-m/backstage-plugin-open-feedback@workspace:plugins/open-feedback"
   dependencies:
@@ -13201,7 +13201,7 @@ __metadata:
     "@backstage/theme": "npm:^0.5.3"
     "@material-ui/core": "npm:^4.12.2"
     "@material-ui/icons": "npm:^4.9.1"
-    "@parsifal-m/backstage-plugin-open-feedback": "npm:^0.2.0"
+    "@parsifal-m/backstage-plugin-open-feedback": "npm:^0.3.0"
     "@playwright/test": "npm:^1.32.3"
     "@testing-library/dom": "npm:^9.0.0"
     "@testing-library/jest-dom": "npm:^6.0.0"
