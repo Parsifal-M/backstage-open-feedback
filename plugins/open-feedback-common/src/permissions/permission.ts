@@ -3,9 +3,14 @@ import { createPermission } from '@backstage/plugin-permission-common';
 /**
  * @public
  */
-export const openFeedbackReadPermission = createPermission({
-  name: 'open.feedback.read',
+export const openFeedbackPageReadPermission = createPermission({
+  name: 'open.feedback.page.read',
   attributes: { action: 'read' },
+});
+
+export const openFeedbackPageDeletePermission = createPermission({
+  name: 'open.feedback.page.delete',
+  attributes: { action: 'delete' },
 });
 
 export const openFeedbackCreatePermission = createPermission({
@@ -18,6 +23,7 @@ export const openFeedbackCreatePermission = createPermission({
  */
 
 export const openFeedbackPermissions = [
-  openFeedbackReadPermission,
+  openFeedbackPageReadPermission,
   openFeedbackCreatePermission,
+  openFeedbackPageDeletePermission,
 ];

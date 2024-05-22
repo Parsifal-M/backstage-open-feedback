@@ -16,7 +16,10 @@ import {
 import Rating from '@mui/material/Rating';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Skeleton from '@mui/material/Skeleton';
-import { AppFeedback, openFeedbackPageDeletePermission } from '@parsifal-m/backstage-plugin-open-feedback-common';
+import {
+  AppFeedback,
+  openFeedbackPageDeletePermission,
+} from '@parsifal-m/backstage-plugin-open-feedback-common';
 import { usePermission } from '@backstage/plugin-permission-react';
 
 export const FeedbackCards = () => {
@@ -26,7 +29,9 @@ export const FeedbackCards = () => {
   const [loading, setLoading] = useState(true);
   const feedbackApi = useApi(openFeedbackBackendRef);
   const alertApi = useApi(alertApiRef);
-  const { allowed } = usePermission({ permission: openFeedbackPageDeletePermission })
+  const { allowed } = usePermission({
+    permission: openFeedbackPageDeletePermission,
+  });
 
   useEffect(() => {
     const fetchFeedback = async () => {
@@ -97,7 +102,10 @@ export const FeedbackCards = () => {
             <InfoCard
               title={`${item.userRef} ${getRatingEmoji(item.rating)}`}
               action={
-                <IconButton onClick={() => handleDeleteClick(item.id)} disabled={!allowed}>
+                <IconButton
+                  onClick={() => handleDeleteClick(item.id)}
+                  disabled={!allowed}
+                >
                   <DeleteIcon />
                 </IconButton>
               }
