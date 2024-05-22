@@ -95,7 +95,7 @@ import { OpenFeedbackModal } from '@parsifal-m/backstage-plugin-open-feedback';
 // Inside your Root component
 <Sidebar>
   {/* Other SidebarItems */}
-      <OpenFeedbackModal />
+  <OpenFeedbackModal />
   {/* Other SidebarItems */}
 </Sidebar>;
 ```
