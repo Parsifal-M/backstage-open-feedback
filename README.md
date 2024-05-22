@@ -43,16 +43,14 @@ This is the page where all the feedback is displayed. It uses card components to
 
 Run the following yarn commands to add all the required packages to your Backstage application:
 
-In your `packages/app` directory:
+From the root of your repository you can run the following commands:
 
 ```bash
-yarn add @parsifal-m/backstage-plugin-open-feedback
+yarn --cwd packages/app add @parsifal-m/backstage-plugin-open-feedback
 ```
 
-In your `packages/backend` directory:
-
 ```bash
-yarn add @parsifal-m/backstage-plugin-open-feedback-backend
+yarn --cwd packages/backend add @parsifal-m/backstage-plugin-open-feedback-backend
 ```
 
 ## Adding the OpenFeedback Backend to your Backstage Application
@@ -76,14 +74,11 @@ Firstly you will want to add the `OpenFeedbackPage` component to your `packages/
 
 In the `OpenFeedbackPage` you will be able to see all the feedback that has been collected from users, and you will also have the option to delete feedback if needed.
 
-> Note: If you want to use the `OpenFeedbackModal` component, you will need to add it also like below.
-
 ```typescript
 const routes = (
   <FlatRoutes>
     // Other routes
     <Route path="/open-feedback" element={<OpenFeedbackPage />} />
-    <Route path="/open-feedback-modal" element={<OpenFeedbackModal />} />
   </FlatRoutes>
 );
 ```
@@ -100,11 +95,7 @@ import { OpenFeedbackModal } from '@parsifal-m/backstage-plugin-open-feedback';
 // Inside your Root component
 <Sidebar>
   {/* Other SidebarItems */}
-  <SidebarItem
-    icon={ThumbUpAltIcon} // You do not have to use this icon, it can be any!
-    to="/open-feedback-modal"
-    text="OpenFeedbackModal"
-  />
+  <OpenFeedbackModal />
   {/* Other SidebarItems */}
 </Sidebar>;
 ```
