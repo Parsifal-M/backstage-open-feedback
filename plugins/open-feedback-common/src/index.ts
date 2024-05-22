@@ -17,3 +17,6 @@ export type AppFeedback = {
 };
 
 export type SubmitFeedback = Omit<AppFeedback, 'id'>;
+
+// Exporting the permissions from the permissions folder
+export * from './permissions';
