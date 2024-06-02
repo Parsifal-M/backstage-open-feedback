@@ -103,10 +103,10 @@ export const FeedbackCards = () => {
               title={`${item.userRef} ${getRatingEmoji(item.rating)}`}
               action={
                 <IconButton
-                  data-testid='delete-feedback-button'
+                  data-testid="delete-feedback-button"
                   onClick={() => handleDeleteClick(item.id)}
                   disabled={!allowed}
-                  aria-label='delete'
+                  aria-label="delete"
                 >
                   <DeleteIcon />
                 </IconButton>
