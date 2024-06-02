@@ -3,6 +3,7 @@ import {
   createBackendPlugin,
 } from '@backstage/backend-plugin-api';
 import { createRouter } from './service/router';
+import { OpenFeedbackDatabaseHandler } from './database/DatabaseHandler';
 
 /**
  * openFeedbackPlugin backend plugin
@@ -22,9 +23,12 @@ export const openFeedbackPlugin = createBackendPlugin({
         httpAuth: coreServices.httpAuth,
       },
       async init({ database, discovery, logger, httpRouter, auth, httpAuth }) {
+        const databaseHandler = await OpenFeedbackDatabaseHandler.create(
+          database,
+        );
         httpRouter.use(
           await createRouter({
-            database,
+            databaseHandler,
             discovery,
             logger,
             auth,

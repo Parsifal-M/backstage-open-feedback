@@ -1,4 +1,7 @@
-import { resolvePackagePath } from '@backstage/backend-common';
+import {
+  resolvePackagePath,
+  PluginDatabaseManager,
+} from '@backstage/backend-common';
 import { Knex } from 'knex';
 import {
   AppFeedback,
@@ -10,33 +13,30 @@ const migrationsDir = resolvePackagePath(
   'migrations',
 );
 
-type Options = {
-  database: Knex;
-};
+export class OpenFeedbackDatabaseHandler {
+  private readonly client: Knex;
+  static async create(
+    database: PluginDatabaseManager,
+  ): Promise<OpenFeedbackDatabaseHandler> {
+    const client = await database.getClient();
 
-export class DatabaseHandler {
-  static async create(options: Options): Promise<DatabaseHandler> {
-    const { database } = options;
-
-    await database.migrate.latest({
+    await client.migrate.latest({
       directory: migrationsDir,
     });
 
-    return new DatabaseHandler(options);
+    return new OpenFeedbackDatabaseHandler(client);
   }
 
-  private readonly database: Knex;
-
-  private constructor(options: Options) {
-    this.database = options.database;
+  private constructor(client: Knex) {
+    this.client = client;
   }
 
   async addFeedback(feedback: SubmitFeedback): Promise<void> {
-    await this.database('open_feedback').insert(feedback);
+    await this.client('open_feedback').insert(feedback);
   }
 
   async getFeedback(): Promise<AppFeedback[]> {
-    return this.database('open_feedback').select(
+    return this.client('open_feedback').select(
       'id',
       'userRef',
       'rating',
@@ -46,6 +46,6 @@ export class DatabaseHandler {
   }
 
   async removeFeedback(id: number): Promise<void> {
-    return this.database('open_feedback').where('id', id).delete();
+    return this.client('open_feedback').where('id', id).delete();
   }
 }
