@@ -1,27 +1,43 @@
-import React from 'react';
-import { OpenFeedbackPage } from './OpenFeedbackPage';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
+import React, { act } from 'react';
 import { screen } from '@testing-library/react';
 import {
-  setupRequestMockHandlers,
   renderInTestApp,
+  TestApiProvider,
 } from '@backstage/test-utils';
+import { usePermission } from '@backstage/plugin-permission-react';
+import { alertApiRef } from '@backstage/core-plugin-api';
+import { openFeedbackBackendRef } from '../../api/types';
+import { OpenFeedbackPage } from './OpenFeedbackPage';
 
-describe('ExampleComponent', () => {
-  const server = setupServer();
-  // Enable sane handlers for network requests
-  setupRequestMockHandlers(server);
+jest.mock('@backstage/plugin-permission-react', () => ({
+  usePermission: jest.fn(),
+}));
 
-  // setup mock response
-  beforeEach(() => {
-    server.use(
-      rest.get('/*', (_, res, ctx) => res(ctx.status(200), ctx.json({}))),
-    );
-  });
+const mockOpenFeedbackBackendApi = {
+  getFeedback: () => Promise.resolve([
+    { id: 1, rating: 5, comment: 'Very good!, much test!', userRef: 'Baz' },
+  ]),
+  removeFeedback: jest.fn(),
+};
 
-  it('should render', async () => {
-    await renderInTestApp(<OpenFeedbackPage />);
-    expect(screen.getByText('Welcome to open-feedback!')).toBeInTheDocument();
+
+const mockAlertApi = {
+  post: jest.fn(),
+};
+
+describe('OpenFeedbackPage', () => {
+  it('renders the page without crashing', async () => {
+    (usePermission as jest.Mock).mockReturnValue({ allowed: true });
+    await act(async () => {
+        renderInTestApp(
+            <TestApiProvider apis={[
+                [alertApiRef, mockAlertApi],
+                [openFeedbackBackendRef, mockOpenFeedbackBackendApi]
+            ]}>
+                <OpenFeedbackPage />
+            </TestApiProvider>
+        );
+    });
+    expect(await screen.findByText('Collected Feedback')).toBeInTheDocument();
   });
 });
