@@ -134,7 +134,7 @@ export const FeedbackCards = () => {
           <Button onClick={() => setDeleteDialogOpen(false)} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleDelete} color="primary">
+          <Button onClick={handleDelete} color="primary" variant="outlined">
             Delete
           </Button>
         </DialogActions>
