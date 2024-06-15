@@ -1,6 +1,5 @@
 import {
   errorHandler,
-  PluginDatabaseManager,
   PluginEndpointDiscovery,
 } from '@backstage/backend-common';
 import {
@@ -11,11 +10,11 @@ import {
 import express, { Request, Response } from 'express';
 import Router from 'express-promise-router';
 import { body } from 'express-validator';
-import { DatabaseHandler } from '../database/DatabaseHandler';
+import { OpenFeedbackDatabaseHandler } from '../database/DatabaseHandler';
 import { SubmitFeedback } from '@parsifal-m/backstage-plugin-open-feedback-common';
 
 export interface RouterOptions {
-  database: PluginDatabaseManager;
+  databaseHandler: OpenFeedbackDatabaseHandler;
   discovery: PluginEndpointDiscovery;
   logger: LoggerService;
   auth?: AuthService;
@@ -31,9 +30,7 @@ const feedbackValidator = [
 export async function createRouter(
   options: RouterOptions,
 ): Promise<express.Router> {
-  const { logger, database } = options;
-  const db = await database.getClient();
-  const dbHandler = await DatabaseHandler.create({ database: db });
+  const { logger, databaseHandler } = options;
 
   const router = Router();
   router.use(express.json());
@@ -52,7 +49,7 @@ export async function createRouter(
       const feedback: SubmitFeedback = { userRef, rating, comment };
 
       try {
-        await dbHandler.addFeedback(feedback);
+        await databaseHandler.addFeedback(feedback);
         logger.info(`Received feedback from ${userRef} with rating ${rating}`);
         res.status(201).json({ status: 'ok', message: 'Feedback added' });
       } catch (error) {
@@ -66,7 +63,7 @@ export async function createRouter(
 
   router.get('/feedback', async (_, res: Response) => {
     try {
-      const feedback = await dbHandler.getFeedback();
+      const feedback = await databaseHandler.getFeedback();
       res.status(200).json(feedback);
     } catch (error) {
       logger.error(`Failed to get feedback: ${error}`);
@@ -80,7 +77,7 @@ export async function createRouter(
     const { id } = req.params;
 
     try {
-      await dbHandler.removeFeedback(Number(id));
+      await databaseHandler.removeFeedback(Number(id));
       res.status(200).json({ status: 'ok', message: 'Feedback removed' });
     } catch (error) {
       logger.error(`Failed to remove feedback: ${error}`);
