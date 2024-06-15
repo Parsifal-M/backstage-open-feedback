@@ -111,16 +111,16 @@ export const OpenFeedbackModal = (props: SidebarOpenfeedbackProps) => {
                 label="Submit anonymously"
               />
             </Box>
-            <Button type="submit" variant="contained" color="primary">
-              Submit
-            </Button>
+            <DialogActions>
+              <Button type="submit" variant="outlined" color="primary">
+                Submit
+              </Button>
+              <Button onClick={handleClose} color="primary">
+                Close
+              </Button>
+            </DialogActions>
           </form>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Close
-          </Button>
-        </DialogActions>
       </Dialog>
     </>
   );
