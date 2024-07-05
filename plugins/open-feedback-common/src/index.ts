@@ -14,9 +14,10 @@ export type AppFeedback = {
   userRef: string;
   rating: number;
   comment: string;
+  created_at: string;
 };
 
-export type SubmitFeedback = Omit<AppFeedback, 'id'>;
+export type SubmitFeedback = Omit<AppFeedback, 'id' | 'created_at'>;
 
 // Exporting the permissions from the permissions folder
 export * from './permissions';
