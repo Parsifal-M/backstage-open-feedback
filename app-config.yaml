@@ -12,8 +12,8 @@ backend:
   # auth:
   #   keys:
   #     - secret: ${BACKEND_SECRET}
-  # auth:
-  #   dangerouslyDisableDefaultAuthPolicy: true
+  auth:
+    dangerouslyDisableDefaultAuthPolicy: true
   baseUrl: http://localhost:7007
   listen:
     port: 7007

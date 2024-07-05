@@ -65,10 +65,10 @@ export const FeedbackCards = () => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
-    
+
     return `${day}-${month}-${year}`;
   };
-  
+
   if (loading) {
     return (
       <Grid container spacing={3}>
@@ -123,7 +123,13 @@ export const FeedbackCards = () => {
               }
             >
               <Typography variant="body1">{item.comment}</Typography>
-              <Box pt={2} width="100%" display="flex" justifyContent="space-between" alignItems="center">
+              <Box
+                pt={2}
+                width="100%"
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
                 <Typography variant="body1">
                   <Rating name="read-only" value={item.rating} readOnly />
                 </Typography>

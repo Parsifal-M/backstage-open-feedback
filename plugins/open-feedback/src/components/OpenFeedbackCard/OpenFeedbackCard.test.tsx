@@ -13,7 +13,13 @@ jest.mock('@backstage/plugin-permission-react', () => ({
 const mockOpenFeedbackBackendApi = {
   getFeedback: () =>
     Promise.resolve([
-      { id: 1, rating: 5, comment: 'Very good!, much test!', userRef: 'Baz' ,created_at: '2024-07-05T07:30:00Z'},
+      {
+        id: 1,
+        rating: 5,
+        comment: 'Very good!, much test!',
+        userRef: 'Baz',
+        created_at: '2024-07-05T07:30:00Z',
+      },
     ]),
   removeFeedback: jest.fn(),
 };
@@ -76,9 +82,7 @@ describe('FeedbackCards', () => {
         </TestApiProvider>,
       );
     });
-    expect(
-      await screen.findByText('05-07-2024'),
-    ).toBeInTheDocument();
+    expect(await screen.findByText('05-07-2024')).toBeInTheDocument();
   });
 
   it('renders the delete dialog', async () => {
@@ -199,8 +203,20 @@ describe('FeedbackCards', () => {
     (usePermission as jest.Mock).mockReturnValue({ allowed: true });
     mockOpenFeedbackBackendApi.getFeedback = () =>
       Promise.resolve([
-        { id: 1, rating: 5, comment: 'Very good!, much test!', userRef: 'Baz',created_at: '2024-07-05T07:30:00Z' },
-        { id: 2, rating: 4, comment: 'Good job!', userRef: 'Anonymous', created_at: '2024-07-05T07:30:00Z' },
+        {
+          id: 1,
+          rating: 5,
+          comment: 'Very good!, much test!',
+          userRef: 'Baz',
+          created_at: '2024-07-05T07:30:00Z',
+        },
+        {
+          id: 2,
+          rating: 4,
+          comment: 'Good job!',
+          userRef: 'Anonymous',
+          created_at: '2024-07-05T07:30:00Z',
+        },
       ]);
     await act(async () => {
       renderInTestApp(
