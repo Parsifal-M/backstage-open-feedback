@@ -13,7 +13,7 @@ jest.mock('@backstage/plugin-permission-react', () => ({
 const mockOpenFeedbackBackendApi = {
   getFeedback: () =>
     Promise.resolve([
-      { id: 1, rating: 5, comment: 'Very good!, much test!', userRef: 'Baz' },
+      { id: 1, rating: 5, comment: 'Very good!, much test!', userRef: 'Baz' ,created_at: '2024-07-05T07:30:00Z'},
     ]),
   removeFeedback: jest.fn(),
 };
@@ -60,6 +60,25 @@ describe('FeedbackCards', () => {
     const userRef = 'Baz';
     const title = new RegExp(`${userRef}.*${emoji}`);
     expect(await screen.findByText(title)).toBeInTheDocument();
+  });
+
+  it('renders a timestamp for feedback', async () => {
+    (usePermission as jest.Mock).mockReturnValue({ allowed: true });
+    await act(async () => {
+      renderInTestApp(
+        <TestApiProvider
+          apis={[
+            [alertApiRef, mockAlertApi],
+            [openFeedbackBackendRef, mockOpenFeedbackBackendApi],
+          ]}
+        >
+          <FeedbackCards />
+        </TestApiProvider>,
+      );
+    });
+    expect(
+      await screen.findByText('05-07-2024'),
+    ).toBeInTheDocument();
   });
 
   it('renders the delete dialog', async () => {
@@ -180,8 +199,8 @@ describe('FeedbackCards', () => {
     (usePermission as jest.Mock).mockReturnValue({ allowed: true });
     mockOpenFeedbackBackendApi.getFeedback = () =>
       Promise.resolve([
-        { id: 1, rating: 5, comment: 'Very good!, much test!', userRef: 'Baz' },
-        { id: 2, rating: 4, comment: 'Good job!', userRef: 'Anonymous' },
+        { id: 1, rating: 5, comment: 'Very good!, much test!', userRef: 'Baz',created_at: '2024-07-05T07:30:00Z' },
+        { id: 2, rating: 4, comment: 'Good job!', userRef: 'Anonymous', created_at: '2024-07-05T07:30:00Z' },
       ]);
     await act(async () => {
       renderInTestApp(
