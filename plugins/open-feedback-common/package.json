@@ -12,7 +12,13 @@
     "types": "dist/index.d.ts"
   },
   "backstage": {
-    "role": "common-library"
+    "role": "common-library",
+    "pluginId": "open-feedback",
+    "pluginPackages": [
+      "@parsifal-m/backstage-plugin-open-feedback",
+      "@parsifal-m/backstage-plugin-open-feedback-backend",
+      "@parsifal-m/backstage-plugin-open-feedback-common"
+    ]
   },
   "repository": {
     "type": "git",
@@ -36,12 +42,12 @@
     "postpack": "backstage-cli package postpack"
   },
   "devDependencies": {
-    "@backstage/cli": "^0.26.3"
+    "@backstage/cli": "^0.26.10"
   },
   "files": [
     "dist"
   ],
   "dependencies": {
-    "@backstage/plugin-permission-common": "^0.7.13"
+    "@backstage/plugin-permission-common": "^0.7.14"
   }
 }

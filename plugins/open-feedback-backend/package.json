@@ -10,7 +10,13 @@
     "types": "dist/index.d.ts"
   },
   "backstage": {
-    "role": "backend-plugin"
+    "role": "backend-plugin",
+    "pluginId": "open-feedback",
+    "pluginPackages": [
+      "@parsifal-m/backstage-plugin-open-feedback",
+      "@parsifal-m/backstage-plugin-open-feedback-backend",
+      "@parsifal-m/backstage-plugin-open-feedback-common"
+    ]
   },
   "repository": {
     "type": "git",
@@ -34,10 +40,10 @@
     "postpack": "backstage-cli package postpack"
   },
   "dependencies": {
-    "@backstage/backend-common": "^0.21.7",
-    "@backstage/backend-defaults": "^0.2.17",
-    "@backstage/backend-plugin-api": "^0.6.17",
-    "@backstage/backend-test-utils": "^0.3.8",
+    "@backstage/backend-common": "^0.23.2",
+    "@backstage/backend-defaults": "^0.3.3",
+    "@backstage/backend-plugin-api": "^0.6.21",
+    "@backstage/backend-test-utils": "^0.4.3",
     "@backstage/config": "^1.2.0",
     "@parsifal-m/backstage-plugin-open-feedback-common": "0.3.0",
     "@types/express": "*",
@@ -50,9 +56,9 @@
     "yn": "^4.0.0"
   },
   "devDependencies": {
-    "@backstage/cli": "^0.26.3",
-    "@backstage/plugin-auth-backend": "^0.22.4",
-    "@backstage/plugin-auth-backend-module-guest-provider": "^0.1.3",
+    "@backstage/cli": "^0.26.10",
+    "@backstage/plugin-auth-backend": "^0.22.8",
+    "@backstage/plugin-auth-backend-module-guest-provider": "^0.1.7",
     "@types/supertest": "^2.0.12",
     "msw": "^1.0.0",
     "supertest": "^6.2.4"
