@@ -95,9 +95,8 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
       </SidebarGroup>
     </Sidebar>
     {children}
-    <OpenFeedbackModal 
+    <OpenFeedbackModal floating
       icon={FeedbackIcon} 
-      floating={true} 
       style={{ position: 'fixed', bottom: 20, right: 20, color: 'white'}}
     />
   </SidebarPage>

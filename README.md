@@ -106,8 +106,7 @@ Floating button
 import { OpenFeedbackModal } from '@parsifal-m/backstage-plugin-open-feedback';
 
 // Anywhere
-<OpenFeedbackModal 
-  floating={true} 
+<OpenFeedbackModal floating
   style={{ position: 'fixed', bottom: 20, right: 20}}
 />
 ```
