@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { Fab, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ExtensionIcon from '@material-ui/icons/Extension';
@@ -95,12 +95,10 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
       </SidebarGroup>
     </Sidebar>
     {children}
-    <Fab
-      color="primary"
-      aria-label="open feedback"
-      style={{ position: 'fixed', bottom: 20, right: 20 }}
-    >
-      <OpenFeedbackModal icon={FeedbackIcon} />
-    </Fab>
+    <OpenFeedbackModal 
+      icon={FeedbackIcon} 
+      floating={true} 
+      style={{ position: 'fixed', bottom: 20, right: 20, color: 'white'}}
+    />
   </SidebarPage>
 );
