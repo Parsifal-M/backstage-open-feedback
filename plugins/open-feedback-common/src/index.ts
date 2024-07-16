@@ -11,6 +11,7 @@
  */
 export type AppFeedback = {
   id: number;
+  url: string;
   userRef: string;
   rating: number;
   comment: string;
