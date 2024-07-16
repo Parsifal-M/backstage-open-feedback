@@ -13,7 +13,7 @@ jest.mock('@backstage/plugin-permission-react', () => ({
 const mockOpenFeedbackBackendApi = {
   getFeedback: () =>
     Promise.resolve([
-      { id: 1, rating: 5, comment: 'Very good!, much test!', userRef: 'Baz' },
+      { id: 1, rating: 5, url: "test-url", comment: 'Very good!, much test!', userRef: 'Baz', created_at: '2024-07-05T07:30:00Z' },
     ]),
   removeFeedback: jest.fn(),
 };
