@@ -29,6 +29,7 @@ describe('OpenFeedbackDatabaseHandler', () => {
   it('should add feedback', async () => {
     const feedback = {
       userRef: 'test',
+      url: 'test-url',
       rating: 5,
       comment: 'test comment',
     };
@@ -46,6 +47,7 @@ describe('OpenFeedbackDatabaseHandler', () => {
   it('should get feedback', async () => {
     const feedback = {
       userRef: 'test',
+      url: 'test-url',
       rating: 5,
       comment: 'test comment',
     };
@@ -60,6 +62,7 @@ describe('OpenFeedbackDatabaseHandler', () => {
   it('should remove feedback', async () => {
     const feedback = {
       userRef: 'test',
+      url: 'test-url',
       rating: 5,
       comment: 'test comment',
     };
