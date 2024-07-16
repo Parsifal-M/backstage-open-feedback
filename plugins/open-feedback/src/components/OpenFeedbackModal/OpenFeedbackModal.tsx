@@ -54,6 +54,7 @@ export const OpenFeedbackModal = (props: SidebarOpenfeedbackProps) => {
 
     const feedback: SubmitFeedback = {
       rating: rating ?? 0,
+      url: window.location.href,
       comment: comment,
       userRef: anonymous ? 'Anonymous' : userName.value ?? 'unknown',
     };
@@ -87,6 +88,15 @@ export const OpenFeedbackModal = (props: SidebarOpenfeedbackProps) => {
                     setRating(newValue);
                   }
                 }}
+              />
+            </Box>
+            <Box mb={2}>
+              <TextField
+                name="url"
+                label="URL"
+                value={window.location.href}
+                disabled
+                fullWidth
               />
             </Box>
             <Box mb={2}>
