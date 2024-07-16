@@ -5,7 +5,6 @@
 exports.up = function up(knex) {
   return knex.schema.createTable('open_feedback', table => {
     table.increments('id').primary();
-    table.string('url').notNullable();
     table.string('userRef').notNullable();
     table.string('rating').notNullable();
     table.string('comment');
