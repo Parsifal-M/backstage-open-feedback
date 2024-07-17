@@ -2,7 +2,7 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.up = function (knex) {
+exports.up = function up(knex) {
   return knex.schema.table('open_feedback', table => {
     table.string('url');
   });
@@ -12,7 +12,7 @@ exports.up = function (knex) {
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.down = function (knex) {
+exports.down = function down(knex) {
   return knex.schema.table('open_feedback', table => {
     table.dropColumn('url');
   });
