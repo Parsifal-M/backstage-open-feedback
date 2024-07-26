@@ -45,7 +45,7 @@
     "@backstage/backend-plugin-api": "^0.6.21",
     "@backstage/backend-test-utils": "^0.4.3",
     "@backstage/config": "^1.2.0",
-    "@parsifal-m/backstage-plugin-open-feedback-common": "0.3.0",
+    "@parsifal-m/backstage-plugin-open-feedback-common": "0.4.0",
     "@types/express": "*",
     "express": "^4.17.1",
     "express-promise-router": "^4.1.0",

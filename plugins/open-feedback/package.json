@@ -50,7 +50,7 @@
     "@material-ui/lab": "4.0.0-alpha.61",
     "@mui/icons-material": "^5.15.16",
     "@mui/material": "^5.15.16",
-    "@parsifal-m/backstage-plugin-open-feedback-common": "0.3.0",
+    "@parsifal-m/backstage-plugin-open-feedback-common": "0.4.0",
     "react-use": "^17.2.4"
   },
   "peerDependencies": {
