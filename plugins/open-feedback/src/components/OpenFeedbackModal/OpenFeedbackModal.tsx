@@ -31,6 +31,7 @@ export const OpenFeedbackModal = (props: SidebarOpenfeedbackProps) => {
   const [comment, setComment] = useState('');
   const [anonymous, setAnonymous] = useState(false);
   const [open, setOpen] = useState(false);
+  const [hideUrl, setHideUrl] = useState(false);
   const feedbackApi = useApi(openFeedbackBackendRef);
   const identity = useApi(identityApiRef);
   const Icon = props.icon ? props.icon : ThumbUpAltIcon;
@@ -54,7 +55,7 @@ export const OpenFeedbackModal = (props: SidebarOpenfeedbackProps) => {
 
     const feedback: SubmitFeedback = {
       rating: rating ?? 0,
-      url: window.location.href,
+      url: hideUrl ? '' : window.location.href,
       comment: comment,
       userRef: anonymous ? 'Anonymous' : userName.value ?? 'unknown',
     };
@@ -90,13 +91,25 @@ export const OpenFeedbackModal = (props: SidebarOpenfeedbackProps) => {
                 }}
               />
             </Box>
-            <Box mb={2}>
+            <Box mb={2} display="flex" alignItems="center">
               <TextField
                 name="url"
                 label="URL"
                 value={window.location.href}
                 disabled
                 fullWidth
+                style={{ textDecoration: hideUrl ? 'line-through' : 'none' }}
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={hideUrl}
+                    onChange={event => setHideUrl(event.target.checked)}
+                    name="hideUrl"
+                    color="primary"
+                  />
+                }
+                label="Hide"
               />
             </Box>
             <Box mb={2}>
