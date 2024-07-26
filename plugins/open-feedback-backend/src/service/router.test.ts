@@ -3,10 +3,11 @@ import express from 'express';
 import request from 'supertest';
 import { createRouter } from './router';
 import { OpenFeedbackDatabaseHandler } from '../database/DatabaseHandler';
+import { AppFeedback } from '@parsifal-m/backstage-plugin-open-feedback-common';
 
 const mockDatabaseHandler = {
   addFeedback: jest.fn(),
-  getFeedback: jest.fn(),
+  getFeedback: jest.fn<Promise<AppFeedback[]>, []>(),
   removeFeedback: jest.fn(),
 } as unknown as OpenFeedbackDatabaseHandler;
 
@@ -50,6 +51,8 @@ describe('createRouter', () => {
         userRef: 'user1',
       };
 
+      (mockDatabaseHandler.addFeedback as jest.Mock).mockResolvedValueOnce(undefined);
+
       const response = await request(app)
         .post('/feedback/submit')
         .send(feedback);
@@ -62,14 +65,13 @@ describe('createRouter', () => {
       expect(mockDatabaseHandler.addFeedback).toHaveBeenCalledWith(feedback);
     });
   });
+
   describe('GET /feedback', () => {
     it('returns feedback list', async () => {
       const feedbackList = [
         { rating: 5, url: 'test-url', comment: 'Great!', userRef: 'user1' },
       ];
-      mockDatabaseHandler.getFeedback = jest
-        .fn()
-        .mockResolvedValue(feedbackList);
+      (mockDatabaseHandler.getFeedback as jest.Mock).mockResolvedValueOnce(feedbackList);
 
       const response = await request(app).get('/feedback');
 
@@ -82,9 +84,7 @@ describe('createRouter', () => {
   describe('DELETE /feedback/:id', () => {
     it('returns ok when feedback is removed', async () => {
       const feedbackId = 1;
-      mockDatabaseHandler.removeFeedback = jest
-        .fn()
-        .mockResolvedValue(feedbackId);
+      (mockDatabaseHandler.removeFeedback as jest.Mock).mockResolvedValueOnce(undefined);
 
       const response = await request(app).delete(`/feedback/${feedbackId}`);
 
@@ -93,9 +93,7 @@ describe('createRouter', () => {
         status: 'ok',
         message: 'Feedback removed',
       });
-      expect(mockDatabaseHandler.removeFeedback).toHaveBeenCalledWith(
-        feedbackId,
-      );
+      expect(mockDatabaseHandler.removeFeedback).toHaveBeenCalledWith(feedbackId);
     });
   });
 });
