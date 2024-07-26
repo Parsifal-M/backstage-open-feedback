@@ -43,7 +43,12 @@ describe('createRouter', () => {
 
   describe('POST /feedback/submit', () => {
     it('returns ok when feedback is added', async () => {
-      const feedback = { rating: 5, comment: 'Great!', userRef: 'user1' };
+      const feedback = {
+        rating: 5,
+        url: 'test-url',
+        comment: 'Great!',
+        userRef: 'user1',
+      };
 
       const response = await request(app)
         .post('/feedback/submit')
@@ -59,7 +64,9 @@ describe('createRouter', () => {
   });
   describe('GET /feedback', () => {
     it('returns feedback list', async () => {
-      const feedbackList = [{ rating: 5, comment: 'Great!', userRef: 'user1' }];
+      const feedbackList = [
+        { rating: 5, url: 'test-url', comment: 'Great!', userRef: 'user1' },
+      ];
       mockDatabaseHandler.getFeedback = jest
         .fn()
         .mockResolvedValue(feedbackList);

@@ -16,6 +16,7 @@ const mockOpenFeedbackBackendApi = {
       {
         id: 1,
         rating: 5,
+        url: 'test-url',
         comment: 'Very good!, much test!',
         userRef: 'Baz',
         created_at: '2024-07-05T07:30:00Z',
@@ -206,6 +207,7 @@ describe('FeedbackCards', () => {
         {
           id: 1,
           rating: 5,
+          url: 'test-url',
           comment: 'Very good!, much test!',
           userRef: 'Baz',
           created_at: '2024-07-05T07:30:00Z',
@@ -213,6 +215,7 @@ describe('FeedbackCards', () => {
         {
           id: 2,
           rating: 4,
+          url: 'test-url',
           comment: 'Good job!',
           userRef: 'Anonymous',
           created_at: '2024-07-05T07:30:00Z',

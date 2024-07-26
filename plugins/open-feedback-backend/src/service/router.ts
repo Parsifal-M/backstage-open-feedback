@@ -25,6 +25,7 @@ const feedbackValidator = [
   body('rating').isNumeric().notEmpty(),
   body('comment').isString().notEmpty().withMessage('Comment must be a string'),
   body('userRef').isString(),
+  body('url').isString().notEmpty(),
 ];
 
 export async function createRouter(
@@ -44,9 +45,9 @@ export async function createRouter(
     '/feedback/submit',
     feedbackValidator,
     async (req: Request, res: Response) => {
-      const { rating, comment, userRef } = req.body;
+      const { rating, url, comment, userRef } = req.body;
 
-      const feedback: SubmitFeedback = { userRef, rating, comment };
+      const feedback: SubmitFeedback = { userRef, url, rating, comment };
 
       try {
         await databaseHandler.addFeedback(feedback);

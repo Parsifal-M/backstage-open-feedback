@@ -38,6 +38,7 @@ export class OpenFeedbackDatabaseHandler {
   async getFeedback(): Promise<AppFeedback[]> {
     return this.client('open_feedback').select(
       'id',
+      'url',
       'userRef',
       'rating',
       'comment',

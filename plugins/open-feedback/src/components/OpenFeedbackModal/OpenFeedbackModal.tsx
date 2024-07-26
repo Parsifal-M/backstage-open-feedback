@@ -1,26 +1,26 @@
+import React, { useEffect, useState } from 'react';
+import { SubmitFeedback } from '@parsifal-m/backstage-plugin-open-feedback-common';
+import { SidebarItem } from '@backstage/core-components';
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import {
   useApi,
   identityApiRef,
   IconComponent,
 } from '@backstage/core-plugin-api';
+import Rating from '@mui/material/Rating';
+import { openFeedbackBackendRef } from '../../api/types';
+import useAsyncFn from 'react-use/esm/useAsyncFn';
 import {
-  Box,
-  TextField,
   Button,
-  FormControlLabel,
-  Checkbox,
   Dialog,
   DialogTitle,
   DialogContent,
+  Box,
+  TextField,
+  FormControlLabel,
+  Checkbox,
   DialogActions,
 } from '@material-ui/core';
-import Rating from '@mui/material/Rating';
-import React, { useEffect, useState } from 'react';
-import { openFeedbackBackendRef } from '../../api/types';
-import useAsyncFn from 'react-use/esm/useAsyncFn';
-import { SubmitFeedback } from '@parsifal-m/backstage-plugin-open-feedback-common';
-import { SidebarItem } from '@backstage/core-components';
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 
 export type SidebarOpenfeedbackProps = {
   icon?: IconComponent;
@@ -31,6 +31,7 @@ export const OpenFeedbackModal = (props: SidebarOpenfeedbackProps) => {
   const [comment, setComment] = useState('');
   const [anonymous, setAnonymous] = useState(false);
   const [open, setOpen] = useState(false);
+  const [url, setUrl] = useState(window.location.href);
   const feedbackApi = useApi(openFeedbackBackendRef);
   const identity = useApi(identityApiRef);
   const Icon = props.icon ? props.icon : ThumbUpAltIcon;
@@ -54,6 +55,7 @@ export const OpenFeedbackModal = (props: SidebarOpenfeedbackProps) => {
 
     const feedback: SubmitFeedback = {
       rating: rating ?? 0,
+      url: url ?? '',
       comment: comment,
       userRef: anonymous ? 'Anonymous' : userName.value ?? 'unknown',
     };
@@ -66,6 +68,12 @@ export const OpenFeedbackModal = (props: SidebarOpenfeedbackProps) => {
     setAnonymous(false);
     handleClose();
   };
+
+  useEffect(() => {
+    if (open) {
+      setUrl(window.location.href);
+    }
+  }, [open]);
 
   return (
     <>
@@ -87,6 +95,15 @@ export const OpenFeedbackModal = (props: SidebarOpenfeedbackProps) => {
                     setRating(newValue);
                   }
                 }}
+              />
+            </Box>
+            <Box mb={2} display="flex" alignItems="center">
+              <TextField
+                name="url"
+                label="Location"
+                value={url}
+                onChange={event => setUrl(event.target.value)}
+                fullWidth
               />
             </Box>
             <Box mb={2}>

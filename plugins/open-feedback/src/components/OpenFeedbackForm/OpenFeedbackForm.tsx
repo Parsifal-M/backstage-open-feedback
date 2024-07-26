@@ -35,6 +35,7 @@ export const FeedbackForm = () => {
 
     const feedback: SubmitFeedback = {
       rating: rating ?? 0,
+      url: window.location.href,
       comment: comment,
       userRef: anonymous ? 'Anonymous' : userName.value ?? 'unknown',
     };
@@ -50,6 +51,14 @@ export const FeedbackForm = () => {
   return (
     <InfoCard title="Submit Feedback">
       <form onSubmit={handleSubmit}>
+        <Box mb={2}>
+          <TextField
+            label="URL"
+            value={window.location.href}
+            disabled
+            fullWidth
+          />
+        </Box>
         <Box mb={2}>
           <Rating
             name="rating"
