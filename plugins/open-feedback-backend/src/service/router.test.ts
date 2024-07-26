@@ -51,7 +51,9 @@ describe('createRouter', () => {
         userRef: 'user1',
       };
 
-      (mockDatabaseHandler.addFeedback as jest.Mock).mockResolvedValueOnce(undefined);
+      (mockDatabaseHandler.addFeedback as jest.Mock).mockResolvedValueOnce(
+        undefined,
+      );
 
       const response = await request(app)
         .post('/feedback/submit')
@@ -71,7 +73,9 @@ describe('createRouter', () => {
       const feedbackList = [
         { rating: 5, url: 'test-url', comment: 'Great!', userRef: 'user1' },
       ];
-      (mockDatabaseHandler.getFeedback as jest.Mock).mockResolvedValueOnce(feedbackList);
+      (mockDatabaseHandler.getFeedback as jest.Mock).mockResolvedValueOnce(
+        feedbackList,
+      );
 
       const response = await request(app).get('/feedback');
 
@@ -84,7 +88,9 @@ describe('createRouter', () => {
   describe('DELETE /feedback/:id', () => {
     it('returns ok when feedback is removed', async () => {
       const feedbackId = 1;
-      (mockDatabaseHandler.removeFeedback as jest.Mock).mockResolvedValueOnce(undefined);
+      (mockDatabaseHandler.removeFeedback as jest.Mock).mockResolvedValueOnce(
+        undefined,
+      );
 
       const response = await request(app).delete(`/feedback/${feedbackId}`);
 
@@ -93,7 +99,9 @@ describe('createRouter', () => {
         status: 'ok',
         message: 'Feedback removed',
       });
-      expect(mockDatabaseHandler.removeFeedback).toHaveBeenCalledWith(feedbackId);
+      expect(mockDatabaseHandler.removeFeedback).toHaveBeenCalledWith(
+        feedbackId,
+      );
     });
   });
 });
