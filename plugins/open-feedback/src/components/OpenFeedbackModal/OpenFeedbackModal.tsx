@@ -130,10 +130,10 @@ export const OpenFeedbackModal = (props: SidebarOpenfeedbackProps) => {
             </Box>
             <DialogActions>
               <Button type="submit" variant="outlined" color="primary">
-                Submit
-              </Button>
-              <Button onClick={handleClose} color="primary">
                 Close
+              </Button>
+              <Button onClick={handleClose} variant="contained" color="primary">
+                Submit
               </Button>
             </DialogActions>
           </form>
