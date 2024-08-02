@@ -21,6 +21,7 @@ import {
   Checkbox,
   DialogActions,
 } from '@material-ui/core';
+import { cleanUrl } from '../../utils/cleanUrl';
 
 export type SidebarOpenfeedbackProps = {
   icon?: IconComponent;
@@ -31,7 +32,7 @@ export const OpenFeedbackModal = (props: SidebarOpenfeedbackProps) => {
   const [comment, setComment] = useState('');
   const [anonymous, setAnonymous] = useState(false);
   const [open, setOpen] = useState(false);
-  const [url, setUrl] = useState(window.location.href);
+  const [url, setUrl] = useState(cleanUrl(window.location.href));
   const feedbackApi = useApi(openFeedbackBackendRef);
   const identity = useApi(identityApiRef);
   const Icon = props.icon ? props.icon : ThumbUpAltIcon;
@@ -71,9 +72,11 @@ export const OpenFeedbackModal = (props: SidebarOpenfeedbackProps) => {
 
   useEffect(() => {
     if (open) {
-      setUrl(window.location.href);
+      setUrl(cleanUrl(window.location.href));
     }
   }, [open]);
+
+
 
   return (
     <>
