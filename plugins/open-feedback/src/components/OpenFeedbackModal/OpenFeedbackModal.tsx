@@ -76,8 +76,6 @@ export const OpenFeedbackModal = (props: SidebarOpenfeedbackProps) => {
     }
   }, [open]);
 
-
-
   return (
     <>
       <SidebarItem
