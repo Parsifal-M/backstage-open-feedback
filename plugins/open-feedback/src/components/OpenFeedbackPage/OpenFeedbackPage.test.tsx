@@ -46,4 +46,22 @@ describe('OpenFeedbackPage', () => {
     });
     expect(await screen.findByText('Collected Feedback')).toBeInTheDocument();
   });
+
+  it('renders the page with custom title and subtitle', async () => {
+    (usePermission as jest.Mock).mockReturnValue({ allowed: true });
+    await act(async () => {
+      renderInTestApp(
+        <TestApiProvider
+          apis={[
+            [alertApiRef, mockAlertApi],
+            [openFeedbackBackendRef, mockOpenFeedbackBackendApi],
+          ]}
+        >
+          <OpenFeedbackPage title="Custom Title" subtitle="Custom Subtitle" />
+        </TestApiProvider>,
+      );
+    });
+    expect(await screen.findByText('Custom Title')).toBeInTheDocument();
+    expect(await screen.findByText('Custom Subtitle')).toBeInTheDocument();
+  });
 });
