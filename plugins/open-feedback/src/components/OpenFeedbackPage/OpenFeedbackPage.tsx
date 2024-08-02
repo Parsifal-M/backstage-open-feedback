@@ -3,7 +3,7 @@ import { Typography, Grid } from '@material-ui/core';
 import { InfoCard, Header, Page, Content } from '@backstage/core-components';
 import { FeedbackCards } from '../OpenFeedbackCard/OpenFeedbackCard';
 
-interface OpenFeedbackPageProps {
+export interface OpenFeedbackPageProps {
   title?: string;
   subtitle?: string;
 }
