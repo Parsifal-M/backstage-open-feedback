@@ -5,7 +5,7 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import {
   useApi,
   identityApiRef,
-  IconComponent
+  IconComponent,
 } from '@backstage/core-plugin-api';
 import Rating from '@mui/material/Rating';
 import { openFeedbackBackendRef } from '../../api/types';
@@ -87,11 +87,16 @@ export const OpenFeedbackModal = (props: ButtonOpenfeedbackProps) => {
           onClick={() => setOpen(true)}
         />
       ) : (
-        <Fab color="primary" variant="extended" onClick={() => setOpen(true)} style={props.style}>
+        <Fab
+          color="primary"
+          variant="extended"
+          onClick={() => setOpen(true)}
+          style={props.style}
+        >
           <Icon style={{ marginRight: 4 }} />
-            Feedback
+          Feedback
         </Fab>
-      )}      
+      )}
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
         <DialogTitle>Submit Feedback</DialogTitle>
         <DialogContent>
