@@ -24,7 +24,7 @@ import {
 } from '@material-ui/core';
 import { cleanUrl } from '../../utils/cleanUrl';
 
-export type ButtonOpenfeedbackProps = {
+type ButtonOpenfeedbackProps = {
   icon?: IconComponent;
   floating?: boolean;
   style?: React.CSSProperties;
