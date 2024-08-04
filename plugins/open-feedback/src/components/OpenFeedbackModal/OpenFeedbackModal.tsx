@@ -39,7 +39,7 @@ export const OpenFeedbackModal = (props: ButtonOpenfeedbackProps) => {
   const feedbackApi = useApi(openFeedbackBackendRef);
   const identity = useApi(identityApiRef);
   const Icon = props.icon ? props.icon : ThumbUpAltIcon;
-  const Floating = props.floating ?? false;
+  const floating = props.floating ?? false;
   const [userName, fetchUserName] = useAsyncFn(async () => {
     return await (
       await identity.getProfileInfo()
@@ -81,7 +81,7 @@ export const OpenFeedbackModal = (props: ButtonOpenfeedbackProps) => {
 
   return (
     <>
-      {!Floating ? (
+      {!floating ? (
         <SidebarItem
           icon={Icon}
           text="OpenFeedback"
