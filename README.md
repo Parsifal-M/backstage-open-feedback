@@ -78,7 +78,15 @@ In the `OpenFeedbackPage` you will be able to see all the feedback that has been
 const routes = (
   <FlatRoutes>
     // Other routes
-    <Route path="/open-feedback" element={<OpenFeedbackPage />} />
+    <Route
+      path="/open-feedback"
+      element={
+        <OpenFeedbackPage
+          title="My Super Feedback Title!" // Optional
+          subtitle="A Super Subtitle!" // Optional
+        />
+      }
+    />
   </FlatRoutes>
 );
 ```
