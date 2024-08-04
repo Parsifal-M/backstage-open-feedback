@@ -110,7 +110,11 @@ import { OpenFeedbackModal } from '@parsifal-m/backstage-plugin-open-feedback';
 // Anywhere
 <OpenFeedbackModal
   floating
+  title="Super Feedback!" // Optional, defaults to "Feedback"
+  color="primary" // Optional, defaults to "primary"
+  icon={FeedbackIcon} // Optional, defaults to the feedback icon
   style={{ position: 'fixed', bottom: 20, right: 20, color: 'primary' }}
+  // Optional, defaults the Material-UI fab style
 />;
 ```
 

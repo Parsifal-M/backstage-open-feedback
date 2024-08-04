@@ -28,6 +28,8 @@ type ButtonOpenfeedbackProps = {
   icon?: IconComponent;
   floating?: boolean;
   style?: React.CSSProperties;
+  title?: string;
+  color?: 'primary' | 'secondary';
 };
 
 export const OpenFeedbackModal = (props: ButtonOpenfeedbackProps) => {
@@ -89,13 +91,13 @@ export const OpenFeedbackModal = (props: ButtonOpenfeedbackProps) => {
         />
       ) : (
         <Fab
-          color="primary"
+          color={props.color ?? 'primary'}
           variant="extended"
           onClick={() => setOpen(true)}
           style={props.style}
         >
           <Icon style={{ marginRight: 4 }} />
-          Feedback
+          {props.title ?? 'Feedback'}
         </Fab>
       )}
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
