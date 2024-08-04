@@ -86,7 +86,7 @@ export const OpenFeedbackModal = (props: ButtonOpenfeedbackProps) => {
       {!floating ? (
         <SidebarItem
           icon={Icon}
-          text="OpenFeedback"
+          text={props.title ?? 'Feedback'}
           onClick={() => setOpen(true)}
         />
       ) : (
