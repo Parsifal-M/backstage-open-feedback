@@ -1,5 +1,5 @@
 app:
-  title: Backstage
+  title: OpenFeedback
   baseUrl: http://localhost:3000
 
 organization:

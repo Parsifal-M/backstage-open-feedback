@@ -78,7 +78,15 @@ In the `OpenFeedbackPage` you will be able to see all the feedback that has been
 const routes = (
   <FlatRoutes>
     // Other routes
-    <Route path="/open-feedback" element={<OpenFeedbackPage />} />
+    <Route
+      path="/open-feedback"
+      element={
+        <OpenFeedbackPage
+          title="My Super Feedback Title!" // Optional
+          subtitle="A Super Subtitle!" // Optional
+        />
+      }
+    />
   </FlatRoutes>
 );
 ```
@@ -89,6 +97,8 @@ To use the `OpenFeedbackModal` component, you will need to add it to your `packa
 
 Clicking on it will open a dialog box for users to send feedback.
 
+In the sidebar
+
 ```typescript
 import { OpenFeedbackModal } from '@parsifal-m/backstage-plugin-open-feedback';
 
@@ -98,6 +108,22 @@ import { OpenFeedbackModal } from '@parsifal-m/backstage-plugin-open-feedback';
   <OpenFeedbackModal />
   {/* Other SidebarItems */}
 </Sidebar>;
+```
+
+Floating button
+
+```typescript
+import { OpenFeedbackModal } from '@parsifal-m/backstage-plugin-open-feedback';
+
+// Anywhere
+<OpenFeedbackModal
+  floating
+  title="Super Feedback!" // Optional, defaults to "Feedback"
+  color="primary" // Optional, defaults to "primary"
+  icon={FeedbackIcon} // Optional, defaults to the feedback icon
+  style={{ position: 'fixed', bottom: 20, right: 20, color: 'primary' }}
+  // Optional, defaults the Material-UI fab style
+/>;
 ```
 
 ## Using the OpenFeedbackForm Component

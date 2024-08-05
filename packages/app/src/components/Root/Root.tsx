@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ExtensionIcon from '@material-ui/icons/Extension';
+import FeedbackIcon from '@material-ui/icons/Feedback';
 import MapIcon from '@material-ui/icons/MyLocation';
 import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import CreateComponentIcon from '@material-ui/icons/AddCircleOutline';
@@ -94,5 +95,10 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
       </SidebarGroup>
     </Sidebar>
     {children}
+    <OpenFeedbackModal
+      floating
+      icon={FeedbackIcon}
+      style={{ position: 'fixed', bottom: 20, right: 20, color: 'primary' }}
+    />
   </SidebarPage>
 );

@@ -20,22 +20,28 @@ import {
   FormControlLabel,
   Checkbox,
   DialogActions,
+  Fab,
 } from '@material-ui/core';
+import { cleanUrl } from '../../utils/cleanUrl';
 
-export type SidebarOpenfeedbackProps = {
+type ButtonOpenfeedbackProps = {
   icon?: IconComponent;
+  floating?: boolean;
+  style?: React.CSSProperties;
+  title?: string;
+  color?: 'primary' | 'secondary';
 };
 
-export const OpenFeedbackModal = (props: SidebarOpenfeedbackProps) => {
+export const OpenFeedbackModal = (props: ButtonOpenfeedbackProps) => {
   const [rating, setRating] = useState<number | null>(2);
   const [comment, setComment] = useState('');
   const [anonymous, setAnonymous] = useState(false);
   const [open, setOpen] = useState(false);
-  const [url, setUrl] = useState(window.location.href);
+  const [url, setUrl] = useState(cleanUrl(window.location.href));
   const feedbackApi = useApi(openFeedbackBackendRef);
   const identity = useApi(identityApiRef);
   const Icon = props.icon ? props.icon : ThumbUpAltIcon;
-
+  const floating = props.floating ?? false;
   const [userName, fetchUserName] = useAsyncFn(async () => {
     return await (
       await identity.getProfileInfo()
@@ -71,17 +77,29 @@ export const OpenFeedbackModal = (props: SidebarOpenfeedbackProps) => {
 
   useEffect(() => {
     if (open) {
-      setUrl(window.location.href);
+      setUrl(cleanUrl(window.location.href));
     }
   }, [open]);
 
   return (
     <>
-      <SidebarItem
-        icon={Icon}
-        text="OpenFeedback"
-        onClick={() => setOpen(true)}
-      />
+      {!floating ? (
+        <SidebarItem
+          icon={Icon}
+          text={props.title ?? 'Feedback'}
+          onClick={() => setOpen(true)}
+        />
+      ) : (
+        <Fab
+          color={props.color ?? 'primary'}
+          variant="extended"
+          onClick={() => setOpen(true)}
+          style={props.style}
+        >
+          <Icon style={{ marginRight: 4 }} />
+          {props.title ?? 'Feedback'}
+        </Fab>
+      )}
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
         <DialogTitle>Submit Feedback</DialogTitle>
         <DialogContent>
@@ -129,10 +147,10 @@ export const OpenFeedbackModal = (props: SidebarOpenfeedbackProps) => {
               />
             </Box>
             <DialogActions>
-              <Button onClick={handleClose} variant="contained" color="primary">
+              <Button onClick={handleClose} variant="outlined" color="primary">
                 Close
               </Button>
-              <Button type="submit" variant="outlined" color="primary">
+              <Button type="submit" variant="contained" color="primary">
                 Submit
               </Button>
             </DialogActions>
