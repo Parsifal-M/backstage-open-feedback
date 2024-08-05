@@ -64,8 +64,13 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
       <SidebarLogo />
       <SidebarGroup label="Search" icon={<SearchIcon />} to="/search">
         <SidebarSearchModal />
+        <OpenFeedbackModal
+          floating
+          title='OpenFeedback'
+          icon={FeedbackIcon}
+          style={{ position: 'fixed', bottom: 20, right: 20, color: 'primary' }}
+        />
       </SidebarGroup>
-      <OpenFeedbackModal />
       <SidebarDivider />
       <SidebarGroup label="Menu" icon={<MenuIcon />}>
         {/* Global nav, not org-specific */}
@@ -95,10 +100,5 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
       </SidebarGroup>
     </Sidebar>
     {children}
-    <OpenFeedbackModal
-      floating
-      icon={FeedbackIcon}
-      style={{ position: 'fixed', bottom: 20, right: 20, color: 'primary' }}
-    />
   </SidebarPage>
 );
