@@ -66,7 +66,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         <SidebarSearchModal />
         <OpenFeedbackModal
           floating
-          title='OpenFeedback'
+          title="OpenFeedback"
           icon={FeedbackIcon}
           style={{ position: 'fixed', bottom: 20, right: 20, color: 'primary' }}
         />

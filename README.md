@@ -100,19 +100,19 @@ In the sidebar
 import { OpenFeedbackModal } from '@parsifal-m/backstage-plugin-open-feedback';
 
 // Inside your Root component
-    <Sidebar>
-      <SidebarLogo />
-      <SidebarGroup label="Search" icon={<SearchIcon />} to="/search">
-        <SidebarSearchModal />
-          <OpenFeedbackModal
-            floating // Setting this to true will make a floating button (FAB), setting it to false will make a sidebar item
-            title="Super Feedback!" // Optional, defaults to "Feedback"
-            color="primary" // Optional, defaults to "primary"
-            icon={FeedbackIcon} // Optional, defaults to the feedback icon
-            style={{ position: 'fixed', bottom: 20, right: 20, color: 'primary' }}
-          />;
-      </SidebarGroup>
-      </Sidebar>
+<Sidebar>
+  <SidebarLogo />
+  <SidebarGroup label="Search" icon={<SearchIcon />} to="/search">
+    <SidebarSearchModal />
+    <OpenFeedbackModal
+      floating // Setting this to true will make a floating button (FAB), setting it to false will make a sidebar item
+      title="Super Feedback!" // Optional, defaults to "Feedback"
+      color="primary" // Optional, defaults to "primary"
+      icon={FeedbackIcon} // Optional, defaults to the feedback icon
+      style={{ position: 'fixed', bottom: 20, right: 20, color: 'primary' }}
+    />;
+  </SidebarGroup>
+</Sidebar>;
 ```
 
 ## Using the OpenFeedbackForm Component
