@@ -9,27 +9,24 @@ Like what you see? Feel free to star this repository and share it with your frie
 ## Key Features
 
 - **Feedback Collection**: OpenFeedback provides two interfaces for users to easily submit feedback, helping you gather valuable insights to improve your application.
-
-  - **OpenFeedbackModal**: This component can be added to the sidebar and pops up a dialog box for users to send feedback. It can be easily integrated into your `packages/app/src/components/Root/Root.tsx` file.
-  - **OpenFeedbackForm**: This is a form component that can be added to any page (More specifically designed for the [Backstage HomePage](https://backstage.io/docs/getting-started/homepage/#homepage)), providing a flexible way to collect feedback across your application.
-
+- **OpenFeedbackModal**: This component can be added to the sidebar and pops up a dialog box for users to send feedback. It can be easily integrated into your `packages/app/src/components/Root/Root.tsx` file.
+- **OpenFeedbackForm**: This is a form component that can be added to any page (More specifically designed for the [Backstage HomePage](https://backstage.io/docs/getting-started/homepage/#homepage)), providing a flexible way to collect feedback across your application.
 - **Feedback Management**: The `OpenFeedbackPage` component provides a comprehensive view of all collected feedback. This page uses the `FeedbackCards` component to display each piece of feedback. Administrators can view all feedback collected from users on this page, making it a central hub for feedback management.
-
 - **Integrated Solution**: OpenFeedback is built to integrate seamlessly with Backstage, allowing you to manage feedback directly within your Backstage application.
 
 ## Screenshots
 
 ### OpenFeedbackModal
 
-This is the modal that pops up when the user clicks on the feedback button in the sidebar. It allows users to send feedback directly from the Backstage application as their logged in user or anonymously.
+This is the modal that pops up when the user clicks on the feedback button in the sidebar. It allows users to send feedback directly from the Backstage application as their logged in user or anonymously. It includes a location field to specify the page where the feedback was collected.
 
-![OpenFeedbackModal](./docs/img/feedback-modal.png)
+![OpenFeedbackModal](./docs/img/of-modal.png)
 
 ### OpenFeedbackPage
 
-This is the page where all the feedback is displayed. It uses card components to display each piece of feedback. Administrators can view all feedback collected from users on this page, making it a central hub for feedback management.
+This is the page where all the feedback is displayed. It uses card components to display each piece of feedback. Administrators can view all feedback collected from users on this page, making it a central hub for feedback management. It will also display a "location" field to specify the page where the feedback was collected.
 
-![OpenFeedbackPage](./docs/img/feedback-page-mocked-data.png)
+![OpenFeedbackPage](./docs/img/of-feedbackpage.png)
 
 ## Components
 
@@ -39,7 +36,7 @@ This is the page where all the feedback is displayed. It uses card components to
 
 - `common`: This component, located in the `plugins/open-feedback-common` directory, contains shared types and permissions used by both the backend and frontend.
 
-# Installation
+## Installation
 
 Run the following yarn commands to add all the required packages to your Backstage application:
 
@@ -104,34 +101,28 @@ import { OpenFeedbackModal } from '@parsifal-m/backstage-plugin-open-feedback';
 
 // Inside your Root component
 <Sidebar>
-  {/* Other SidebarItems */}
-  <OpenFeedbackModal />
-  {/* Other SidebarItems */}
+  <SidebarLogo />
+  <SidebarGroup label="Search" icon={<SearchIcon />} to="/search">
+    <SidebarSearchModal />
+    <OpenFeedbackModal
+      floating // Setting this to true will make a floating button (FAB), setting it to false will make a sidebar item
+      title="Super Feedback!" // Optional, defaults to "Feedback"
+      color="primary" // Optional, defaults to "primary"
+      icon={FeedbackIcon} // Optional, defaults to the feedback icon
+      style={{ position: 'fixed', bottom: 20, right: 20, color: 'primary' }}
+    />;
+  </SidebarGroup>
 </Sidebar>;
-```
-
-Floating button
-
-```typescript
-import { OpenFeedbackModal } from '@parsifal-m/backstage-plugin-open-feedback';
-
-// Anywhere
-<OpenFeedbackModal
-  floating
-  title="Super Feedback!" // Optional, defaults to "Feedback"
-  color="primary" // Optional, defaults to "primary"
-  icon={FeedbackIcon} // Optional, defaults to the feedback icon
-  style={{ position: 'fixed', bottom: 20, right: 20, color: 'primary' }}
-  // Optional, defaults the Material-UI fab style
-/>;
 ```
 
 ## Using the OpenFeedbackForm Component
 
 I would recommend using the `OpenFeedbackForm` on the [Backstage HomePage](https://backstage.io/docs/getting-started/homepage/#homepage) to collect feedback from users. This component can be added to any page, but it is more specifically designed for the Backstage HomePage.
 
-# Contributing
+## Contributing
 
 Contributions are welcome! Feel free to pick up any open issues, or suggest new features by opening an issue!
+
+Some instructions on how to contribute can be found in the [CONTRIBUTING.md](./CONTRIBUTING.md) file.
 
 If you have any questions you can also contact me on mastodon at [@parcifal](https://hachyderm.io/@parcifal).
