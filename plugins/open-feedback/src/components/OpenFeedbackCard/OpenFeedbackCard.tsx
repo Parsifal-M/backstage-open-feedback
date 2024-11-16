@@ -21,6 +21,7 @@ import {
   openFeedbackPageDeletePermission,
 } from '@parsifal-m/backstage-plugin-open-feedback-common';
 import { usePermission } from '@backstage/plugin-permission-react';
+import { EntityRefLink } from '@backstage/plugin-catalog-react';
 
 export const FeedbackCards = () => {
   const [feedback, setFeedback] = useState<AppFeedback[] | null>(null);
@@ -110,7 +111,16 @@ export const FeedbackCards = () => {
         <Grid item xs={6} key={item.id}>
           <Box>
             <InfoCard
-              title={`${item.userRef} ${getRatingEmoji(item.rating)}`}
+              title={
+                <>
+                  {item.userRef && item.userRef !== 'anonymous' ? (
+                    <EntityRefLink entityRef={item.userRef} />
+                  ) : (
+                    'Anonymous'
+                  )}{' '}
+                  {getRatingEmoji(item.rating)}
+                </>
+              }
               action={
                 <IconButton
                   data-testid="delete-feedback-button"
@@ -158,7 +168,12 @@ export const FeedbackCards = () => {
           <Button onClick={() => setDeleteDialogOpen(false)} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleDelete} color="primary" variant="contained">
+          <Button
+            onClick={handleDelete}
+            color="primary"
+            variant="outlined"
+            style={{ marginLeft: '8px' }}
+          >
             Delete
           </Button>
         </DialogActions>
