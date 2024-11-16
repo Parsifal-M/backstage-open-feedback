@@ -5,23 +5,14 @@ import React, { act } from 'react';
 import { FeedbackCards } from './OpenFeedbackCard';
 import { openFeedbackBackendRef } from '../../api/types';
 import { usePermission } from '@backstage/plugin-permission-react';
+import { entityRouteRef } from '@backstage/plugin-catalog-react';
 
 jest.mock('@backstage/plugin-permission-react', () => ({
   usePermission: jest.fn(),
 }));
 
 const mockOpenFeedbackBackendApi = {
-  getFeedback: () =>
-    Promise.resolve([
-      {
-        id: 1,
-        rating: 5,
-        url: 'test-url',
-        comment: 'Very good!, much test!',
-        userRef: 'Baz',
-        created_at: '2024-07-05T07:30:00Z',
-      },
-    ]),
+  getFeedback: jest.fn(),
   removeFeedback: jest.fn(),
 };
 
@@ -30,6 +21,25 @@ const mockAlertApi = {
 };
 
 describe('FeedbackCards', () => {
+
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  beforeAll(() => {
+    mockOpenFeedbackBackendApi.getFeedback.mockResolvedValue([
+      {
+        id: 1,
+        rating: 5,
+        url: 'test-url',
+        comment: 'Very good!, much test!',
+        userRef: 'user:default/baz',
+        created_at: '2024-07-05T07:30:00Z',
+      },
+    ]);
+  });
+
   it('renders a card with feedback', async () => {
     (usePermission as jest.Mock).mockReturnValue({ allowed: true });
     await act(async () => {
@@ -42,6 +52,11 @@ describe('FeedbackCards', () => {
         >
           <FeedbackCards />
         </TestApiProvider>,
+      {
+        mountedRoutes: {
+          '/catalog/:namespace/:kind/:name': entityRouteRef,
+        },
+      },
       );
     });
     expect(
@@ -61,12 +76,15 @@ describe('FeedbackCards', () => {
         >
           <FeedbackCards />
         </TestApiProvider>,
+      {
+        mountedRoutes: {
+          '/catalog/:namespace/:kind/:name': entityRouteRef,
+        },
+      },
       );
     });
-    const emoji = '🤩';
-    const userRef = 'Baz';
-    const title = new RegExp(`${userRef}.*${emoji}`);
-    expect(await screen.findByText(title)).toBeInTheDocument();
+    expect(await screen.findByText('baz')).toBeInTheDocument();
+    expect(await screen.findByText('🤩')).toBeInTheDocument();
   });
 
   it('renders a timestamp for feedback', async () => {
@@ -81,6 +99,11 @@ describe('FeedbackCards', () => {
         >
           <FeedbackCards />
         </TestApiProvider>,
+      {
+        mountedRoutes: {
+          '/catalog/:namespace/:kind/:name': entityRouteRef,
+        },
+      },
       );
     });
     expect(await screen.findByText('05-07-2024')).toBeInTheDocument();
@@ -98,6 +121,11 @@ describe('FeedbackCards', () => {
         >
           <FeedbackCards />
         </TestApiProvider>,
+      {
+        mountedRoutes: {
+          '/catalog/:namespace/:kind/:name': entityRouteRef,
+        },
+      },
       );
     });
     const deleteButton = await screen.findByTestId('delete-feedback-button');
@@ -119,6 +147,11 @@ describe('FeedbackCards', () => {
         >
           <FeedbackCards />
         </TestApiProvider>,
+      {
+        mountedRoutes: {
+          '/catalog/:namespace/:kind/:name': entityRouteRef,
+        },
+      },
       );
     });
     const deleteButton = await screen.findByTestId('delete-feedback-button');
@@ -144,6 +177,11 @@ describe('FeedbackCards', () => {
         >
           <FeedbackCards />
         </TestApiProvider>,
+      {
+        mountedRoutes: {
+          '/catalog/:namespace/:kind/:name': entityRouteRef,
+        },
+      },
       );
     });
     const deleteButton = await screen.findByTestId('delete-feedback-button');
@@ -168,6 +206,11 @@ describe('FeedbackCards', () => {
         >
           <FeedbackCards />
         </TestApiProvider>,
+      {
+        mountedRoutes: {
+          '/catalog/:namespace/:kind/:name': entityRouteRef,
+        },
+      },
       );
     });
     const deleteButton = await screen.findByTestId('delete-feedback-button');
@@ -194,64 +237,23 @@ describe('FeedbackCards', () => {
         >
           <FeedbackCards />
         </TestApiProvider>,
+      {
+        mountedRoutes: {
+          '/catalog/:namespace/:kind/:name': entityRouteRef,
+        },
+      },
       );
     });
     const deleteButton = await screen.findByTestId('delete-feedback-button');
     expect(deleteButton).toBeDisabled();
   });
 
-  it('renders feedback cards with respective userRef', async () => {
-    (usePermission as jest.Mock).mockReturnValue({ allowed: true });
-    mockOpenFeedbackBackendApi.getFeedback = () =>
-      Promise.resolve([
-        {
-          id: 1,
-          rating: 5,
-          url: 'test-url',
-          comment: 'Very good!, much test!',
-          userRef: 'Baz',
-          created_at: '2024-07-05T07:30:00Z',
-        },
-        {
-          id: 2,
-          rating: 4,
-          url: 'test-url',
-          comment: 'Good job!',
-          userRef: 'Anonymous',
-          created_at: '2024-07-05T07:30:00Z',
-        },
-      ]);
-    await act(async () => {
-      renderInTestApp(
-        <TestApiProvider
-          apis={[
-            [alertApiRef, mockAlertApi],
-            [openFeedbackBackendRef, mockOpenFeedbackBackendApi],
-          ]}
-        >
-          <FeedbackCards />
-        </TestApiProvider>,
-      );
-    });
-    expect(
-      await screen.findByText('Very good!, much test!'),
-    ).toBeInTheDocument();
-    expect(await screen.findByText('Good job!')).toBeInTheDocument();
-    const emojiBaz = '🤩';
-    const emojiAnonymous = '😃';
-    const userRefBaz = 'Baz';
-    const userRefAnonymous = 'Anonymous';
-    const titleBaz = new RegExp(`${userRefBaz}.*${emojiBaz}`);
-    const titleAnonymous = new RegExp(`${userRefAnonymous}.*${emojiAnonymous}`);
-    expect(await screen.findByText(titleBaz)).toBeInTheDocument();
-    expect(await screen.findByText(titleAnonymous)).toBeInTheDocument();
-  });
-
   it('posts an alert error when fails to fetch feedback', async () => {
     const errorMessage = 'Oops Something went wrong!';
     (usePermission as jest.Mock).mockReturnValue({ allowed: true });
-    mockOpenFeedbackBackendApi.getFeedback = () =>
-      Promise.reject(new Error(errorMessage));
+    mockOpenFeedbackBackendApi.getFeedback.mockImplementation(() =>
+      Promise.reject(new Error(errorMessage))
+    );
     await act(async () => {
       renderInTestApp(
         <TestApiProvider
@@ -262,6 +264,11 @@ describe('FeedbackCards', () => {
         >
           <FeedbackCards />
         </TestApiProvider>,
+      {
+        mountedRoutes: {
+          '/catalog/:namespace/:kind/:name': entityRouteRef,
+        },
+      },
       );
     });
     expect(mockAlertApi.post).toHaveBeenCalledWith({

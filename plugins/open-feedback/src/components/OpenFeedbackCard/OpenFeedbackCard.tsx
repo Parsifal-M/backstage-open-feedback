@@ -112,13 +112,14 @@ export const FeedbackCards = () => {
           <Box>
             <InfoCard
               title={
-                item.userRef && item.userRef !== 'anonymous' ? (
-                  <>
-                    <EntityRefLink entityRef={item.userRef} /> {getRatingEmoji(item.rating)}
-                  </>
-                ) : (
-                  'Anonymous'
-                )
+                <>
+                  {item.userRef && item.userRef !== 'anonymous' ? (
+                    <EntityRefLink entityRef={item.userRef} />
+                  ) : (
+                    'Anonymous'
+                  )}{' '}
+                  {getRatingEmoji(item.rating)}
+                </>
               }
               action={
                 <IconButton
