@@ -43,9 +43,9 @@ export const OpenFeedbackModal = (props: ButtonOpenfeedbackProps) => {
   const Icon = props.icon ? props.icon : ThumbUpAltIcon;
   const floating = props.floating ?? false;
   const [userName, fetchUserName] = useAsyncFn(async () => {
-    return await (
-      await identity.getProfileInfo()
-    ).displayName;
+    return (
+      await identity.getBackstageIdentity()
+    ).userEntityRef;
   });
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export const OpenFeedbackModal = (props: ButtonOpenfeedbackProps) => {
       rating: rating ?? 0,
       url: url ?? '',
       comment: comment,
-      userRef: anonymous ? 'Anonymous' : userName.value ?? 'unknown',
+      userRef: anonymous ? 'anonymous' : userName.value ?? 'anonymous',
     };
 
     await feedbackApi.submitFeedback(feedback);

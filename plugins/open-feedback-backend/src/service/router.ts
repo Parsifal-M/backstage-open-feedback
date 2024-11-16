@@ -1,21 +1,19 @@
 import {
-  errorHandler,
-  PluginEndpointDiscovery,
-} from '@backstage/backend-common';
-import {
   AuthService,
   HttpAuthService,
   LoggerService,
 } from '@backstage/backend-plugin-api';
 import express, { Request, Response } from 'express';
 import Router from 'express-promise-router';
+import { Config } from '@backstage/config';
 import { body, validationResult } from 'express-validator';
 import { OpenFeedbackDatabaseHandler } from '../database/DatabaseHandler';
 import { SubmitFeedback } from '@parsifal-m/backstage-plugin-open-feedback-common';
+import { MiddlewareFactory } from '@backstage/backend-defaults/rootHttpRouter';
 
 export interface RouterOptions {
   databaseHandler: OpenFeedbackDatabaseHandler;
-  discovery: PluginEndpointDiscovery;
+  config: Config;
   logger: LoggerService;
   auth?: AuthService;
   httpAuth?: HttpAuthService;
@@ -31,7 +29,7 @@ const feedbackValidator = [
 export async function createRouter(
   options: RouterOptions,
 ): Promise<express.Router> {
-  const { logger, databaseHandler } = options;
+  const { logger, config, databaseHandler } = options;
 
   const router = Router();
   router.use(express.json());
@@ -101,6 +99,9 @@ export async function createRouter(
       });
   });
 
-  router.use(errorHandler());
+
+  const middleware = MiddlewareFactory.create({ logger, config });
+
+  router.use(middleware.error());
   return router;
 }

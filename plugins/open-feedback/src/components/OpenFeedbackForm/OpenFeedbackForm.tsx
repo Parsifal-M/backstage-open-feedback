@@ -21,9 +21,9 @@ export const FeedbackForm = () => {
   const identity = useApi(identityApiRef);
 
   const [userName, fetchUserName] = useAsyncFn(async () => {
-    return await (
-      await identity.getProfileInfo()
-    ).displayName;
+    return (
+      await identity.getBackstageIdentity()
+    ).userEntityRef
   });
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export const FeedbackForm = () => {
       rating: rating ?? 0,
       url: window.location.href,
       comment: comment,
-      userRef: anonymous ? 'Anonymous' : userName.value ?? 'unknown',
+      userRef: anonymous ? 'anonymous' : userName.value ?? 'anonymous',
     };
 
     await feedbackApi.submitFeedback(feedback);
