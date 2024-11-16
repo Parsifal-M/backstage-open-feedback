@@ -21,8 +21,6 @@ const mockAlertApi = {
 };
 
 describe('FeedbackCards', () => {
-
-
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -52,11 +50,11 @@ describe('FeedbackCards', () => {
         >
           <FeedbackCards />
         </TestApiProvider>,
-      {
-        mountedRoutes: {
-          '/catalog/:namespace/:kind/:name': entityRouteRef,
+        {
+          mountedRoutes: {
+            '/catalog/:namespace/:kind/:name': entityRouteRef,
+          },
         },
-      },
       );
     });
     expect(
@@ -76,11 +74,11 @@ describe('FeedbackCards', () => {
         >
           <FeedbackCards />
         </TestApiProvider>,
-      {
-        mountedRoutes: {
-          '/catalog/:namespace/:kind/:name': entityRouteRef,
+        {
+          mountedRoutes: {
+            '/catalog/:namespace/:kind/:name': entityRouteRef,
+          },
         },
-      },
       );
     });
     expect(await screen.findByText('baz')).toBeInTheDocument();
@@ -99,11 +97,11 @@ describe('FeedbackCards', () => {
         >
           <FeedbackCards />
         </TestApiProvider>,
-      {
-        mountedRoutes: {
-          '/catalog/:namespace/:kind/:name': entityRouteRef,
+        {
+          mountedRoutes: {
+            '/catalog/:namespace/:kind/:name': entityRouteRef,
+          },
         },
-      },
       );
     });
     expect(await screen.findByText('05-07-2024')).toBeInTheDocument();
@@ -121,11 +119,11 @@ describe('FeedbackCards', () => {
         >
           <FeedbackCards />
         </TestApiProvider>,
-      {
-        mountedRoutes: {
-          '/catalog/:namespace/:kind/:name': entityRouteRef,
+        {
+          mountedRoutes: {
+            '/catalog/:namespace/:kind/:name': entityRouteRef,
+          },
         },
-      },
       );
     });
     const deleteButton = await screen.findByTestId('delete-feedback-button');
@@ -147,11 +145,11 @@ describe('FeedbackCards', () => {
         >
           <FeedbackCards />
         </TestApiProvider>,
-      {
-        mountedRoutes: {
-          '/catalog/:namespace/:kind/:name': entityRouteRef,
+        {
+          mountedRoutes: {
+            '/catalog/:namespace/:kind/:name': entityRouteRef,
+          },
         },
-      },
       );
     });
     const deleteButton = await screen.findByTestId('delete-feedback-button');
@@ -177,11 +175,11 @@ describe('FeedbackCards', () => {
         >
           <FeedbackCards />
         </TestApiProvider>,
-      {
-        mountedRoutes: {
-          '/catalog/:namespace/:kind/:name': entityRouteRef,
+        {
+          mountedRoutes: {
+            '/catalog/:namespace/:kind/:name': entityRouteRef,
+          },
         },
-      },
       );
     });
     const deleteButton = await screen.findByTestId('delete-feedback-button');
@@ -206,11 +204,11 @@ describe('FeedbackCards', () => {
         >
           <FeedbackCards />
         </TestApiProvider>,
-      {
-        mountedRoutes: {
-          '/catalog/:namespace/:kind/:name': entityRouteRef,
+        {
+          mountedRoutes: {
+            '/catalog/:namespace/:kind/:name': entityRouteRef,
+          },
         },
-      },
       );
     });
     const deleteButton = await screen.findByTestId('delete-feedback-button');
@@ -237,11 +235,11 @@ describe('FeedbackCards', () => {
         >
           <FeedbackCards />
         </TestApiProvider>,
-      {
-        mountedRoutes: {
-          '/catalog/:namespace/:kind/:name': entityRouteRef,
+        {
+          mountedRoutes: {
+            '/catalog/:namespace/:kind/:name': entityRouteRef,
+          },
         },
-      },
       );
     });
     const deleteButton = await screen.findByTestId('delete-feedback-button');
@@ -252,7 +250,7 @@ describe('FeedbackCards', () => {
     const errorMessage = 'Oops Something went wrong!';
     (usePermission as jest.Mock).mockReturnValue({ allowed: true });
     mockOpenFeedbackBackendApi.getFeedback.mockImplementation(() =>
-      Promise.reject(new Error(errorMessage))
+      Promise.reject(new Error(errorMessage)),
     );
     await act(async () => {
       renderInTestApp(
@@ -264,11 +262,11 @@ describe('FeedbackCards', () => {
         >
           <FeedbackCards />
         </TestApiProvider>,
-      {
-        mountedRoutes: {
-          '/catalog/:namespace/:kind/:name': entityRouteRef,
+        {
+          mountedRoutes: {
+            '/catalog/:namespace/:kind/:name': entityRouteRef,
+          },
         },
-      },
       );
     });
     expect(mockAlertApi.post).toHaveBeenCalledWith({

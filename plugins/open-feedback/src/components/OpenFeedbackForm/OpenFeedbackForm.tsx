@@ -21,9 +21,7 @@ export const FeedbackForm = () => {
   const identity = useApi(identityApiRef);
 
   const [userName, fetchUserName] = useAsyncFn(async () => {
-    return (
-      await identity.getBackstageIdentity()
-    ).userEntityRef
+    return (await identity.getBackstageIdentity()).userEntityRef;
   });
 
   useEffect(() => {

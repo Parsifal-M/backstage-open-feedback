@@ -43,9 +43,7 @@ export const OpenFeedbackModal = (props: ButtonOpenfeedbackProps) => {
   const Icon = props.icon ? props.icon : ThumbUpAltIcon;
   const floating = props.floating ?? false;
   const [userName, fetchUserName] = useAsyncFn(async () => {
-    return (
-      await identity.getBackstageIdentity()
-    ).userEntityRef;
+    return (await identity.getBackstageIdentity()).userEntityRef;
   });
 
   useEffect(() => {
