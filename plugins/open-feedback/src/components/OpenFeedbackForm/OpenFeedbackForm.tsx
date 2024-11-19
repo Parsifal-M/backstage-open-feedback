@@ -75,6 +75,7 @@ export const FeedbackForm = () => {
             value={comment}
             onChange={event => setComment(event.target.value)}
             fullWidth
+            multiline
           />
         </Box>
         <Box mb={2}>
