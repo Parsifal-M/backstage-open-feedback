@@ -1,0 +1,1 @@
+export { FeedbackForm } from './OpenFeedbackForm';
