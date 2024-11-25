@@ -24,9 +24,9 @@ This is the modal that pops up when the user clicks on the feedback button in th
 
 ### OpenFeedbackPage
 
-This is the page where all the feedback is displayed. It uses card components to display each piece of feedback. Administrators can view all feedback collected from users on this page, making it a central hub for feedback management. It will also display a "location" field to specify the page where the feedback was collected.
+This is the page where all the feedback is displayed. It uses card components to display each piece of feedback. Administrators can view all feedback collected from users on this page, making it a central hub for feedback management. It will also display a "location" field to specify the page where the feedback was collected. It also uses the `EntityRefLink` to create a clickable link to the user entity that submitted it, so long as it was not submitted anonymously.
 
-![OpenFeedbackPage](./docs/img/of-feedbackpage.png)
+![OpenFeedbackPage](./docs/img/of-feedback.png)
 
 ## Components
 
