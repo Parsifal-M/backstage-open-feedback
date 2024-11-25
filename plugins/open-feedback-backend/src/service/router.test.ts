@@ -1,9 +1,9 @@
-import { getVoidLogger } from '@backstage/backend-common';
 import express from 'express';
 import request from 'supertest';
 import { createRouter } from './router';
 import { OpenFeedbackDatabaseHandler } from '../database/DatabaseHandler';
 import { AppFeedback } from '@parsifal-m/backstage-plugin-open-feedback-common';
+import { mockServices } from '@backstage/backend-test-utils';
 
 const mockDatabaseHandler = {
   addFeedback: jest.fn(),
@@ -11,20 +11,17 @@ const mockDatabaseHandler = {
   removeFeedback: jest.fn(),
 } as unknown as OpenFeedbackDatabaseHandler;
 
+const mockLogger = mockServices.logger.mock();
+
 describe('createRouter', () => {
   let app: express.Express;
 
   beforeAll(async () => {
+    const mockConfig = mockServices.rootConfig({});
     const router = await createRouter({
-      logger: getVoidLogger(),
+      logger: mockLogger,
+      config: mockConfig,
       databaseHandler: mockDatabaseHandler,
-      discovery: {
-        getBaseUrl: jest.fn(),
-        // eslint-disable-next-line func-names
-        getExternalBaseUrl: function (_pluginId: string): Promise<string> {
-          throw new Error('Function not implemented.');
-        },
-      },
     });
     app = express().use(router);
   });
