@@ -1,8 +1,4 @@
-import {
-  AuthService,
-  HttpAuthService,
-  LoggerService,
-} from '@backstage/backend-plugin-api';
+import { LoggerService } from '@backstage/backend-plugin-api';
 import express, { Request, Response } from 'express';
 import Router from 'express-promise-router';
 import { Config } from '@backstage/config';
@@ -15,8 +11,6 @@ export interface RouterOptions {
   databaseHandler: OpenFeedbackDatabaseHandler;
   config: Config;
   logger: LoggerService;
-  auth?: AuthService;
-  httpAuth?: HttpAuthService;
 }
 
 const feedbackValidator = [

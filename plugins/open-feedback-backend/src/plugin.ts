@@ -15,24 +15,20 @@ export const openFeedbackPlugin = createBackendPlugin({
   register(env) {
     env.registerInit({
       deps: {
-        discovery: coreServices.discovery,
+        config: coreServices.rootConfig,
         database: coreServices.database,
         logger: coreServices.logger,
         httpRouter: coreServices.httpRouter,
-        auth: coreServices.auth,
-        httpAuth: coreServices.httpAuth,
       },
-      async init({ database, discovery, logger, httpRouter, auth, httpAuth }) {
+      async init({ config, database, logger, httpRouter }) {
         const databaseHandler = await OpenFeedbackDatabaseHandler.create(
           database,
         );
         httpRouter.use(
           await createRouter({
+            config,
             databaseHandler,
-            discovery,
             logger,
-            auth,
-            httpAuth,
           }),
         );
       },
