@@ -109,6 +109,8 @@ import { OpenFeedbackModal } from '@parsifal-m/backstage-plugin-open-feedback';
       title="Super Feedback!" // Optional, defaults to "Feedback"
       color="primary" // Optional, defaults to "primary"
       icon={FeedbackIcon} // Optional, defaults to the feedback icon
+      rating={3}
+      disableAnonymous
       style={{ position: 'fixed', bottom: 20, right: 20, color: 'primary' }}
     />;
   </SidebarGroup>
