@@ -30,10 +30,12 @@ type ButtonOpenfeedbackProps = {
   style?: React.CSSProperties;
   title?: string;
   color?: 'primary' | 'secondary';
+  rating?: number;
+  disableAnonymous?: boolean;
 };
 
 export const OpenFeedbackModal = (props: ButtonOpenfeedbackProps) => {
-  const [rating, setRating] = useState<number | null>(2);
+  const [rating, setRating] = useState<number | null>(props.rating || 2);
   const [comment, setComment] = useState('');
   const [anonymous, setAnonymous] = useState(false);
   const [open, setOpen] = useState(false);
@@ -42,6 +44,7 @@ export const OpenFeedbackModal = (props: ButtonOpenfeedbackProps) => {
   const identity = useApi(identityApiRef);
   const Icon = props.icon ? props.icon : ThumbUpAltIcon;
   const floating = props.floating ?? false;
+  const disableAnonymous = props.disableAnonymous ?? false;
   const [userName, fetchUserName] = useAsyncFn(async () => {
     return (await identity.getBackstageIdentity()).userEntityRef;
   });
@@ -67,7 +70,7 @@ export const OpenFeedbackModal = (props: ButtonOpenfeedbackProps) => {
     await feedbackApi.submitFeedback(feedback);
 
     // reset form
-    setRating(2);
+    setRating(props.rating || 2);
     setComment('');
     setAnonymous(false);
     handleClose();
@@ -132,19 +135,21 @@ export const OpenFeedbackModal = (props: ButtonOpenfeedbackProps) => {
                 multiline
               />
             </Box>
-            <Box mb={2}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={anonymous}
-                    onChange={event => setAnonymous(event.target.checked)}
-                    name="anonymous"
-                    color="primary"
-                  />
-                }
-                label="Submit anonymously"
-              />
-            </Box>
+            {!disableAnonymous && (
+              <Box mb={2}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={anonymous}
+                      onChange={event => setAnonymous(event.target.checked)}
+                      name="anonymous"
+                      color="primary"
+                    />
+                  }
+                  label="Submit anonymously"
+                />
+              </Box>
+            )}
             <DialogActions>
               <Button onClick={handleClose} variant="outlined" color="primary">
                 Close
