@@ -67,6 +67,8 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         <OpenFeedbackModal
           floating
           title="OpenFeedback"
+          rating={2}
+          disableAnonymous={false}
           icon={FeedbackIcon}
           style={{ position: 'fixed', bottom: 20, right: 20, color: 'primary' }}
         />
