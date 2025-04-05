@@ -109,17 +109,13 @@ import { OpenFeedbackModal } from '@parsifal-m/backstage-plugin-open-feedback';
       title="Super Feedback!" // Optional, defaults to "Feedback"
       color="primary" // Optional, defaults to "primary"
       icon={FeedbackIcon} // Optional, defaults to the feedback icon
-      rating={3}
-      disableAnonymous
+      rating={3} // Optional, the default rating to show in the modal, defaults to 2
+      disableAnonymous // Optional, defaults to false, if set to true, the user will not be able to send feedback anonymously
       style={{ position: 'fixed', bottom: 20, right: 20, color: 'primary' }}
-    />;
+    />
   </SidebarGroup>
-</Sidebar>;
+</Sidebar>
 ```
-
-## Using the OpenFeedbackForm Component
-
-I would recommend using the `OpenFeedbackForm` on the [Backstage HomePage](https://backstage.io/docs/getting-started/homepage/#homepage) to collect feedback from users. This component can be added to any page, but it is more specifically designed for the Backstage HomePage.
 
 ## Contributing
 
