@@ -114,7 +114,7 @@ import { OpenFeedbackModal } from '@parsifal-m/backstage-plugin-open-feedback';
       style={{ position: 'fixed', bottom: 20, right: 20, color: 'primary' }}
     />
   </SidebarGroup>
-</Sidebar>
+</Sidebar>;
 ```
 
 ## Contributing
