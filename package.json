@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "engines": {
-    "node": "18 || 20"
+    "node": "20 || 22"
   },
   "scripts": {
     "dev": "concurrently \"yarn start\" \"yarn start-backend\"",
@@ -56,5 +56,5 @@
       "prettier --write"
     ]
   },
-  "packageManager": "yarn@4.5.2"
+  "packageManager": "yarn@4.12.0"
 }
