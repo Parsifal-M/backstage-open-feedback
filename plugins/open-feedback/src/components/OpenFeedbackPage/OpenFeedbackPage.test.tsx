@@ -1,4 +1,4 @@
-import React, { act } from 'react';
+import { act } from 'react';
 import { screen } from '@testing-library/react';
 import { renderInTestApp, TestApiProvider } from '@backstage/test-utils';
 import { usePermission } from '@backstage/plugin-permission-react';

@@ -1,7 +1,7 @@
 import { renderInTestApp, TestApiProvider } from '@backstage/test-utils';
 import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { alertApiRef } from '@backstage/core-plugin-api';
-import React, { act } from 'react';
+import { act } from 'react';
 import { FeedbackCards } from './OpenFeedbackCard';
 import { openFeedbackBackendRef } from '../../api/types';
 import { usePermission } from '@backstage/plugin-permission-react';
