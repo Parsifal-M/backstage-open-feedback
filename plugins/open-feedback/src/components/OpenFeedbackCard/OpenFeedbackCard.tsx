@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { InfoCard } from '@backstage/core-components';
 import { useApi, alertApiRef } from '@backstage/core-plugin-api';
 import { openFeedbackBackendRef } from '../../api/types';
