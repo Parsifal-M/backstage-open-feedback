@@ -64,7 +64,7 @@ export const OpenFeedbackModal = (props: ButtonOpenfeedbackProps) => {
       rating: rating ?? 0,
       url: url ?? '',
       comment: comment,
-      userRef: anonymous ? 'anonymous' : userName.value ?? 'anonymous',
+      userRef: anonymous ? 'anonymous' : (userName.value ?? 'anonymous'),
     };
 
     await feedbackApi.submitFeedback(feedback);

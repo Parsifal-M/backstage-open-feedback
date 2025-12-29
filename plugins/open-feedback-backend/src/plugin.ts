@@ -21,9 +21,8 @@ export const openFeedbackPlugin = createBackendPlugin({
         httpRouter: coreServices.httpRouter,
       },
       async init({ config, database, logger, httpRouter }) {
-        const databaseHandler = await OpenFeedbackDatabaseHandler.create(
-          database,
-        );
+        const databaseHandler =
+          await OpenFeedbackDatabaseHandler.create(database);
         httpRouter.use(
           await createRouter({
             config,

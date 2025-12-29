@@ -35,7 +35,7 @@ export const FeedbackForm = () => {
       rating: rating ?? 0,
       url: window.location.href,
       comment: comment,
-      userRef: anonymous ? 'anonymous' : userName.value ?? 'anonymous',
+      userRef: anonymous ? 'anonymous' : (userName.value ?? 'anonymous'),
     };
 
     await feedbackApi.submitFeedback(feedback);
