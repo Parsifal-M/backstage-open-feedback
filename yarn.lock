@@ -7664,7 +7664,7 @@ __metadata:
     "@types/supertest": "npm:^2.0.12"
     express: "npm:^4.17.1"
     express-promise-router: "npm:^4.1.0"
-    express-validator: "npm:^7.0.1"
+    express-validator: "npm:^7.3.1"
     knex: "npm:^3.1.0"
     msw: "npm:^1.0.0"
     node-fetch: "npm:^2.6.7"
@@ -18900,13 +18900,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express-validator@npm:^7.0.1":
-  version: 7.0.1
-  resolution: "express-validator@npm:7.0.1"
+"express-validator@npm:^7.3.1":
+  version: 7.3.1
+  resolution: "express-validator@npm:7.3.1"
   dependencies:
     lodash: "npm:^4.17.21"
-    validator: "npm:^13.9.0"
-  checksum: 10/c65591561903ad7b370fdf61a789620b50f5b0d912872cfc07d71ecd654bc077b4918a4a5e9c3777c6d48bbcc702f114ab23c9dfc145a4a79e5245854cada532
+    validator: "npm:~13.15.23"
+  checksum: 10/1ea5ad295445570d24f712a3b76dfd004cf9b32d36a0f7496895948b02e18914bc39664fa5b626fe1f69c10f179e7e20254ddc25df5b77bb78e36916343d4620
   languageName: node
   linkType: hard
 
@@ -32384,10 +32384,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"validator@npm:^13.9.0":
-  version: 13.11.0
-  resolution: "validator@npm:13.11.0"
-  checksum: 10/4bf094641eb71729c06a42d669840e7189597ba655a8264adabac9bf03f95cd6fde5fbc894b0a13ee861bd4a852f56d2afdc9391aeaeb3fc0f9633a974140e12
+"validator@npm:~13.15.23":
+  version: 13.15.26
+  resolution: "validator@npm:13.15.26"
+  checksum: 10/22488ae718ca724eda81b7c8bf505005d4d70cb6ff9a319f48fd897a31d40fd9a2971af4a3288667a04c56b4f95912555495519d54a5d8d63c2572bf4970081a
   languageName: node
   linkType: hard
 
