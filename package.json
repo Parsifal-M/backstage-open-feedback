@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "engines": {
-    "node": "20 || 22"
+    "node": "22 || 24"
   },
   "scripts": {
     "dev": "concurrently \"yarn start\" \"yarn start-backend\"",
@@ -32,11 +32,15 @@
     ]
   },
   "devDependencies": {
-    "@backstage/cli": "^0.34.5",
-    "@backstage/e2e-test-utils": "^0.1.1",
+    "@backstage/cli": "^0.36.0",
+    "@backstage/e2e-test-utils": "^0.1.2",
+    "@jest/environment-jsdom-abstract": "^30",
     "@playwright/test": "^1.32.3",
     "@spotify/prettier-config": "^12.0.0",
+    "@types/jest": "^30",
     "concurrently": "^8.0.0",
+    "jest": "^30",
+    "jsdom": "^27",
     "node-gyp": "^9.0.0",
     "prettier": "^3.1.1",
     "typescript": "^5.8.0"
@@ -55,5 +59,5 @@
       "prettier --write"
     ]
   },
-  "packageManager": "yarn@4.12.0"
+  "packageManager": "yarn@4.13.0"
 }
