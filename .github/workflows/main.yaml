@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Run on Node 18
+    name: Run on Node 22
     runs-on: ubuntu-latest
 
     steps:
@@ -18,7 +18,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18.x'
+          node-version: '22.x'
 
       - name: Enable Corepack
         run: corepack enable
@@ -33,9 +33,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/yarn
-          key: yarn-${{ runner.OS }}-18-${{ hashFiles('**/yarn.lock') }}
+          key: yarn-${{ runner.OS }}-22-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            yarn-${{ runner.OS }}-18-
+            yarn-${{ runner.OS }}-22-
 
       - name: Install Dependencies
         run: yarn install
