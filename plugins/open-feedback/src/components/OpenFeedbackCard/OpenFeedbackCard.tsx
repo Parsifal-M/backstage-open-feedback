@@ -16,6 +16,7 @@ import {
 import Rating from '@mui/material/Rating';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArchiveIcon from '@mui/icons-material/Archive';
+import UnarchiveIcon from '@mui/icons-material/Unarchive';
 import Skeleton from '@mui/material/Skeleton';
 import {
   AppFeedback,
@@ -42,13 +43,19 @@ export const formatDateAndTime = (timestamp: string): string => {
 };
 
 export interface FeedbackCardsProps {
+  mode: 'active' | 'archived';
   onArchive?: () => void;
+  refreshKey?: number;
 }
 
-export const FeedbackCards = ({ onArchive }: FeedbackCardsProps) => {
+export const FeedbackCards = ({
+  mode,
+  onArchive,
+  refreshKey,
+}: FeedbackCardsProps) => {
   const [feedback, setFeedback] = useState<AppFeedback[] | null>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [archiveDialogOpen, setArchiveDialogOpen] = useState(false);
+  const [secondaryDialogOpen, setSecondaryDialogOpen] = useState(false);
   const [actionId, setActionId] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const feedbackApi = useApi(openFeedbackBackendRef);
@@ -60,15 +67,19 @@ export const FeedbackCards = ({ onArchive }: FeedbackCardsProps) => {
     permission: openFeedbackArchivePermission,
   });
 
+  const isArchived = mode === 'archived';
+
   useEffect(() => {
     const fetchFeedback = async () => {
       setLoading(true);
       try {
-        const feedbackData = await feedbackApi.getFeedback();
+        const feedbackData = isArchived
+          ? await feedbackApi.getArchivedFeedback()
+          : await feedbackApi.getFeedback();
         setFeedback(feedbackData);
       } catch (error) {
         alertApi.post({
-          message: `Failed to fetch feedback: ${error}`,
+          message: `Failed to fetch ${isArchived ? 'archived ' : ''}feedback: ${error}`,
           severity: 'error',
         });
       }
@@ -76,7 +87,9 @@ export const FeedbackCards = ({ onArchive }: FeedbackCardsProps) => {
     };
 
     fetchFeedback();
-  }, [feedbackApi, alertApi]);
+    // refreshKey is intentionally included so the archived tab re-fetches
+    // when an item is archived from the active tab
+  }, [feedbackApi, alertApi, refreshKey, isArchived]);
 
   if (loading) {
     return (
@@ -90,14 +103,22 @@ export const FeedbackCards = ({ onArchive }: FeedbackCardsProps) => {
     );
   }
 
+  if (!feedback || feedback.length === 0) {
+    return (
+      <Grid item xs={12}>
+        <Typography variant="body1" color="textSecondary">
+          {isArchived ? 'No archived feedback found.' : 'No feedback received yet!'}
+        </Typography>
+      </Grid>
+    );
+  }
+
   const handleDelete = async () => {
     if (actionId === null) return;
 
     try {
       await feedbackApi.removeFeedback(actionId);
-      if (feedback) {
-        setFeedback(feedback.filter(item => item.id !== actionId));
-      }
+      setFeedback(prev => prev?.filter(item => item.id !== actionId) ?? null);
     } catch (error) {
       alertApi.post({
         message: `Failed to delete feedback: ${error}`,
@@ -108,33 +129,27 @@ export const FeedbackCards = ({ onArchive }: FeedbackCardsProps) => {
     setDeleteDialogOpen(false);
   };
 
-  const handleArchive = async () => {
+  // Archive (active mode) or Restore (archived mode)
+  const handleSecondaryAction = async () => {
     if (actionId === null) return;
 
     try {
-      await feedbackApi.archiveFeedback(actionId);
-      if (feedback) {
-        setFeedback(feedback.filter(item => item.id !== actionId));
+      if (isArchived) {
+        await feedbackApi.restoreFeedback(actionId);
+      } else {
+        await feedbackApi.archiveFeedback(actionId);
+        onArchive?.();
       }
-      onArchive?.();
+      setFeedback(prev => prev?.filter(item => item.id !== actionId) ?? null);
     } catch (error) {
+      const action = isArchived ? 'restore' : 'archive';
       alertApi.post({
-        message: `Failed to archive feedback: ${error}`,
+        message: `Failed to ${action} feedback: ${error}`,
         severity: 'error',
       });
     }
 
-    setArchiveDialogOpen(false);
-  };
-
-  const handleDeleteClick = (id: number) => {
-    setActionId(id);
-    setDeleteDialogOpen(true);
-  };
-
-  const handleArchiveClick = (id: number) => {
-    setActionId(id);
-    setArchiveDialogOpen(true);
+    setSecondaryDialogOpen(false);
   };
 
   return (
@@ -156,16 +171,30 @@ export const FeedbackCards = ({ onArchive }: FeedbackCardsProps) => {
               action={
                 <Box display="flex">
                   <IconButton
-                    data-testid="archive-feedback-button"
-                    onClick={() => handleArchiveClick(item.id)}
+                    data-testid={
+                      isArchived
+                        ? 'restore-feedback-button'
+                        : 'archive-feedback-button'
+                    }
+                    onClick={() => {
+                      setActionId(item.id);
+                      setSecondaryDialogOpen(true);
+                    }}
                     disabled={!archiveAllowed}
-                    aria-label="archive"
+                    aria-label={isArchived ? 'restore' : 'archive'}
                   >
-                    <ArchiveIcon />
+                    {isArchived ? <UnarchiveIcon /> : <ArchiveIcon />}
                   </IconButton>
                   <IconButton
-                    data-testid="delete-feedback-button"
-                    onClick={() => handleDeleteClick(item.id)}
+                    data-testid={
+                      isArchived
+                        ? 'delete-archived-feedback-button'
+                        : 'delete-feedback-button'
+                    }
+                    onClick={() => {
+                      setActionId(item.id);
+                      setDeleteDialogOpen(true);
+                    }}
                     disabled={!deleteAllowed}
                     aria-label="delete"
                   >
@@ -199,37 +228,49 @@ export const FeedbackCards = ({ onArchive }: FeedbackCardsProps) => {
         </Grid>
       ))}
 
+      {/* Archive / Restore dialog */}
       <Dialog
-        open={archiveDialogOpen}
-        onClose={() => setArchiveDialogOpen(false)}
+        open={secondaryDialogOpen}
+        onClose={() => setSecondaryDialogOpen(false)}
       >
-        <DialogTitle>Confirm Archive</DialogTitle>
+        <DialogTitle>
+          {isArchived ? 'Confirm Restore' : 'Confirm Archive'}
+        </DialogTitle>
         <DialogContent>
-          Are you sure you want to archive this feedback? You can restore it
-          later from the Archived tab.
+          {isArchived
+            ? 'Are you sure you want to restore this feedback to active?'
+            : 'Are you sure you want to archive this feedback? You can restore it later from the Archived tab.'}
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setArchiveDialogOpen(false)} color="primary">
+          <Button
+            onClick={() => setSecondaryDialogOpen(false)}
+            color="primary"
+          >
             Cancel
           </Button>
           <Button
-            onClick={handleArchive}
+            onClick={handleSecondaryAction}
             color="primary"
             variant="outlined"
             style={{ marginLeft: '8px' }}
           >
-            Archive
+            {isArchived ? 'Restore' : 'Archive'}
           </Button>
         </DialogActions>
       </Dialog>
 
+      {/* Delete dialog */}
       <Dialog
         open={deleteDialogOpen}
         onClose={() => setDeleteDialogOpen(false)}
       >
-        <DialogTitle>Confirm Deletion</DialogTitle>
+        <DialogTitle>
+          {isArchived ? 'Confirm Permanent Deletion' : 'Confirm Deletion'}
+        </DialogTitle>
         <DialogContent>
-          Are you sure you want to delete this feedback?
+          {isArchived
+            ? 'Are you sure you want to permanently delete this feedback? This action cannot be undone.'
+            : 'Are you sure you want to delete this feedback?'}
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setDeleteDialogOpen(false)} color="primary">
@@ -241,7 +282,7 @@ export const FeedbackCards = ({ onArchive }: FeedbackCardsProps) => {
             variant="outlined"
             style={{ marginLeft: '8px' }}
           >
-            Delete
+            {isArchived ? 'Delete Permanently' : 'Delete'}
           </Button>
         </DialogActions>
       </Dialog>

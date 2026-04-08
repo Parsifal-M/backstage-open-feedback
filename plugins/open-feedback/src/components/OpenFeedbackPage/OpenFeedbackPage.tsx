@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Grid } from '@material-ui/core';
 import { Header, Page, RoutedTabs } from '@backstage/core-components';
 import { FeedbackCards } from '../OpenFeedbackCard/OpenFeedbackCard';
-import { ArchivedFeedbackCards } from '../ArchivedFeedbackCard';
 
 export interface OpenFeedbackPageProps {
   title?: string;
@@ -26,6 +25,7 @@ export const OpenFeedbackPage = ({
               children: (
                 <Grid container spacing={3}>
                   <FeedbackCards
+                    mode="active"
                     onArchive={() => setArchiveRefreshKey(k => k + 1)}
                   />
                 </Grid>
@@ -36,7 +36,7 @@ export const OpenFeedbackPage = ({
               title: 'Archived',
               children: (
                 <Grid container spacing={3}>
-                  <ArchivedFeedbackCards refreshKey={archiveRefreshKey} />
+                  <FeedbackCards mode="archived" refreshKey={archiveRefreshKey} />
                 </Grid>
               ),
             },
