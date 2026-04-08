@@ -77,6 +77,52 @@ export async function createRouter(
       });
   });
 
+  router.get('/feedback/archived', (_, res: Response) => {
+    databaseHandler
+      .getArchivedFeedback()
+      .then(feedback => {
+        res.status(200).json(feedback);
+      })
+      .catch(error => {
+        logger.error(`Failed to get archived feedback: ${error}`);
+        res
+          .status(500)
+          .json({ status: 'error', message: 'Failed to get archived feedback' });
+      });
+  });
+
+  router.patch('/feedback/:id/archive', (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    databaseHandler
+      .archiveFeedback(Number(id))
+      .then(() => {
+        res.status(200).json({ status: 'ok', message: 'Feedback archived' });
+      })
+      .catch(error => {
+        logger.error(`Failed to archive feedback: ${error}`);
+        res
+          .status(500)
+          .json({ status: 'error', message: 'Failed to archive feedback' });
+      });
+  });
+
+  router.patch('/feedback/:id/restore', (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    databaseHandler
+      .restoreFeedback(Number(id))
+      .then(() => {
+        res.status(200).json({ status: 'ok', message: 'Feedback restored' });
+      })
+      .catch(error => {
+        logger.error(`Failed to restore feedback: ${error}`);
+        res
+          .status(500)
+          .json({ status: 'error', message: 'Failed to restore feedback' });
+      });
+  });
+
   router.delete('/feedback/:id', (req: Request, res: Response) => {
     const { id } = req.params;
 

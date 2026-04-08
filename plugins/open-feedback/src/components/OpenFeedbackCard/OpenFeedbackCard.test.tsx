@@ -14,6 +14,7 @@ jest.mock('@backstage/plugin-permission-react', () => ({
 const mockOpenFeedbackBackendApi = {
   getFeedback: jest.fn(),
   removeFeedback: jest.fn(),
+  archiveFeedback: jest.fn(),
 };
 
 const mockAlertApi = {
@@ -34,6 +35,7 @@ describe('FeedbackCards', () => {
         comment: 'Very good!, much test!',
         userRef: 'user:default/baz',
         created_at: '2024-07-05T07:30:00Z',
+        archived: false,
       },
     ]);
   });
@@ -273,5 +275,148 @@ describe('FeedbackCards', () => {
       message: `Failed to fetch feedback: Error: ${errorMessage}`,
       severity: 'error',
     });
+  });
+
+  it('renders the archive dialog when archive button is clicked', async () => {
+    (usePermission as jest.Mock).mockReturnValue({ allowed: true });
+    await act(async () => {
+      renderInTestApp(
+        <TestApiProvider
+          apis={[
+            [alertApiRef, mockAlertApi],
+            [openFeedbackBackendRef, mockOpenFeedbackBackendApi],
+          ]}
+        >
+          <FeedbackCards />
+        </TestApiProvider>,
+        {
+          mountedRoutes: {
+            '/catalog/:namespace/:kind/:name': entityRouteRef,
+          },
+        },
+      );
+    });
+    const archiveButton = await screen.findByTestId('archive-feedback-button');
+    fireEvent.click(archiveButton);
+    expect(
+      await screen.findByText(
+        'Are you sure you want to archive this feedback? You can restore it later from the Archived tab.',
+      ),
+    ).toBeInTheDocument();
+  });
+
+  it('closes the archive dialog and does not archive when Cancel is clicked', async () => {
+    (usePermission as jest.Mock).mockReturnValue({ allowed: true });
+    await act(async () => {
+      renderInTestApp(
+        <TestApiProvider
+          apis={[
+            [alertApiRef, mockAlertApi],
+            [openFeedbackBackendRef, mockOpenFeedbackBackendApi],
+          ]}
+        >
+          <FeedbackCards />
+        </TestApiProvider>,
+        {
+          mountedRoutes: {
+            '/catalog/:namespace/:kind/:name': entityRouteRef,
+          },
+        },
+      );
+    });
+    const archiveButton = await screen.findByTestId('archive-feedback-button');
+    fireEvent.click(archiveButton);
+    fireEvent.click(await screen.findByText('Cancel'));
+    expect(mockOpenFeedbackBackendApi.archiveFeedback).not.toHaveBeenCalled();
+    await waitFor(() => {
+      expect(
+        screen.queryByText(
+          'Are you sure you want to archive this feedback? You can restore it later from the Archived tab.',
+        ),
+      ).not.toBeInTheDocument();
+    });
+  });
+
+  it('archives feedback and removes it from active list', async () => {
+    (usePermission as jest.Mock).mockReturnValue({ allowed: true });
+    mockOpenFeedbackBackendApi.archiveFeedback.mockResolvedValueOnce(undefined);
+    await act(async () => {
+      renderInTestApp(
+        <TestApiProvider
+          apis={[
+            [alertApiRef, mockAlertApi],
+            [openFeedbackBackendRef, mockOpenFeedbackBackendApi],
+          ]}
+        >
+          <FeedbackCards />
+        </TestApiProvider>,
+        {
+          mountedRoutes: {
+            '/catalog/:namespace/:kind/:name': entityRouteRef,
+          },
+        },
+      );
+    });
+    const archiveButton = await screen.findByTestId('archive-feedback-button');
+    fireEvent.click(archiveButton);
+    fireEvent.click(await screen.findByText('Archive'));
+    expect(mockOpenFeedbackBackendApi.archiveFeedback).toHaveBeenCalledWith(1);
+  });
+
+  it('posts an alert error when archive fails', async () => {
+    const errorMessage = 'Archive failed!';
+    (usePermission as jest.Mock).mockReturnValue({ allowed: true });
+    mockOpenFeedbackBackendApi.archiveFeedback.mockRejectedValueOnce(
+      new Error(errorMessage),
+    );
+    await act(async () => {
+      renderInTestApp(
+        <TestApiProvider
+          apis={[
+            [alertApiRef, mockAlertApi],
+            [openFeedbackBackendRef, mockOpenFeedbackBackendApi],
+          ]}
+        >
+          <FeedbackCards />
+        </TestApiProvider>,
+        {
+          mountedRoutes: {
+            '/catalog/:namespace/:kind/:name': entityRouteRef,
+          },
+        },
+      );
+    });
+    const archiveButton = await screen.findByTestId('archive-feedback-button');
+    fireEvent.click(archiveButton);
+    fireEvent.click(await screen.findByText('Archive'));
+    await waitFor(() => {
+      expect(mockAlertApi.post).toHaveBeenCalledWith({
+        message: `Failed to archive feedback: Error: ${errorMessage}`,
+        severity: 'error',
+      });
+    });
+  });
+
+  it('disables archive button when not allowed', async () => {
+    (usePermission as jest.Mock).mockReturnValue({ allowed: false });
+    await act(async () => {
+      renderInTestApp(
+        <TestApiProvider
+          apis={[
+            [alertApiRef, mockAlertApi],
+            [openFeedbackBackendRef, mockOpenFeedbackBackendApi],
+          ]}
+        >
+          <FeedbackCards />
+        </TestApiProvider>,
+        {
+          mountedRoutes: {
+            '/catalog/:namespace/:kind/:name': entityRouteRef,
+          },
+        },
+      );
+    });
+    const archiveButton = await screen.findByTestId('archive-feedback-button');
+    expect(archiveButton).toBeDisabled();
   });
 });

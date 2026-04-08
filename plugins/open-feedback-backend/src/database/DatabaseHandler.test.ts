@@ -77,4 +77,74 @@ describe('OpenFeedbackDatabaseHandler', () => {
     result = await handler.getFeedback();
     expect(result).toHaveLength(0);
   });
+
+  it('should archive feedback and exclude it from getFeedback', async () => {
+    const feedback = {
+      userRef: 'test',
+      url: 'test-url',
+      rating: 4,
+      comment: 'archive me',
+    };
+
+    await handler.addFeedback(feedback);
+
+    let active = await handler.getFeedback();
+    expect(active).toHaveLength(1);
+    const id = active[0].id;
+
+    await handler.archiveFeedback(id);
+
+    active = await handler.getFeedback();
+    expect(active).toHaveLength(0);
+
+    const archived = await handler.getArchivedFeedback();
+    expect(archived).toHaveLength(1);
+    expect(archived[0].archived).toBe(true);
+  });
+
+  it('should restore archived feedback back to active', async () => {
+    const feedback = {
+      userRef: 'test',
+      url: 'test-url',
+      rating: 2,
+      comment: 'restore me',
+    };
+
+    await handler.addFeedback(feedback);
+    const [item] = await handler.getFeedback();
+
+    await handler.archiveFeedback(item.id);
+    await handler.restoreFeedback(item.id);
+
+    const active = await handler.getFeedback();
+    expect(active).toHaveLength(1);
+    expect(active[0].archived).toBe(false);
+
+    const archived = await handler.getArchivedFeedback();
+    expect(archived).toHaveLength(0);
+  });
+
+  it('should return only non-archived feedback from getFeedback', async () => {
+    await handler.addFeedback({
+      userRef: 'user1',
+      url: 'url1',
+      rating: 5,
+      comment: 'active',
+    });
+    await handler.addFeedback({
+      userRef: 'user2',
+      url: 'url2',
+      rating: 1,
+      comment: 'archived',
+    });
+
+    const allActive = await handler.getFeedback();
+    expect(allActive).toHaveLength(2);
+
+    await handler.archiveFeedback(allActive[1].id);
+
+    const active = await handler.getFeedback();
+    expect(active).toHaveLength(1);
+    expect(active[0].comment).toBe('active');
+  });
 });
