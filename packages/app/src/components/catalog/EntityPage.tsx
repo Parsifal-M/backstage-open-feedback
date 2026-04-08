@@ -337,7 +337,6 @@ const systemPage = (
     </EntityLayout.Route>
     <EntityLayout.Route path="/diagram" title="Diagram">
       <EntityCatalogGraphCard
-       
         direction={Direction.TOP_BOTTOM}
         title="System Diagram"
         height={700}
