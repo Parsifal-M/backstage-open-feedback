@@ -79,12 +79,10 @@ export async function createRouter(
       })
       .catch(error => {
         logger.error(`Failed to get archived feedback: ${error}`);
-        res
-          .status(500)
-          .json({
-            status: 'error',
-            message: 'Failed to get archived feedback',
-          });
+        res.status(500).json({
+          status: 'error',
+          message: 'Failed to get archived feedback',
+        });
       });
   });
 
