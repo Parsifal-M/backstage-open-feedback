@@ -7,7 +7,7 @@ import {
   Checkbox,
 } from '@material-ui/core';
 import Rating from '@mui/material/Rating';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { openFeedbackBackendRef } from '../../api/types';
 import useAsyncFn from 'react-use/esm/useAsyncFn';
 import { InfoCard } from '@backstage/core-components';
