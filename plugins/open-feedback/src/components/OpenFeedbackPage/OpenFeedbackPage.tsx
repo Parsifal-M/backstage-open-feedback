@@ -17,31 +17,31 @@ export const OpenFeedbackPage = ({
   return (
     <Page themeId="tool">
       <Header title={title} subtitle={subtitle} />
-        <RoutedTabs
-          routes={[
-            {
-              path: '/',
-              title: 'Active',
-              children: (
-                <Grid container spacing={3}>
-                  <FeedbackCards
-                    mode="active"
-                    onArchive={() => setArchiveRefreshKey(k => k + 1)}
-                  />
-                </Grid>
-              ),
-            },
-            {
-              path: '/archived',
-              title: 'Archived',
-              children: (
-                <Grid container spacing={3}>
-                  <FeedbackCards mode="archived" refreshKey={archiveRefreshKey} />
-                </Grid>
-              ),
-            },
-          ]}
-        />
+      <RoutedTabs
+        routes={[
+          {
+            path: '/',
+            title: 'Active',
+            children: (
+              <Grid container spacing={3}>
+                <FeedbackCards
+                  mode="active"
+                  onArchive={() => setArchiveRefreshKey(k => k + 1)}
+                />
+              </Grid>
+            ),
+          },
+          {
+            path: '/archived',
+            title: 'Archived',
+            children: (
+              <Grid container spacing={3}>
+                <FeedbackCards mode="archived" refreshKey={archiveRefreshKey} />
+              </Grid>
+            ),
+          },
+        ]}
+      />
     </Page>
   );
 };

@@ -107,7 +107,9 @@ export const FeedbackCards = ({
     return (
       <Grid item xs={12}>
         <Typography variant="body1" color="textSecondary">
-          {isArchived ? 'No archived feedback found.' : 'No feedback received yet!'}
+          {isArchived
+            ? 'No archived feedback found.'
+            : 'No feedback received yet!'}
         </Typography>
       </Grid>
     );
@@ -242,10 +244,7 @@ export const FeedbackCards = ({
             : 'Are you sure you want to archive this feedback? You can restore it later from the Archived tab.'}
         </DialogContent>
         <DialogActions>
-          <Button
-            onClick={() => setSecondaryDialogOpen(false)}
-            color="primary"
-          >
+          <Button onClick={() => setSecondaryDialogOpen(false)} color="primary">
             Cancel
           </Button>
           <Button

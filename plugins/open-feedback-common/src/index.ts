@@ -19,7 +19,10 @@ export type AppFeedback = {
   archived: boolean;
 };
 
-export type SubmitFeedback = Omit<AppFeedback, 'id' | 'created_at' | 'archived'>;
+export type SubmitFeedback = Omit<
+  AppFeedback,
+  'id' | 'created_at' | 'archived'
+>;
 
 // Exporting the permissions from the permissions folder
 export * from './permissions';

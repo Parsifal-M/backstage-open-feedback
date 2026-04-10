@@ -236,9 +236,7 @@ describe('FeedbackCards — active mode', () => {
   it('disables archive button when not allowed', async () => {
     (usePermission as jest.Mock).mockReturnValue({ allowed: false });
     await renderActive();
-    expect(
-      await screen.findByTestId('archive-feedback-button'),
-    ).toBeDisabled();
+    expect(await screen.findByTestId('archive-feedback-button')).toBeDisabled();
   });
 });
 
@@ -365,9 +363,7 @@ describe('FeedbackCards — archived mode', () => {
   it('disables restore button when not allowed', async () => {
     (usePermission as jest.Mock).mockReturnValue({ allowed: false });
     await renderArchived();
-    expect(
-      await screen.findByTestId('restore-feedback-button'),
-    ).toBeDisabled();
+    expect(await screen.findByTestId('restore-feedback-button')).toBeDisabled();
   });
 
   it('disables delete button when not allowed', async () => {

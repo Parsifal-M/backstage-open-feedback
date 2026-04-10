@@ -6,11 +6,11 @@ A published Backstage plugin monorepo providing an open feedback system for Back
 
 All packages are scoped under `@parsifal-m/`. There are three plugin packages:
 
-| Package | Role | Path |
-| --- | --- | --- |
-| `@parsifal-m/backstage-plugin-open-feedback` | Frontend plugin (old frontend system) | `plugins/open-feedback` |
-| `@parsifal-m/backstage-plugin-open-feedback-backend` | Backend plugin | `plugins/open-feedback-backend` |
-| `@parsifal-m/backstage-plugin-open-feedback-common` | Shared types, permissions | `plugins/open-feedback-common` |
+| Package                                              | Role                                  | Path                            |
+| ---------------------------------------------------- | ------------------------------------- | ------------------------------- |
+| `@parsifal-m/backstage-plugin-open-feedback`         | Frontend plugin (old frontend system) | `plugins/open-feedback`         |
+| `@parsifal-m/backstage-plugin-open-feedback-backend` | Backend plugin                        | `plugins/open-feedback-backend` |
+| `@parsifal-m/backstage-plugin-open-feedback-common`  | Shared types, permissions             | `plugins/open-feedback-common`  |
 
 `packages/app` and `packages/backend` are local example apps for development only — they are not published.
 

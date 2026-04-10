@@ -38,21 +38,41 @@ export class OpenFeedbackDatabaseHandler {
   async getFeedback(): Promise<AppFeedback[]> {
     return this.client('open_feedback')
       .where('archived', false)
-      .select('id', 'url', 'userRef', 'rating', 'comment', 'created_at', 'archived');
+      .select(
+        'id',
+        'url',
+        'userRef',
+        'rating',
+        'comment',
+        'created_at',
+        'archived',
+      );
   }
 
   async getArchivedFeedback(): Promise<AppFeedback[]> {
     return this.client('open_feedback')
       .where('archived', true)
-      .select('id', 'url', 'userRef', 'rating', 'comment', 'created_at', 'archived');
+      .select(
+        'id',
+        'url',
+        'userRef',
+        'rating',
+        'comment',
+        'created_at',
+        'archived',
+      );
   }
 
   async archiveFeedback(id: number): Promise<void> {
-    await this.client('open_feedback').where('id', id).update({ archived: true });
+    await this.client('open_feedback')
+      .where('id', id)
+      .update({ archived: true });
   }
 
   async restoreFeedback(id: number): Promise<void> {
-    await this.client('open_feedback').where('id', id).update({ archived: false });
+    await this.client('open_feedback')
+      .where('id', id)
+      .update({ archived: false });
   }
 
   async removeFeedback(id: number): Promise<void> {

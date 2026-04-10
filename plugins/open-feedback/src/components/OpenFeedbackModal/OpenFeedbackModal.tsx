@@ -39,7 +39,6 @@ export const OpenFeedbackModal = (props: ButtonOpenfeedbackProps) => {
   const [comment, setComment] = useState('');
   const [anonymous, setAnonymous] = useState(false);
   const [open, setOpen] = useState(false);
-  const [url, setUrl] = useState(cleanUrl(window.location.href));
   const feedbackApi = useApi(openFeedbackBackendRef);
   const identity = useApi(identityApiRef);
   const Icon = props.icon ? props.icon : ThumbUpAltIcon;
@@ -62,7 +61,7 @@ export const OpenFeedbackModal = (props: ButtonOpenfeedbackProps) => {
 
     const feedback: SubmitFeedback = {
       rating: rating ?? 0,
-      url: url ?? '',
+      url: cleanUrl(window.location.href),
       comment: comment,
       userRef: anonymous ? 'anonymous' : (userName.value ?? 'anonymous'),
     };
@@ -75,12 +74,6 @@ export const OpenFeedbackModal = (props: ButtonOpenfeedbackProps) => {
     setAnonymous(false);
     handleClose();
   };
-
-  useEffect(() => {
-    if (open) {
-      setUrl(cleanUrl(window.location.href));
-    }
-  }, [open]);
 
   return (
     <>
@@ -120,8 +113,8 @@ export const OpenFeedbackModal = (props: ButtonOpenfeedbackProps) => {
               <TextField
                 name="url"
                 label="Location"
-                value={url}
-                onChange={event => setUrl(event.target.value)}
+                value={cleanUrl(window.location.href)}
+                disabled
                 fullWidth
               />
             </Box>
