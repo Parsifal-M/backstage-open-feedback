@@ -2,10 +2,7 @@ import { TestDatabases } from '@backstage/backend-test-utils';
 import { Knex } from 'knex';
 import { OpenFeedbackDatabaseHandler } from './DatabaseHandler';
 
-const databases = TestDatabases.create({
-  disableDocker: false,
-  ids: ['POSTGRES_16'],
-});
+const databases = TestDatabases.create();
 
 describe.each(databases.eachSupportedId())(
   'OpenFeedbackDatabaseHandler %s',

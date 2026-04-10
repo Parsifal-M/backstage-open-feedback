@@ -93,13 +93,13 @@ export const FeedbackCards = ({
 
   if (loading) {
     return (
-      <Grid container spacing={3}>
+      <>
         {[...Array(6)].map((_, index) => (
           <Grid item xs={6} key={index}>
             <Skeleton variant="rectangular" height={200} />
           </Grid>
         ))}
-      </Grid>
+      </>
     );
   }
 

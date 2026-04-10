@@ -63,19 +63,19 @@ export class OpenFeedbackDatabaseHandler {
       );
   }
 
-  async archiveFeedback(id: number): Promise<void> {
-    await this.client('open_feedback')
+  async archiveFeedback(id: number): Promise<number> {
+    return this.client('open_feedback')
       .where('id', id)
       .update({ archived: true });
   }
 
-  async restoreFeedback(id: number): Promise<void> {
-    await this.client('open_feedback')
+  async restoreFeedback(id: number): Promise<number> {
+    return this.client('open_feedback')
       .where('id', id)
       .update({ archived: false });
   }
 
-  async removeFeedback(id: number): Promise<void> {
+  async removeFeedback(id: number): Promise<number> {
     return this.client('open_feedback').where('id', id).delete();
   }
 }

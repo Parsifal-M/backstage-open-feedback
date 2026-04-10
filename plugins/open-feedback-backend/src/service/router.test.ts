@@ -111,65 +111,106 @@ describe('createRouter', () => {
 
   describe('PATCH /feedback/:id/archive', () => {
     it('returns ok when feedback is archived', async () => {
-      const feedbackId = 1;
       (mockDatabaseHandler.archiveFeedback as jest.Mock).mockResolvedValueOnce(
-        undefined,
+        1,
       );
 
-      const response = await request(app).patch(
-        `/feedback/${feedbackId}/archive`,
-      );
+      const response = await request(app).patch('/feedback/1/archive');
 
       expect(response.status).toEqual(200);
       expect(response.body).toEqual({
         status: 'ok',
         message: 'Feedback archived',
       });
-      expect(mockDatabaseHandler.archiveFeedback).toHaveBeenCalledWith(
-        feedbackId,
+      expect(mockDatabaseHandler.archiveFeedback).toHaveBeenCalledWith(1);
+    });
+
+    it('returns 404 when feedback is not found', async () => {
+      (mockDatabaseHandler.archiveFeedback as jest.Mock).mockResolvedValueOnce(
+        0,
       );
+
+      const response = await request(app).patch('/feedback/99/archive');
+
+      expect(response.status).toEqual(404);
+      expect(mockDatabaseHandler.archiveFeedback).toHaveBeenCalledWith(99);
+    });
+
+    it('returns 400 for a non-numeric id', async () => {
+      const response = await request(app).patch('/feedback/abc/archive');
+
+      expect(response.status).toEqual(400);
+      expect(mockDatabaseHandler.archiveFeedback).not.toHaveBeenCalled();
     });
   });
 
   describe('PATCH /feedback/:id/restore', () => {
     it('returns ok when feedback is restored', async () => {
-      const feedbackId = 1;
       (mockDatabaseHandler.restoreFeedback as jest.Mock).mockResolvedValueOnce(
-        undefined,
+        1,
       );
 
-      const response = await request(app).patch(
-        `/feedback/${feedbackId}/restore`,
-      );
+      const response = await request(app).patch('/feedback/1/restore');
 
       expect(response.status).toEqual(200);
       expect(response.body).toEqual({
         status: 'ok',
         message: 'Feedback restored',
       });
-      expect(mockDatabaseHandler.restoreFeedback).toHaveBeenCalledWith(
-        feedbackId,
+      expect(mockDatabaseHandler.restoreFeedback).toHaveBeenCalledWith(1);
+    });
+
+    it('returns 404 when feedback is not found', async () => {
+      (mockDatabaseHandler.restoreFeedback as jest.Mock).mockResolvedValueOnce(
+        0,
       );
+
+      const response = await request(app).patch('/feedback/99/restore');
+
+      expect(response.status).toEqual(404);
+      expect(mockDatabaseHandler.restoreFeedback).toHaveBeenCalledWith(99);
+    });
+
+    it('returns 400 for a non-numeric id', async () => {
+      const response = await request(app).patch('/feedback/abc/restore');
+
+      expect(response.status).toEqual(400);
+      expect(mockDatabaseHandler.restoreFeedback).not.toHaveBeenCalled();
     });
   });
 
   describe('DELETE /feedback/:id', () => {
     it('returns ok when feedback is removed', async () => {
-      const feedbackId = 1;
       (mockDatabaseHandler.removeFeedback as jest.Mock).mockResolvedValueOnce(
-        undefined,
+        1,
       );
 
-      const response = await request(app).delete(`/feedback/${feedbackId}`);
+      const response = await request(app).delete('/feedback/1');
 
       expect(response.status).toEqual(200);
       expect(response.body).toEqual({
         status: 'ok',
         message: 'Feedback removed',
       });
-      expect(mockDatabaseHandler.removeFeedback).toHaveBeenCalledWith(
-        feedbackId,
+      expect(mockDatabaseHandler.removeFeedback).toHaveBeenCalledWith(1);
+    });
+
+    it('returns 404 when feedback is not found', async () => {
+      (mockDatabaseHandler.removeFeedback as jest.Mock).mockResolvedValueOnce(
+        0,
       );
+
+      const response = await request(app).delete('/feedback/99');
+
+      expect(response.status).toEqual(404);
+      expect(mockDatabaseHandler.removeFeedback).toHaveBeenCalledWith(99);
+    });
+
+    it('returns 400 for a non-numeric id', async () => {
+      const response = await request(app).delete('/feedback/abc');
+
+      expect(response.status).toEqual(400);
+      expect(mockDatabaseHandler.removeFeedback).not.toHaveBeenCalled();
     });
   });
 });
