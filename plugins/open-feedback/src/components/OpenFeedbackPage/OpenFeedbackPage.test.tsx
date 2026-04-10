@@ -20,6 +20,7 @@ const mockOpenFeedbackBackendApi = {
         comment: 'Very good!, much test!',
         userRef: 'Baz',
         created_at: '2024-07-05T07:30:00Z',
+        archived: false,
       },
     ]),
   removeFeedback: jest.fn(),
@@ -44,7 +45,9 @@ describe('OpenFeedbackPage', () => {
         </TestApiProvider>,
       );
     });
-    expect(await screen.findByText('Collected Feedback')).toBeInTheDocument();
+    expect(
+      await screen.findByText('Welcome to OpenFeedback!'),
+    ).toBeInTheDocument();
   });
 
   it('renders the page with custom title and subtitle', async () => {

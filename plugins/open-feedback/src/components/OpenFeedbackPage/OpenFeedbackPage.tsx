@@ -1,5 +1,6 @@
-import { Typography, Grid } from '@material-ui/core';
-import { InfoCard, Header, Page, Content } from '@backstage/core-components';
+import { useState } from 'react';
+import { Grid } from '@material-ui/core';
+import { Header, Page, RoutedTabs } from '@backstage/core-components';
 import { FeedbackCards } from '../OpenFeedbackCard/OpenFeedbackCard';
 
 export interface OpenFeedbackPageProps {
@@ -10,20 +11,37 @@ export interface OpenFeedbackPageProps {
 export const OpenFeedbackPage = ({
   title = 'Welcome to OpenFeedback!',
   subtitle = 'Collected Feedback for your Backstage App!',
-}: OpenFeedbackPageProps) => (
-  <Page themeId="tool">
-    <Header title={title} subtitle={subtitle} />
-    <Content>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <InfoCard title="Collected Feedback">
-            <Typography variant="body1">
-              The feedback collected from users will be displayed below.
-            </Typography>
-          </InfoCard>
-        </Grid>
-        <FeedbackCards />
-      </Grid>
-    </Content>
-  </Page>
-);
+}: OpenFeedbackPageProps) => {
+  const [archiveRefreshKey, setArchiveRefreshKey] = useState(0);
+
+  return (
+    <Page themeId="tool">
+      <Header title={title} subtitle={subtitle} />
+      <RoutedTabs
+        routes={[
+          {
+            path: '/',
+            title: 'Active',
+            children: (
+              <Grid container spacing={3}>
+                <FeedbackCards
+                  mode="active"
+                  onArchive={() => setArchiveRefreshKey(k => k + 1)}
+                />
+              </Grid>
+            ),
+          },
+          {
+            path: '/archived',
+            title: 'Archived',
+            children: (
+              <Grid container spacing={3}>
+                <FeedbackCards mode="archived" refreshKey={archiveRefreshKey} />
+              </Grid>
+            ),
+          },
+        ]}
+      />
+    </Page>
+  );
+};

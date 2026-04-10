@@ -36,6 +36,12 @@ export class OpenFeedbackBackendClient implements OpenFeedbackBackendApi {
     return await this.handleResponse(response);
   }
 
+  async getArchivedFeedback(): Promise<AppFeedback[]> {
+    const url = `plugin://open-feedback/feedback/archived`;
+    const response = await this.fetchApi.fetch(url);
+    return await this.handleResponse(response);
+  }
+
   async submitFeedback(feedback: SubmitFeedback): Promise<void> {
     const url = `plugin://open-feedback/feedback/submit`;
     const response = await this.fetchApi.fetch(url, {
@@ -45,6 +51,18 @@ export class OpenFeedbackBackendClient implements OpenFeedbackBackendApi {
       },
       body: JSON.stringify(feedback),
     });
+    await this.handleResponse(response);
+  }
+
+  async archiveFeedback(id: number): Promise<void> {
+    const url = `plugin://open-feedback/feedback/${id}/archive`;
+    const response = await this.fetchApi.fetch(url, { method: 'PATCH' });
+    await this.handleResponse(response);
+  }
+
+  async restoreFeedback(id: number): Promise<void> {
+    const url = `plugin://open-feedback/feedback/${id}/restore`;
+    const response = await this.fetchApi.fetch(url, { method: 'PATCH' });
     await this.handleResponse(response);
   }
 

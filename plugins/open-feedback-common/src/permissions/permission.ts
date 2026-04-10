@@ -18,6 +18,11 @@ export const openFeedbackCreatePermission = createPermission({
   attributes: { action: 'create' },
 });
 
+export const openFeedbackArchivePermission = createPermission({
+  name: 'open.feedback.archive',
+  attributes: { action: 'update' },
+});
+
 /**
  * @public
  */
@@ -26,4 +31,5 @@ export const openFeedbackPermissions = [
   openFeedbackPageReadPermission,
   openFeedbackCreatePermission,
   openFeedbackPageDeletePermission,
+  openFeedbackArchivePermission,
 ];
