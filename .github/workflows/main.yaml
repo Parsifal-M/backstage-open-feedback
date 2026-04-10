@@ -6,6 +6,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
   build:
     name: Run on Node 22
@@ -13,24 +16,18 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version: '22.x'
 
       - name: Enable Corepack
         run: corepack enable
 
-      - name: Set Yarn Version
-        run: yarn set version berry
-
-      - name: Clean Yarn Cache
-        run: yarn cache clean
-
       - name: Cache Node.js modules
-        uses: actions/cache@v4
+        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
         with:
           path: ~/.cache/yarn
           key: yarn-${{ runner.OS }}-22-${{ hashFiles('**/yarn.lock') }}
@@ -38,7 +35,7 @@ jobs:
             yarn-${{ runner.OS }}-22-
 
       - name: Install Dependencies
-        run: yarn install
+        run: yarn install --immutable
 
       - name: Lint and Check Formatting
         run: |
