@@ -12,6 +12,7 @@ Like what you see? Feel free to star this repository and share it with your frie
 - **OpenFeedbackModal**: This component can be added to the sidebar and pops up a dialog box for users to send feedback. It can be easily integrated into your `packages/app/src/components/Root/Root.tsx` file.
 - **OpenFeedbackForm**: This is a form component that can be added to any page (More specifically designed for the [Backstage HomePage](https://backstage.io/docs/getting-started/homepage/#homepage)), providing a flexible way to collect feedback across your application.
 - **Feedback Management**: The `OpenFeedbackPage` component provides a comprehensive view of all collected feedback. This page uses the `FeedbackCards` component to display each piece of feedback. Administrators can view all feedback collected from users on this page, making it a central hub for feedback management.
+- **Archive & Restore**: Administrators can archive feedback to keep the active view tidy without losing data. Archived feedback is accessible in a dedicated tab and can be restored to active at any time. Permanent deletion is also available from both tabs.
 - **Integrated Solution**: OpenFeedback is built to integrate seamlessly with Backstage, allowing you to manage feedback directly within your Backstage application.
 
 ## Screenshots
@@ -26,7 +27,22 @@ This is the modal that pops up when the user clicks on the feedback button in th
 
 This is the page where all the feedback is displayed. It uses card components to display each piece of feedback. Administrators can view all feedback collected from users on this page, making it a central hub for feedback management. It will also display a "location" field to specify the page where the feedback was collected. It also uses the `EntityRefLink` to create a clickable link to the user entity that submitted it, so long as it was not submitted anonymously.
 
+The page has two tabs — **Active** and **Archived** — so administrators can manage feedback without permanently deleting it.
+
 ![OpenFeedbackPage](./docs/img/of-feedback.png)
+
+## Feedback Lifecycle
+
+Each piece of feedback can move through the following states:
+
+```text
+Submitted → Active → Archived → Permanently Deleted
+                  ↑_________|  (restore)
+```
+
+- **Archive**: Move feedback from the Active tab to the Archived tab. Use this to tidy up without losing data. Requires the `open.feedback.archive` permission.
+- **Restore**: Move feedback back from the Archived tab to Active. Requires the `open.feedback.archive` permission.
+- **Delete**: Permanently remove feedback. This action cannot be undone. Requires the `open.feedback.page.delete` permission. Deletion is available from both the Active and Archived tabs.
 
 ## Components
 
@@ -69,7 +85,12 @@ backend.start();
 
 Firstly you will want to add the `OpenFeedbackPage` component to your `packages/app/src/App.tsx` file under the `routes`. This will add the feedback page to your Backstage application.
 
-In the `OpenFeedbackPage` you will be able to see all the feedback that has been collected from users, and you will also have the option to delete feedback if needed.
+The `OpenFeedbackPage` displays all collected feedback across two tabs:
+
+- **Active** — live feedback visible to administrators. Each card has an archive button and a delete button.
+- **Archived** — feedback that has been moved out of the active view. Each card has a restore button to move it back to active, and a permanent delete button.
+
+Archiving requires the `open.feedback.archive` permission. Deletion requires the `open.feedback.page.delete` permission.
 
 ```typescript
 const routes = (
