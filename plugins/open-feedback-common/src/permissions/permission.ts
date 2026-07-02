@@ -24,6 +24,16 @@ export const openFeedbackArchivePermission = createPermission({
 });
 
 /**
+ * Controls visibility of the open-feedback nav item in the sidebar.
+ * Deny this permission to hide the plugin from the sidebar for a given user/group.
+ * @public
+ */
+export const openFeedbackNavPermission = createPermission({
+  name: 'open.feedback.nav',
+  attributes: { action: 'read' },
+});
+
+/**
  * @public
  */
 
@@ -32,4 +42,5 @@ export const openFeedbackPermissions = [
   openFeedbackCreatePermission,
   openFeedbackPageDeletePermission,
   openFeedbackArchivePermission,
+  openFeedbackNavPermission,
 ];
