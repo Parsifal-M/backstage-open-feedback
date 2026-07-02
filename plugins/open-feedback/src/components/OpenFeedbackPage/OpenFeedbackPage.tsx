@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Grid } from '@material-ui/core';
-import { Header, Page, RoutedTabs } from '@backstage/core-components';
+import { Content, Header, Page, RoutedTabs } from '@backstage/core-components';
 import { FeedbackCards } from '../OpenFeedbackCard/OpenFeedbackCard';
 
 export interface OpenFeedbackPageProps {
@@ -45,3 +45,21 @@ export const OpenFeedbackPage = ({
     </Page>
   );
 };
+
+// NFS sub-page content — no page shell, framework provides PluginHeader + tabs.
+// Sub-pages re-mount on tab switch so no cross-tab refresh state is needed.
+export const NfsActiveFeedbackContent = () => (
+  <Content>
+    <Grid container spacing={3}>
+      <FeedbackCards mode="active" />
+    </Grid>
+  </Content>
+);
+
+export const NfsArchivedFeedbackContent = () => (
+  <Content>
+    <Grid container spacing={3}>
+      <FeedbackCards mode="archived" />
+    </Grid>
+  </Content>
+);
