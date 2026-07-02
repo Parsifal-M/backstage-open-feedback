@@ -1,5 +1,2 @@
-export {
-  openFeedbackPlugin,
-  OpenFeedbackPage,
-  OpenFeedbackModal,
-} from './plugin';
+export { default } from './plugin';
+export { OpenFeedbackModal } from './components/OpenFeedbackModal';

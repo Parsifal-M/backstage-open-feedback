@@ -19,7 +19,6 @@ const openFeedbackApi = ApiBlueprint.make({
     }),
 });
 
-// No loader — framework renders sub-pages as tabs automatically
 const openFeedbackPage = PageBlueprint.make({
   params: {
     path: '/open-feedback',
@@ -34,7 +33,7 @@ const activeFeedbackSubPage = SubPageBlueprint.make({
     title: 'Active',
     loader: () =>
       import('./components/OpenFeedbackPage').then(m => (
-        <m.NfsActiveFeedbackContent />
+        <m.ActiveFeedbackContent />
       )),
   },
 });
@@ -46,7 +45,7 @@ const archivedFeedbackSubPage = SubPageBlueprint.make({
     title: 'Archived',
     loader: () =>
       import('./components/OpenFeedbackPage').then(m => (
-        <m.NfsArchivedFeedbackContent />
+        <m.ArchivedFeedbackContent />
       )),
   },
 });
@@ -55,8 +54,16 @@ export default createFrontendPlugin({
   pluginId: 'open-feedback',
   title: 'Open Feedback',
   icon: <ThumbUpAltIcon fontSize="inherit" />,
+  info: {
+    packageJson: () => import('../package.json'),
+  },
   routes: {
     root: rootRouteRef,
   },
-  extensions: [openFeedbackApi, openFeedbackPage, activeFeedbackSubPage, archivedFeedbackSubPage],
+  extensions: [
+    openFeedbackApi,
+    openFeedbackPage,
+    activeFeedbackSubPage,
+    archivedFeedbackSubPage,
+  ],
 });

@@ -37,10 +37,7 @@ import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
 import { githubAuthApiRef } from '@backstage/core-plugin-api';
-import {
-  OpenFeedbackModal,
-  OpenFeedbackPage,
-} from '@parsifal-m/backstage-plugin-open-feedback';
+import { OpenFeedbackModal } from '@parsifal-m/backstage-plugin-open-feedback';
 
 const app = createApp({
   components: {
@@ -115,15 +112,6 @@ const routes = (
     </Route>
     <Route path="/settings" element={<UserSettingsPage />} />
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
-    <Route
-      path="/open-feedback"
-      element={
-        <OpenFeedbackPage
-          title="Welcome to OpenFeedback!"
-          subtitle="A Great Place for Feedback!"
-        />
-      }
-    />
     <Route path="/open-feedback-modal" element={<OpenFeedbackModal />} />
   </FlatRoutes>
 );

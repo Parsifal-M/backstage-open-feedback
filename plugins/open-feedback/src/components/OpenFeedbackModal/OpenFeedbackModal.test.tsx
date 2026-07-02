@@ -1,6 +1,6 @@
 import { renderInTestApp, TestApiProvider } from '@backstage/test-utils';
 import { fireEvent, screen } from '@testing-library/react';
-import { alertApiRef } from '@backstage/core-plugin-api';
+import { alertApiRef } from '@backstage/frontend-plugin-api';
 import { act } from 'react';
 import { OpenFeedbackModal } from './OpenFeedbackModal';
 import { openFeedbackBackendRef } from '../../api/types';

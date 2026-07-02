@@ -1,5 +1,1 @@
-export {
-  OpenFeedbackPage,
-  NfsActiveFeedbackContent,
-  NfsArchivedFeedbackContent,
-} from './OpenFeedbackPage';
+export { ActiveFeedbackContent, ArchivedFeedbackContent } from './OpenFeedbackPage';
