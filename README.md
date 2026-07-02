@@ -157,7 +157,7 @@ import { OpenFeedbackModal } from '@parsifal-m/backstage-plugin-open-feedback';
 
 OpenFeedback ships with four permissions that control who can read, delete, archive, and submit feedback. The Delete, Archive, and Restore buttons are already gated inside the plugin — no extra wiring needed for those.
 
-See [docs/permissions-old-frontend-system.md](./docs/permissions-old-frontend-system.md) for how to gate the feedback page itself using `RequirePermission`.
+See [docs/permissions.md](./docs/permissions.md) for the full permission reference, backend policy wiring, and how to conditionally hide the nav item.
 
 ## Contributing
 

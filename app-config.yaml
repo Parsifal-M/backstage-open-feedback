@@ -1,6 +1,7 @@
 app:
   title: OpenFeedback
   baseUrl: http://localhost:3000
+  packages: all
 
 organization:
   name: Backstage

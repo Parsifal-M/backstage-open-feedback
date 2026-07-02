@@ -1,127 +1,159 @@
-import { Navigate, Route } from 'react-router-dom';
-import { apiDocsPlugin, ApiExplorerPage } from '@backstage/plugin-api-docs';
+import { createApp } from '@backstage/frontend-defaults';
 import {
-  CatalogEntityPage,
-  CatalogIndexPage,
-  catalogPlugin,
-} from '@backstage/plugin-catalog';
+  createFrontendModule,
+  ApiBlueprint,
+  configApiRef,
+  githubAuthApiRef,
+} from '@backstage/frontend-plugin-api';
 import {
-  CatalogImportPage,
-  catalogImportPlugin,
-} from '@backstage/plugin-catalog-import';
-import { ScaffolderPage, scaffolderPlugin } from '@backstage/plugin-scaffolder';
-import { orgPlugin } from '@backstage/plugin-org';
-import { SearchPage } from '@backstage/plugin-search';
-import { TechRadarPage } from '@backstage-community/plugin-tech-radar';
+  NavContentBlueprint,
+  SignInPageBlueprint,
+} from '@backstage/plugin-app-react';
 import {
-  TechDocsIndexPage,
-  techdocsPlugin,
-  TechDocsReaderPage,
-} from '@backstage/plugin-techdocs';
-import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
-import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
-import { UserSettingsPage } from '@backstage/plugin-user-settings';
-import { apis } from './apis';
-import { entityPage } from './components/catalog/EntityPage';
-import { searchPage } from './components/search/SearchPage';
-import { Root } from './components/Root';
-
+  ScmIntegrationsApi,
+  scmIntegrationsApiRef,
+} from '@backstage/integration-react';
 import {
-  AlertDisplay,
-  OAuthRequestDialog,
+  Sidebar,
+  SidebarDivider,
+  SidebarGroup,
+  SidebarItem,
+  SidebarScrollWrapper,
+  SidebarSpace,
   SignInPage,
+  sidebarConfig,
+  useSidebarOpenState,
+  Link,
 } from '@backstage/core-components';
-import { createApp } from '@backstage/app-defaults';
-import { AppRouter, FlatRoutes } from '@backstage/core-app-api';
-import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
-import { RequirePermission } from '@backstage/plugin-permission-react';
-import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
-import { githubAuthApiRef } from '@backstage/core-plugin-api';
-import { OpenFeedbackModal } from '@parsifal-m/backstage-plugin-open-feedback';
+import { SidebarSearchModal } from '@backstage/plugin-search';
+import {
+  Settings as SidebarSettings,
+  UserSettingsSignInAvatar,
+} from '@backstage/plugin-user-settings';
+import { makeStyles } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/Search';
+import FeedbackIcon from '@material-ui/icons/Feedback';
+import openFeedbackPlugin, {
+  OpenFeedbackModal,
+} from '@parsifal-m/backstage-plugin-open-feedback';
+import LogoFull from './components/Root/LogoFull';
+import LogoIcon from './components/Root/LogoIcon';
 
-const app = createApp({
-  components: {
-    SignInPage: props => (
-      <SignInPage
-        {...props}
-        providers={[
-          'guest',
-          {
-            id: 'github-auth-provider',
-            title: 'GitHub',
-            message: 'Sign in using GitHub',
-            apiRef: githubAuthApiRef,
-          },
-        ]}
-      />
-    ),
+const useSidebarLogoStyles = makeStyles({
+  root: {
+    width: sidebarConfig.drawerWidthClosed,
+    height: 3 * sidebarConfig.logoHeight,
+    display: 'flex',
+    flexFlow: 'row nowrap',
+    alignItems: 'center',
+    marginBottom: -14,
   },
-  apis,
-  bindRoutes({ bind }) {
-    bind(catalogPlugin.externalRoutes, {
-      createComponent: scaffolderPlugin.routes.root,
-      viewTechDoc: techdocsPlugin.routes.docRoot,
-    });
-    bind(apiDocsPlugin.externalRoutes, {
-      registerApi: catalogImportPlugin.routes.importPage,
-    });
-    bind(scaffolderPlugin.externalRoutes, {
-      registerComponent: catalogImportPlugin.routes.importPage,
-    });
-    bind(orgPlugin.externalRoutes, {
-      catalogIndex: catalogPlugin.routes.catalogIndex,
-    });
+  link: {
+    width: sidebarConfig.drawerWidthClosed,
+    marginLeft: 24,
   },
 });
 
-const routes = (
-  <FlatRoutes>
-    <Route path="/" element={<Navigate to="catalog" />} />
-    <Route path="/catalog" element={<CatalogIndexPage />} />
-    <Route
-      path="/catalog/:namespace/:kind/:name"
-      element={<CatalogEntityPage />}
-    >
-      {entityPage}
-    </Route>
-    <Route path="/docs" element={<TechDocsIndexPage />} />
-    <Route
-      path="/docs/:namespace/:kind/:name/*"
-      element={<TechDocsReaderPage />}
-    >
-      <TechDocsAddons>
-        <ReportIssue />
-      </TechDocsAddons>
-    </Route>
-    <Route path="/create" element={<ScaffolderPage />} />
-    <Route path="/api-docs" element={<ApiExplorerPage />} />
-    <Route
-      path="/tech-radar"
-      element={<TechRadarPage width={1500} height={800} />}
-    />
-    <Route
-      path="/catalog-import"
-      element={
-        <RequirePermission permission={catalogEntityCreatePermission}>
-          <CatalogImportPage />
-        </RequirePermission>
-      }
-    />
-    <Route path="/search" element={<SearchPage />}>
-      {searchPage}
-    </Route>
-    <Route path="/settings" element={<UserSettingsPage />} />
-    <Route path="/catalog-graph" element={<CatalogGraphPage />} />
-    <Route path="/open-feedback-modal" element={<OpenFeedbackModal />} />
-  </FlatRoutes>
-);
+const SidebarLogo = () => {
+  const classes = useSidebarLogoStyles();
+  const { isOpen } = useSidebarOpenState();
+  return (
+    <div className={classes.root}>
+      <Link to="/" underline="none" className={classes.link} aria-label="Home">
+        {isOpen ? <LogoFull /> : <LogoIcon />}
+      </Link>
+    </div>
+  );
+};
 
-export default app.createRoot(
-  <>
-    <AlertDisplay />
-    <OAuthRequestDialog />
-    <AppRouter>
-      <Root>{routes}</Root>
-    </AppRouter>
-  </>,
-);
+const signInPage = SignInPageBlueprint.make({
+  params: {
+    loader: async () => props =>
+      (
+        <SignInPage
+          {...props}
+          providers={[
+            'guest',
+            {
+              id: 'github-auth-provider',
+              title: 'GitHub',
+              message: 'Sign in using GitHub',
+              apiRef: githubAuthApiRef,
+            },
+          ]}
+        />
+      ),
+  },
+});
+
+const navContent = NavContentBlueprint.make({
+  params: {
+    component: ({ navItems }) => {
+      const nav = navItems.withComponent(item => (
+        <SidebarItem icon={() => item.icon} to={item.href} text={item.title} />
+      ));
+
+      return (
+        <Sidebar>
+          <SidebarLogo />
+          <SidebarGroup label="Search" icon={<SearchIcon />} to="/search">
+            <SidebarSearchModal />
+            <OpenFeedbackModal
+              floating
+              title="OpenFeedback"
+              rating={2}
+              disableAnonymous={false}
+              icon={FeedbackIcon}
+              style={{ position: 'fixed', bottom: 20, right: 20 }}
+            />
+          </SidebarGroup>
+          <SidebarDivider />
+          <SidebarGroup label="Menu" icon={<MenuIcon />}>
+            {nav.take('page:catalog')}
+            {nav.take('page:api-docs')}
+            {nav.take('page:techdocs')}
+            {nav.take('page:scaffolder')}
+            {nav.take('page:open-feedback')}
+            <SidebarDivider />
+            <SidebarScrollWrapper>
+              {nav.rest({ sortBy: 'title' })}
+            </SidebarScrollWrapper>
+          </SidebarGroup>
+          <SidebarSpace />
+          <SidebarDivider />
+          <SidebarGroup
+            label="Settings"
+            icon={<UserSettingsSignInAvatar />}
+            to="/settings"
+          >
+            <SidebarSettings />
+          </SidebarGroup>
+        </Sidebar>
+      );
+    },
+  },
+});
+
+const appModule = createFrontendModule({
+  pluginId: 'app',
+  extensions: [
+    signInPage,
+    navContent,
+    ApiBlueprint.make({
+      name: 'scm-integrations',
+      params: defineParams =>
+        defineParams({
+          api: scmIntegrationsApiRef,
+          deps: { configApi: configApiRef },
+          factory: ({ configApi }) => ScmIntegrationsApi.fromConfig(configApi),
+        }),
+    }),
+  ],
+});
+
+const app = createApp({
+  features: [openFeedbackPlugin, appModule],
+});
+
+export default app.createRoot();
