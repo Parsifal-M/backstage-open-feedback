@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitFeedback } from '@parsifal-m/backstage-plugin-open-feedback-common';
 import { SidebarItem } from '@backstage/core-components';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
@@ -6,8 +6,8 @@ import {
   useApi,
   identityApiRef,
   IconComponent,
-} from '@backstage/core-plugin-api';
-import Rating from '@mui/material/Rating';
+} from '@backstage/frontend-plugin-api';
+import Rating from '@material-ui/lab/Rating';
 import { openFeedbackBackendRef } from '../../api/types';
 import useAsyncFn from 'react-use/esm/useAsyncFn';
 import {

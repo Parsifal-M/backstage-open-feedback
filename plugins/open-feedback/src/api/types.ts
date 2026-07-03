@@ -1,4 +1,4 @@
-import { createApiRef } from '@backstage/core-plugin-api';
+import { createApiRef } from '@backstage/frontend-plugin-api';
 import {
   AppFeedback,
   SubmitFeedback,
@@ -13,6 +13,8 @@ export interface OpenFeedbackBackendApi {
   removeFeedback(id: number): Promise<void>;
 }
 
-export const openFeedbackBackendRef = createApiRef<OpenFeedbackBackendApi>({
-  id: 'plugin.open-feedback.service',
-});
+export const openFeedbackBackendRef =
+  createApiRef<OpenFeedbackBackendApi>().with({
+    id: 'plugin.open-feedback.service',
+    pluginId: 'open-feedback',
+  });

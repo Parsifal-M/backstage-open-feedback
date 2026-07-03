@@ -3,7 +3,7 @@ import {
   SubmitFeedback,
 } from '@parsifal-m/backstage-plugin-open-feedback-common';
 import { OpenFeedbackBackendApi } from './types';
-import { FetchApi } from '@backstage/core-plugin-api';
+import { FetchApi } from '@backstage/frontend-plugin-api';
 
 export class OpenFeedbackBackendClient implements OpenFeedbackBackendApi {
   private readonly fetchApi: FetchApi;

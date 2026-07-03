@@ -1,11 +1,7 @@
-import { createDevApp } from '@backstage/dev-utils';
-import { openFeedbackPlugin, OpenFeedbackPage } from '../src/plugin';
+import ReactDOM from 'react-dom/client';
+import { createApp } from '@backstage/frontend-defaults';
+import openFeedbackPlugin from '../src/plugin';
 
-createDevApp()
-  .registerPlugin(openFeedbackPlugin)
-  .addPage({
-    element: <OpenFeedbackPage />,
-    title: 'Root Page',
-    path: '/open-feedback',
-  })
-  .render();
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  createApp({ features: [openFeedbackPlugin] }).createRoot(),
+);

@@ -1,4 +1,4 @@
-import { useApi, identityApiRef } from '@backstage/core-plugin-api';
+import { useApi, identityApiRef } from '@backstage/frontend-plugin-api';
 import {
   Box,
   TextField,
@@ -6,7 +6,7 @@ import {
   FormControlLabel,
   Checkbox,
 } from '@material-ui/core';
-import Rating from '@mui/material/Rating';
+import Rating from '@material-ui/lab/Rating';
 import { useEffect, useState } from 'react';
 import { openFeedbackBackendRef } from '../../api/types';
 import useAsyncFn from 'react-use/esm/useAsyncFn';

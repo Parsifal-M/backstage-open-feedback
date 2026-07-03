@@ -1,47 +1,25 @@
-import { useState } from 'react';
 import { Grid } from '@material-ui/core';
-import { Header, Page, RoutedTabs } from '@backstage/core-components';
+import { Content } from '@backstage/core-components';
+import { RequirePermission } from '@backstage/plugin-permission-react';
+import { openFeedbackPageReadPermission } from '@parsifal-m/backstage-plugin-open-feedback-common';
 import { FeedbackCards } from '../OpenFeedbackCard/OpenFeedbackCard';
 
-export interface OpenFeedbackPageProps {
-  title?: string;
-  subtitle?: string;
-}
+export const ActiveFeedbackContent = () => (
+  <RequirePermission permission={openFeedbackPageReadPermission}>
+    <Content>
+      <Grid container spacing={3}>
+        <FeedbackCards mode="active" />
+      </Grid>
+    </Content>
+  </RequirePermission>
+);
 
-export const OpenFeedbackPage = ({
-  title = 'Welcome to OpenFeedback!',
-  subtitle = 'Collected Feedback for your Backstage App!',
-}: OpenFeedbackPageProps) => {
-  const [archiveRefreshKey, setArchiveRefreshKey] = useState(0);
-
-  return (
-    <Page themeId="tool">
-      <Header title={title} subtitle={subtitle} />
-      <RoutedTabs
-        routes={[
-          {
-            path: '/',
-            title: 'Active',
-            children: (
-              <Grid container spacing={3}>
-                <FeedbackCards
-                  mode="active"
-                  onArchive={() => setArchiveRefreshKey(k => k + 1)}
-                />
-              </Grid>
-            ),
-          },
-          {
-            path: '/archived',
-            title: 'Archived',
-            children: (
-              <Grid container spacing={3}>
-                <FeedbackCards mode="archived" refreshKey={archiveRefreshKey} />
-              </Grid>
-            ),
-          },
-        ]}
-      />
-    </Page>
-  );
-};
+export const ArchivedFeedbackContent = () => (
+  <RequirePermission permission={openFeedbackPageReadPermission}>
+    <Content>
+      <Grid container spacing={3}>
+        <FeedbackCards mode="archived" />
+      </Grid>
+    </Content>
+  </RequirePermission>
+);
