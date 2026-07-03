@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitFeedback } from '@parsifal-m/backstage-plugin-open-feedback-common';
 import { SidebarItem } from '@backstage/core-components';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
