@@ -7,7 +7,7 @@ import {
   identityApiRef,
   IconComponent,
 } from '@backstage/frontend-plugin-api';
-import Rating from '@mui/material/Rating';
+import Rating from '@material-ui/lab/Rating';
 import { openFeedbackBackendRef } from '../../api/types';
 import useAsyncFn from 'react-use/esm/useAsyncFn';
 import {
