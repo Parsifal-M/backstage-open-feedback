@@ -1,6 +1,6 @@
 import { renderInTestApp, TestApiProvider } from '@backstage/test-utils';
 import { fireEvent, screen, waitFor } from '@testing-library/react';
-import { alertApiRef } from '@backstage/core-plugin-api';
+import { toastApiRef } from '@backstage/frontend-plugin-api';
 import { act } from 'react';
 import { FeedbackCards } from './OpenFeedbackCard';
 import { openFeedbackBackendRef } from '../../api/types';
@@ -50,7 +50,7 @@ const renderActive = async (props: { onArchive?: () => void } = {}) => {
     renderInTestApp(
       <TestApiProvider
         apis={[
-          [alertApiRef, mockAlertApi],
+          [toastApiRef, mockAlertApi],
           [openFeedbackBackendRef, mockOpenFeedbackBackendApi],
         ]}
       >
@@ -66,7 +66,7 @@ const renderArchived = async (props: { refreshKey?: number } = {}) => {
     renderInTestApp(
       <TestApiProvider
         apis={[
-          [alertApiRef, mockAlertApi],
+          [toastApiRef, mockAlertApi],
           [openFeedbackBackendRef, mockOpenFeedbackBackendApi],
         ]}
       >
@@ -154,8 +154,8 @@ describe('FeedbackCards — active mode', () => {
     fireEvent.click(await screen.findByText('Delete'));
     await waitFor(() => {
       expect(mockAlertApi.post).toHaveBeenCalledWith({
-        message: `Failed to delete feedback: Error: ${errorMessage}`,
-        severity: 'error',
+        title: `Failed to delete feedback: Error: ${errorMessage}`,
+        status: 'danger',
       });
     });
   });
@@ -174,8 +174,8 @@ describe('FeedbackCards — active mode', () => {
     );
     await renderActive();
     expect(mockAlertApi.post).toHaveBeenCalledWith({
-      message: `Failed to fetch feedback: Error: ${errorMessage}`,
-      severity: 'error',
+      title: `Failed to fetch feedback: Error: ${errorMessage}`,
+      status: 'danger',
     });
   });
 
@@ -227,8 +227,8 @@ describe('FeedbackCards — active mode', () => {
     fireEvent.click(await screen.findByText('Archive'));
     await waitFor(() => {
       expect(mockAlertApi.post).toHaveBeenCalledWith({
-        message: `Failed to archive feedback: Error: ${errorMessage}`,
-        severity: 'error',
+        title: `Failed to archive feedback: Error: ${errorMessage}`,
+        status: 'danger',
       });
     });
   });
@@ -279,8 +279,8 @@ describe('FeedbackCards — archived mode', () => {
     );
     await renderArchived();
     expect(mockAlertApi.post).toHaveBeenCalledWith({
-      message: `Failed to fetch archived feedback: Error: ${errorMessage}`,
-      severity: 'error',
+      title: `Failed to fetch archived feedback: Error: ${errorMessage}`,
+      status: 'danger',
     });
   });
 
@@ -330,8 +330,8 @@ describe('FeedbackCards — archived mode', () => {
     fireEvent.click(await screen.findByText('Restore'));
     await waitFor(() => {
       expect(mockAlertApi.post).toHaveBeenCalledWith({
-        message: `Failed to restore feedback: Error: ${errorMessage}`,
-        severity: 'error',
+        title: `Failed to restore feedback: Error: ${errorMessage}`,
+        status: 'danger',
       });
     });
   });

@@ -1,6 +1,5 @@
 import { renderInTestApp, TestApiProvider } from '@backstage/test-utils';
 import { fireEvent, screen } from '@testing-library/react';
-import { alertApiRef } from '@backstage/frontend-plugin-api';
 import { act } from 'react';
 import { OpenFeedbackModal } from './OpenFeedbackModal';
 import { openFeedbackBackendRef } from '../../api/types';
@@ -13,10 +12,6 @@ jest.mock('@backstage/plugin-permission-react', () => ({
 const mockOpenFeedbackBackendApi = {
   getFeedback: jest.fn(),
   removeFeedback: jest.fn(),
-};
-
-const mockAlertApi = {
-  post: jest.fn(),
 };
 
 describe('OpenFeedbackModal', () => {
@@ -44,10 +39,7 @@ describe('OpenFeedbackModal', () => {
     await act(async () => {
       renderInTestApp(
         <TestApiProvider
-          apis={[
-            [alertApiRef, mockAlertApi],
-            [openFeedbackBackendRef, mockOpenFeedbackBackendApi],
-          ]}
+          apis={[[openFeedbackBackendRef, mockOpenFeedbackBackendApi]]}
         >
           <OpenFeedbackModal title="Submit Feedback" />
         </TestApiProvider>,
@@ -66,10 +58,7 @@ describe('OpenFeedbackModal', () => {
     await act(async () => {
       renderInTestApp(
         <TestApiProvider
-          apis={[
-            [alertApiRef, mockAlertApi],
-            [openFeedbackBackendRef, mockOpenFeedbackBackendApi],
-          ]}
+          apis={[[openFeedbackBackendRef, mockOpenFeedbackBackendApi]]}
         >
           <OpenFeedbackModal title="Submit Feedback" disableAnonymous />
         </TestApiProvider>,

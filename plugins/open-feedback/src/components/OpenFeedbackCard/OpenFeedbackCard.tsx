@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { InfoCard } from '@backstage/core-components';
-import { useApi, alertApiRef } from '@backstage/frontend-plugin-api';
+import { useApi, toastApiRef } from '@backstage/frontend-plugin-api';
 import { openFeedbackBackendRef } from '../../api/types';
 import {
   Grid,
@@ -13,11 +13,11 @@ import {
   DialogContent,
   DialogTitle,
 } from '@material-ui/core';
-import Rating from '@mui/material/Rating';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ArchiveIcon from '@mui/icons-material/Archive';
-import UnarchiveIcon from '@mui/icons-material/Unarchive';
-import Skeleton from '@mui/material/Skeleton';
+import Rating from '@material-ui/lab/Rating';
+import Skeleton from '@material-ui/lab/Skeleton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import ArchiveIcon from '@material-ui/icons/Archive';
+import UnarchiveIcon from '@material-ui/icons/Unarchive';
 import {
   AppFeedback,
   openFeedbackPageDeletePermission,
@@ -59,7 +59,7 @@ export const FeedbackCards = ({
   const [actionId, setActionId] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const feedbackApi = useApi(openFeedbackBackendRef);
-  const alertApi = useApi(alertApiRef);
+  const toastApi = useApi(toastApiRef);
   const { allowed: deleteAllowed } = usePermission({
     permission: openFeedbackPageDeletePermission,
   });
@@ -78,9 +78,9 @@ export const FeedbackCards = ({
           : await feedbackApi.getFeedback();
         setFeedback(feedbackData);
       } catch (error) {
-        alertApi.post({
-          message: `Failed to fetch ${isArchived ? 'archived ' : ''}feedback: ${error}`,
-          severity: 'error',
+        toastApi.post({
+          title: `Failed to fetch ${isArchived ? 'archived ' : ''}feedback: ${error}`,
+          status: 'danger',
         });
       }
       setLoading(false);
@@ -89,14 +89,14 @@ export const FeedbackCards = ({
     fetchFeedback();
     // refreshKey is intentionally included so the archived tab re-fetches
     // when an item is archived from the active tab
-  }, [feedbackApi, alertApi, refreshKey, isArchived]);
+  }, [feedbackApi, toastApi, refreshKey, isArchived]);
 
   if (loading) {
     return (
       <>
         {[...Array(6)].map((_, index) => (
           <Grid item xs={6} key={index}>
-            <Skeleton variant="rectangular" height={200} />
+            <Skeleton variant="rect" height={200} />
           </Grid>
         ))}
       </>
@@ -122,9 +122,9 @@ export const FeedbackCards = ({
       await feedbackApi.removeFeedback(actionId);
       setFeedback(prev => prev?.filter(item => item.id !== actionId) ?? null);
     } catch (error) {
-      alertApi.post({
-        message: `Failed to delete feedback: ${error}`,
-        severity: 'error',
+      toastApi.post({
+        title: `Failed to delete feedback: ${error}`,
+        status: 'danger',
       });
     }
 
@@ -145,9 +145,9 @@ export const FeedbackCards = ({
       setFeedback(prev => prev?.filter(item => item.id !== actionId) ?? null);
     } catch (error) {
       const action = isArchived ? 'restore' : 'archive';
-      alertApi.post({
-        message: `Failed to ${action} feedback: ${error}`,
-        severity: 'error',
+      toastApi.post({
+        title: `Failed to ${action} feedback: ${error}`,
+        status: 'danger',
       });
     }
 

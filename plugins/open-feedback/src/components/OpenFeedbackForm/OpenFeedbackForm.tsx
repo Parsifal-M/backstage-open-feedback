@@ -1,4 +1,4 @@
-import { useApi, identityApiRef } from '@backstage/core-plugin-api';
+import { useApi, identityApiRef } from '@backstage/frontend-plugin-api';
 import {
   Box,
   TextField,
