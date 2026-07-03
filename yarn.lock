@@ -7426,23 +7426,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/icons-material@npm:^5.15.16":
-  version: 5.15.16
-  resolution: "@mui/icons-material@npm:5.15.16"
-  dependencies:
-    "@babel/runtime": "npm:^7.23.9"
-  peerDependencies:
-    "@mui/material": ^5.0.0
-    "@types/react": ^17.0.0 || ^18.0.0
-    react: ^17.0.0 || ^18.0.0
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-  checksum: 10/348e67f1f6b4ccd00ed779b149d56f84452105e70af7c8a1720a61f967c47d58984f16f5db2aac14f2f57698821748f6e11f2f50bbd1ae40a8db6f1dea2ed76d
-  languageName: node
-  linkType: hard
-
-"@mui/material@npm:^5.12.2, @mui/material@npm:^5.15.16":
+"@mui/material@npm:^5.12.2":
   version: 5.15.16
   resolution: "@mui/material@npm:5.15.16"
   dependencies:
@@ -8284,7 +8268,6 @@ __metadata:
   resolution: "@parsifal-m/backstage-plugin-open-feedback@workspace:plugins/open-feedback"
   dependencies:
     "@backstage/cli": "npm:^0.36.3"
-    "@backstage/core-app-api": "npm:^1.20.2"
     "@backstage/core-components": "npm:^0.18.11"
     "@backstage/dev-utils": "npm:^1.1.24"
     "@backstage/frontend-defaults": "npm:^0.5.3"
@@ -8296,8 +8279,6 @@ __metadata:
     "@material-ui/core": "npm:^4.9.13"
     "@material-ui/icons": "npm:^4.9.1"
     "@material-ui/lab": "npm:4.0.0-alpha.61"
-    "@mui/icons-material": "npm:^5.15.16"
-    "@mui/material": "npm:^5.15.16"
     "@parsifal-m/backstage-plugin-open-feedback-common": "npm:^0.4.1"
     "@testing-library/jest-dom": "npm:^6.0.0"
     "@testing-library/react": "npm:^14.0.0"
