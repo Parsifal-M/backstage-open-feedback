@@ -2,12 +2,12 @@
 
 OpenFeedback ships with four permissions that control who can read, delete, archive, and submit feedback. All are exported from `@parsifal-m/backstage-plugin-open-feedback-common`.
 
-| Permission | String ID | Controls |
-|---|---|---|
-| `openFeedbackPageReadPermission` | `open.feedback.page.read` | Viewing feedback on the feedback page |
-| `openFeedbackPageDeletePermission` | `open.feedback.page.delete` | Delete button on feedback cards |
-| `openFeedbackArchivePermission` | `open.feedback.archive` | Archive and Restore buttons on feedback cards |
-| `openFeedbackCreatePermission` | `open.feedback.create` | Submitting new feedback via the modal |
+| Permission                         | String ID                   | Controls                                      |
+| ---------------------------------- | --------------------------- | --------------------------------------------- |
+| `openFeedbackPageReadPermission`   | `open.feedback.page.read`   | Viewing feedback on the feedback page         |
+| `openFeedbackPageDeletePermission` | `open.feedback.page.delete` | Delete button on feedback cards               |
+| `openFeedbackArchivePermission`    | `open.feedback.archive`     | Archive and Restore buttons on feedback cards |
+| `openFeedbackCreatePermission`     | `open.feedback.create`      | Submitting new feedback via the modal         |
 
 ## What the plugin gates itself
 
@@ -98,8 +98,12 @@ import { usePermission } from '@backstage/plugin-permission-react';
 import { openFeedbackPageReadPermission } from '@parsifal-m/backstage-plugin-open-feedback-common';
 
 // Inside your NavContentBlueprint component:
-const { allowed } = usePermission({ permission: openFeedbackPageReadPermission });
+const { allowed } = usePermission({
+  permission: openFeedbackPageReadPermission,
+});
 
 // Then conditionally render:
-{allowed && nav.take('page:open-feedback')}
+{
+  allowed && nav.take('page:open-feedback');
+}
 ```

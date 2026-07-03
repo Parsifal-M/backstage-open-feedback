@@ -120,8 +120,8 @@ app:
   extensions:
     - page:open-feedback:
         config:
-          path: /my-feedback       # optional, defaults to /open-feedback
-          title: Team Feedback     # optional, defaults to "Open Feedback"
+          path: /my-feedback # optional, defaults to /open-feedback
+          title: Team Feedback # optional, defaults to "Open Feedback"
 ```
 
 ## Using the OpenFeedbackModal Component

@@ -13,7 +13,8 @@ export interface OpenFeedbackBackendApi {
   removeFeedback(id: number): Promise<void>;
 }
 
-export const openFeedbackBackendRef = createApiRef<OpenFeedbackBackendApi>().with({
-  id: 'plugin.open-feedback.service',
-  pluginId: 'open-feedback',
-});
+export const openFeedbackBackendRef =
+  createApiRef<OpenFeedbackBackendApi>().with({
+    id: 'plugin.open-feedback.service',
+    pluginId: 'open-feedback',
+  });

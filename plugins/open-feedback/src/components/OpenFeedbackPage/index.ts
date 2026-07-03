@@ -1,1 +1,4 @@
-export { ActiveFeedbackContent, ArchivedFeedbackContent } from './OpenFeedbackPage';
+export {
+  ActiveFeedbackContent,
+  ArchivedFeedbackContent,
+} from './OpenFeedbackPage';
