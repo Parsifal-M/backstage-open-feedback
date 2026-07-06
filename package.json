@@ -25,7 +25,7 @@
     "prettier:check": "prettier --check .",
     "new": "backstage-cli new --scope internal",
     "changeset": "changeset",
-    "version": "changeset version && yarn install --immutable-cache"
+    "changeset:version": "changeset version && yarn install --immutable-cache"
   },
   "workspaces": {
     "packages": [
