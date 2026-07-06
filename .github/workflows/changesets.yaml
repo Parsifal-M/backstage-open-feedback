@@ -1,0 +1,48 @@
+name: Changesets
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  version:
+    name: Version Packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version: '22.x'
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Cache Node.js modules
+        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+        with:
+          path: ~/.cache/yarn
+          key: yarn-${{ runner.OS }}-22-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            yarn-${{ runner.OS }}-22-
+
+      - name: Install Dependencies
+        run: yarn install --immutable
+
+      - name: Create Version PR
+        uses: changesets/action@a45c4d594aa4e2c509dc14a9f2b3b67ba3780d0d # v1.9.0
+        with:
+          version: yarn changeset:version
+          title: 'chore: version packages'
+          commit: 'chore: version packages'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

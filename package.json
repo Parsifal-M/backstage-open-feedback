@@ -23,7 +23,9 @@
     "lint:all": "backstage-cli repo lint",
     "prettier:write": "prettier --write .",
     "prettier:check": "prettier --check .",
-    "new": "backstage-cli new --scope internal"
+    "new": "backstage-cli new --scope internal",
+    "changeset": "changeset",
+    "changeset:version": "changeset version && yarn install --immutable-cache"
   },
   "workspaces": {
     "packages": [
@@ -34,6 +36,7 @@
   "devDependencies": {
     "@backstage/cli": "^0.36.3",
     "@backstage/e2e-test-utils": "^0.1.2",
+    "@changesets/cli": "^2.31.0",
     "@jest/environment-jsdom-abstract": "^30",
     "@playwright/test": "^1.32.3",
     "@spotify/prettier-config": "^12.0.0",
