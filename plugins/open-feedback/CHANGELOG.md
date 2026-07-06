@@ -13,7 +13,7 @@ The plugin has been fully migrated from `@backstage/core-plugin-api` to `@backst
 - `createFrontendPlugin` replaces `createPlugin`; the plugin is now a default export
 - `ApiBlueprint`, `PageBlueprint`, and `SubPageBlueprint` replace the old `createRoutableExtension`/`createComponentExtension` pattern
 - The `openFeedbackPlugin` named export has been removed; import the default export instead
-- `OpenFeedbackPage` has been removed; the page is now registered via `PageBlueprint` with two `SubPageBlueprint` sub-pages (`ActiveFeedbackContent` and `ArchivedFeedbackContent`), which are mounted at `/open-feedback/active` and `/open-feedback/archived` respectively
+- The `OpenFeedbackPage` named export has been removed; the page is now registered via `PageBlueprint` with two `SubPageBlueprint` sub-pages (`ActiveFeedbackContent` and `ArchivedFeedbackContent`), which are mounted at `/open-feedback/active` and `/open-feedback/archived` respectively
 - `createApiRef` now uses the `.with({ id, pluginId })` form required by the new system
 - Route refs now use `createRouteRef()` from `@backstage/frontend-plugin-api` (no `id` string required)
 

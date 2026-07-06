@@ -66,7 +66,7 @@ const app = createApp({
 export default app.createRoot();
 ```
 
-The feedback page is mounted at `/open-feedback` by default. You can override the path and title via `app-config.yaml`:
+The feedback page is mounted at `/open-feedback` by default (with sub-routes `/open-feedback/active` and `/open-feedback/archived`). You can override the path and title via `app-config.yaml`: 
 
 ```yaml
 app:
