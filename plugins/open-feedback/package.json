@@ -1,6 +1,6 @@
 {
   "name": "@parsifal-m/backstage-plugin-open-feedback",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "license": "Apache-2.0",
@@ -49,7 +49,7 @@
     "@material-ui/core": "^4.9.13",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "4.0.0-alpha.61",
-    "@parsifal-m/backstage-plugin-open-feedback-common": "^0.4.1",
+    "@parsifal-m/backstage-plugin-open-feedback-common": "^0.4.4",
     "react-use": "^17.2.4"
   },
   "peerDependencies": {

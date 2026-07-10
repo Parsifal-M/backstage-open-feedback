@@ -8495,7 +8495,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@parsifal-m/backstage-plugin-open-feedback-common@npm:^0.4.1, @parsifal-m/backstage-plugin-open-feedback-common@workspace:plugins/open-feedback-common":
+"@parsifal-m/backstage-plugin-open-feedback-common@npm:^0.4.1, @parsifal-m/backstage-plugin-open-feedback-common@npm:^0.4.4, @parsifal-m/backstage-plugin-open-feedback-common@workspace:plugins/open-feedback-common":
   version: 0.0.0-use.local
   resolution: "@parsifal-m/backstage-plugin-open-feedback-common@workspace:plugins/open-feedback-common"
   dependencies:
@@ -8520,7 +8520,7 @@ __metadata:
     "@material-ui/core": "npm:^4.9.13"
     "@material-ui/icons": "npm:^4.9.1"
     "@material-ui/lab": "npm:4.0.0-alpha.61"
-    "@parsifal-m/backstage-plugin-open-feedback-common": "npm:^0.4.1"
+    "@parsifal-m/backstage-plugin-open-feedback-common": "npm:^0.4.4"
     "@testing-library/jest-dom": "npm:^6.0.0"
     "@testing-library/react": "npm:^14.0.0"
     "@testing-library/user-event": "npm:^14.0.0"
