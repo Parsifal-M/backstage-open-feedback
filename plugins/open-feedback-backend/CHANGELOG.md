@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.0
+
+### Minor Changes
+
+- 317490e: Adds archiving functionality to the backend plugin.
+
 All notable changes to this project will be documented in this file.
 
 ## 0.4.0
