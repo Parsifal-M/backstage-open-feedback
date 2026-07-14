@@ -41,15 +41,15 @@
     "postpack": "backstage-cli package postpack"
   },
   "dependencies": {
-    "@backstage/core-components": "^0.18.11",
-    "@backstage/frontend-plugin-api": "^0.17.2",
-    "@backstage/plugin-catalog-react": "^3.1.0",
-    "@backstage/plugin-permission-react": "^0.5.2",
-    "@backstage/theme": "^0.7.3",
+    "@backstage/core-components": "backstage:^",
+    "@backstage/frontend-plugin-api": "backstage:^",
+    "@backstage/plugin-catalog-react": "backstage:^",
+    "@backstage/plugin-permission-react": "backstage:^",
+    "@backstage/theme": "backstage:^",
     "@material-ui/core": "^4.9.13",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "4.0.0-alpha.61",
-    "@parsifal-m/backstage-plugin-open-feedback-common": "^0.4.4",
+    "@parsifal-m/backstage-plugin-open-feedback-common": "workspace:^",
     "react-use": "^17.2.4"
   },
   "peerDependencies": {
@@ -58,10 +58,10 @@
     "react-router-dom": "^6.23.0"
   },
   "devDependencies": {
-    "@backstage/cli": "^0.36.3",
-    "@backstage/dev-utils": "^1.1.24",
-    "@backstage/frontend-defaults": "^0.5.3",
-    "@backstage/test-utils": "^1.7.19",
+    "@backstage/cli": "backstage:^",
+    "@backstage/dev-utils": "backstage:^",
+    "@backstage/frontend-defaults": "backstage:^",
+    "@backstage/test-utils": "backstage:^",
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.0.0",

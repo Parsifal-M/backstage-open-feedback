@@ -34,8 +34,8 @@
     ]
   },
   "devDependencies": {
-    "@backstage/cli": "^0.36.3",
-    "@backstage/e2e-test-utils": "^0.1.2",
+    "@backstage/cli": "backstage:^",
+    "@backstage/e2e-test-utils": "backstage:^",
     "@changesets/cli": "^2.31.0",
     "@jest/environment-jsdom-abstract": "^30",
     "@playwright/test": "^1.32.3",
